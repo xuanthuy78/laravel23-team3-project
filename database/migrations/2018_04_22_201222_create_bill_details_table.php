@@ -15,7 +15,9 @@ class CreateBillDetailsTable extends Migration
     {
         Schema::create('bill_details', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('bill_id')->unsigned()->nullable();
             $table->foreign('bill_id')->references('id')->on('bills');
+            $table->integer('product_id')->unsigned()->nullable();
             $table->foreign('product_id')->references('id')->on('products');
             $table->integer('quantity')->unsigned();
             $table->integer('unit_price')->unsigned();
