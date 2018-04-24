@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\user;
+use App\User;
 use Illuminate\Http\Request;
+use Auth;
 
 class UserController extends Controller
 {
@@ -81,5 +82,25 @@ class UserController extends Controller
     public function destroy(user $user)
     {
         //
+    }
+
+    public function save(Request $request)
+    {
+        $data = $request->all();
+        $user_id = Auth::id();
+        $data['id'] = $user_id;
+        $user = User::create($data);
+        return redirect('/home');
+    }
+
+    public function submitPassword(Request $request)
+    {
+        $data = $request->all();
+        $data = md5($data);
+        $password = Auth::id()->password;
+        if ($data==$password) {
+            return view('/');
+        };
+        
     }
 }
