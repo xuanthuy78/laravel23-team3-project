@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\bill;
+use App\Bill;
 use Illuminate\Http\Request;
 
 class BillController extends Controller
@@ -12,6 +12,15 @@ class BillController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function listcart()
+    {
+        return view('page.shopping-cart');
+    }
+    public function checkout()
+    {
+        return view('page.checkout');
+    
+    }
     public function index()
     {
         //

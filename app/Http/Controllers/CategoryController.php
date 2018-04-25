@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
+
 use Illuminate\Http\Request;
+use App\Category;
+use App\Product;
+use Illuminate\Support\Facades\Input;
 
 class CategoryController extends Controller
 {
@@ -12,6 +15,28 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function showProducts($id)
+    {
+        $category=Category::findOrFail($id);
+        $products=$category->products;
+        return view('page.product',compact('category','products'));
+    }
+    public function searchCategories()
+    {
+        $data=Input::all();
+        $category_id=$data['nameCategory'];
+        $product_key=$data['search_key'];
+        if($product_key<>"")
+        {
+        $products=Product::where('category_id',$category_id)->where('name','like','%'.$product_key.'%')->get();
+        }
+        else
+        {
+        $products=Product::where('category_id',$category_id)->get();  
+        }
+        $category=Category::findOrFail($category_id);
+        return view('page.categories.search_category',compact('products','category'));
+    }
     public function index()
     {
         //

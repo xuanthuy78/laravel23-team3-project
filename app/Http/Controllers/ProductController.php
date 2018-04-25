@@ -12,6 +12,16 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function getProduct()
+    {
+        return view('page.product');
+    }
+    public function getProduct_Detail()
+    {
+        return view('page.product_detail');
+    }
+
+
     public function index()
     {
         //
