@@ -9,13 +9,14 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    protected $guard = 'user';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'gender', 'phone', 'address', 'is_admin',
     ];
 
     /**
@@ -26,4 +27,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function bills(){
+        return $this->hasMany('bill','user_id','id');
+    }
 }
