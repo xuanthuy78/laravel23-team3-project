@@ -34,18 +34,26 @@ Route::get('search_categories',
 	['as'=>'tim-kiem-the-loai',
 	'uses'=>'CategoryController@searchCategories'
 ]);
+Route::get('search_products',
+	['as'=>'tim-kiem-san-pham',
+	'uses'=>'ProductController@searchProducts'
+]);
 Route::get('products',
 	['as'=>'san-pham',
 	'uses'=>'ProductController@getProduct'
 ]);
-Route::get('categories/products/{id}',
+Route::get('categories/{id}',
 	['as'=>'san-pham-the-loai',
 	'uses'=>'CategoryController@showProducts'
 ]);
-Route::get('product_details',
+Route::get('categories/product/{id}',
 	['as'=>'chi-tiet-san-pham',
 	'uses'=>'ProductController@getProduct_Detail'
 ]);
+// Route::get('product_details',
+// 	['as'=>'chi-tiet-san-pham',
+// 	'uses'=>'ProductController@getProduct_Detail'
+// ]);
 Route::get('contact',
 	['as'=>'lien-he',
 	'uses'=>'PageController@contact'

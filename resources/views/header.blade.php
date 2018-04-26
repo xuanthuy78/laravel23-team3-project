@@ -183,7 +183,7 @@
 						<li><a>Sản phẩm</a>
 							<ul class="sub-menu">
 								@foreach($categories as $categorie)
-								<li><a href="{{url('categories/products/'.$categorie->id)}}">{{$categorie->name}}</a></li>
+								<li><a href="{{url('categories/'.$categorie->id)}}">{{$categorie->name}}</a></li>
 								@endforeach
 							</ul>
 						</li>

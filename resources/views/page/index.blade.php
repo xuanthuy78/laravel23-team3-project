@@ -61,7 +61,7 @@
 									<div class="panel-body">
 										<ul>
 											@foreach($categorie->products as $products)
-											<li><a href="#">{{$products->name}}</a></li>
+											<li><a href="{{url('categories/product/'.$products->id)}}">{{$products->name}}</a></li>
 											@endforeach
 										</ul>
 									</div>
@@ -165,9 +165,9 @@
 					
 					<div class="search-hotel">
 						<h3 class="agileits-sear-head">  Search Here..</h3>
-							<form action="#" method="post">
-								<input type="search" placeholder="Product name..." name="search" required="">
-								<input type="submit" value="Tìm" class="btn btn-info">
+							<form action="{{url('search_products')}}" method="get">
+								<input type="search" placeholder="Product name..." name="search_key" required="">
+								<input type="submit" value="Tìm" class="bstn btn-info">
 								<br> <br>
 								<h3 class="agileits-sear-head">  Giá từ:</h3>
 									<span id="app_min_price" ></span>

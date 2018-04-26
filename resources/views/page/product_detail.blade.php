@@ -1,6 +1,5 @@
 @extends('master')
 @section('content')
-
 <div class="inner-header">
 		<div class="container">
 			<div class="pull-left">
@@ -22,13 +21,17 @@
 
 					<div class="row">
 						<div class="col-sm-4">
-							<img src="source/assets/dest/images/products/6.jpg" alt="">
+							<img src="source/image/product/{{$product->image}}" alt="">
 						</div>
 						<div class="col-sm-8">
 							<div class="single-item-body">
-								<p class="single-item-title">Sample Woman Top</p>
+								<p class="single-item-title">{{$product->name}}</p>
 								<p class="single-item-price">
-									<span>$34.55</span>
+									@if($product->promotion_price !=0)
+										<span class="beta-sales-price">{{number_format($product->promotion_price)}} VND</span>
+										@else
+										<span class="beta-sales-price">{{number_format($product->unit_price)}} VND</span>
+									@endif
 								</p>
 							</div>
 
@@ -36,36 +39,18 @@
 							<div class="space20">&nbsp;</div>
 
 							<div class="single-item-desc">
-								<p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo ms id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe.</p>
+								<p>{{$product->description}}</p>
 							</div>
 							<div class="space20">&nbsp;</div>
 
-							<p>Options:</p>
+							<p>Số lượng:</p>
 							<div class="single-item-options">
 								<select class="wc-select" name="size">
-									<option>Size</option>
-									<option value="XS">XS</option>
-									<option value="S">S</option>
-									<option value="M">M</option>
-									<option value="L">L</option>
-									<option value="XL">XL</option>
+									@for($i=1;$i<=10;$i++)
+									<option value="{{$i}}">{{$i}}</option>
+									@endfor
 								</select>
-								<select class="wc-select" name="color">
-									<option>Color</option>
-									<option value="Red">Red</option>
-									<option value="Green">Green</option>
-									<option value="Yellow">Yellow</option>
-									<option value="Black">Black</option>
-									<option value="White">White</option>
-								</select>
-								<select class="wc-select" name="color">
-									<option>Qty</option>
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-									<option value="5">5</option>
-								</select>
+								
 								<a class="add-to-cart" href="#"><i class="fa fa-shopping-cart"></i></a>
 								<div class="clearfix"></div>
 							</div>
