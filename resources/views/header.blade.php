@@ -88,20 +88,21 @@
                     </div>
                 </div><!-- /.container -->
             </div><!-- /.topbar -->
-            @if(count($errors)>0)
-				  	<div class="alert alert-danger">
-				  		@foreach($errors->all() as $err)
-				  			{{$err}}<br>
-				  		@endforeach
+			<div class="notice">
+				@if(count($errors)>0)
+					<div class="alert alert-danger">
+						@foreach($errors->all() as $err)
+							{{$err}}<br>
+						@endforeach
+					</div>
+				@endif
 
-				  	</div>
-				  	@endif
-
-				  	 @if(Session::has('flash_message'))
-                            <div class="alert alert-success">
-                                {!! Session::get('flash_message') !!}
-                            </div>
-                        @endif
+				@if(Session::has('flash_message'))
+					<div class="alert alert-success">
+						{!! Session::get('flash_message') !!}
+					</div>
+				@endif
+			</div>
 		<div class="header-body">
 			<div class="container beta-relative">
 				<div class="pull-left">

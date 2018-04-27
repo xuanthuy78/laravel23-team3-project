@@ -345,4 +345,18 @@
 		<!-- #content -->
 	</div> <!-- .container -->
 	<div class="space40">&nbsp;</div>
+	<script src="source/assets/dest/js/jquery.js"></script>
+	<script>
+	$(document).ready(function() {
+	$(window).scroll(function(){
+		if($(this).scrollTop()>150){
+			$(".header-bottom").addClass('fixNav')
+		}else{
+			$(".header-bottom").removeClass('fixNav')
+		}}
+	)
+	console.log("ready!");
+	$('div.alert').delay(1000).slideUp();
+	})
+	</script>
 @endsection()

@@ -65,20 +65,6 @@
 	<!--customjs-->
 	<script src="source/assets/dest/js/custom2.js"></script>
 	<script src="source/assets/dest/vendors/dug/dug.js"></script>
-	<script src={{asset('source/assets/js/myscript.js')}}
-	<script>
-	$(document).ready(function($) {    
-		$(window).scroll(function(){
-			if($(this).scrollTop()>150){
-			$(".header-bottom").addClass('fixNav')
-			}else{
-				$(".header-bottom").removeClass('fixNav')
-			}}
-		)
-        $("div.alert").delay(3000).slideUp();
-	})
-	</script>
-	
-
+	<script src="{{asset('source/assets/dest/js/myscript.js')}}"></script>
 </body>
 </html>
