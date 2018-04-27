@@ -165,9 +165,11 @@
 					
 					<div class="search-hotel">
 						<h3 class="agileits-sear-head">  Search Here..</h3>
-							<form action="{{url('search_products')}}" method="get">
-								<input type="search" placeholder="Product name..." name="search_key" required="">
-								<input type="submit" value="Tìm" class="bstn btn-info">
+							<form id="target" action="{{url('search_products')}}" method="get">
+								<input type="hidden" value="min_slide" id="min_slider" name ="min_slider">
+								<input type="hidden" value="min_slide" id="max_slider" name ="max_slider">
+								<input type="search" placeholder="Product name..." name="search_key">
+								<input type="submit" value="Tìm" class="bstn btn-info" id="submit">
 								<br> <br>
 								<h3 class="agileits-sear-head">  Giá từ:</h3>
 									<span id="app_min_price" ></span>

@@ -5,31 +5,29 @@
 	<div class="form-head-w3l">
 		<h2>Welcome</h2>
 	</div>
+
     <ul class="tab-group cl-effect-4">
         <li class="tab active"><a href="#signin-agile">Sign In</a></li>
 		<li class="tab"><a href="#signup-agile">Sign Up</a></li>        
     </ul>
     <div class="tab-content">
         <div id="signin-agile">   
-			<form action="#" method="post">
-				
-				<p class="header">User Name</p>
-				<input type="text" name="user" placeholder="User Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'User Name';}" required="required">
+			<form action="{{url('users/login')}}" method="post">
+				<input type="hidden" name="_token" value="{{csrf_token()}}">
+				<p class="header">Email</p>
+				<input type="email" name="Email" placeholder="User Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'User Name';}" required="required">
 				
 				<p class="header">Password</p>
-				<input type="password" name="password" placeholder="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" required="required">
-				
-				<input type="checkbox" id="brand" value="">
-				<label for="brand"><span></span> Remember me?</label>
-				
+				<input type="password" name="Password" placeholder="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" required="required">
 				<input type="submit" class="sign-in" value="Sign In">
 			</form>
 		</div>
 		<div id="signup-agile">   
-			<form action="#" method="post">
+			<form action="{{url('users/signup')}}" method="post">
+				<input type="hidden" name="_token" value="{{csrf_token()}}">
 				
 				<p class="header">User Name</p>
-				<input type="text" name="user" placeholder="Your Full Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Your Full Name';}" required="required">
+				<input type="text" name="name" placeholder="Your Full Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Your Full Name';}" required="required">
 				
 				<p class="header">Email Address</p>
 				<input type="email" name="email" placeholder="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required="required">
@@ -59,17 +57,19 @@
                     </div>
                     <div class="topbar-right">
                         <ul class="topbar-nav clearfix">
-                            <li><a href="#" class="login" data-toggle="modal" data-target="#myModal88">Login</a></li>
+                        	
+                            @if(Auth::user())
                             <li class="dropdown">
                                 <a href="#" class="account dropdown-toggle" data-toggle="dropdown">My Account</a>
                                 <ul class="dropdown-menu dropdown-menu-right">
-                                    <li><a title="My Account" href="account.html">My Account</a></li>
-                                    <li><a title="My Wishlist" href="wishlist.html">My Wishlist</a></li>
-                                    <li><a title="My Cart" href="cart.html">My Cart</a></li>
-                                    <li><a title="Checkout" href="checkout.html">Checkout</a></li>
-                                    <li><a title="Testimonial" href="testimonial.html">Testimonial</a></li>
+                                    <li><a title="My Account" href="{{url('users/'.Auth::user()->id)}}">Profile</a></li>
+                                    <li><a title="My Cart" href="{{url('previewcart')}}">My Cart</a></li>  
+                                    <li><a title="Testimonial" href="{{url('users/logout')}}">Log Out</a></li>
                                 </ul>
                             </li>
+                            @else 
+                            <li><a href="#" class="login" data-toggle="modal" data-target="#myModal88">Login</a></li>
+                            @endif
                             <li class="dropdown">
                                 <a href="#" class="currency dropdown-toggle" data-toggle="dropdown">USD</a>
                                 <ul class="dropdown-menu dropdown-menu-right">
@@ -88,6 +88,20 @@
                     </div>
                 </div><!-- /.container -->
             </div><!-- /.topbar -->
+            @if(count($errors)>0)
+				  	<div class="alert alert-danger">
+				  		@foreach($errors->all() as $err)
+				  			{{$err}}<br>
+				  		@endforeach
+
+				  	</div>
+				  	@endif
+
+				  	 @if(Session::has('flash_message'))
+                            <div class="alert alert-success">
+                                {!! Session::get('flash_message') !!}
+                            </div>
+                        @endif
 		<div class="header-body">
 			<div class="container beta-relative">
 				<div class="pull-left">

@@ -185,7 +185,7 @@ p.header {
     letter-spacing: 1px;
   
 }
-div#signin-agile input[type="text"],div#signin-agile input[type="password"],div#signup-agile input[type="text"],div#signup-agile input[type="email"],div#signup-agile input[type="password"] {
+div#signin-agile input[type="email"],div#signin-agile input[type="password"],div#signup-agile input[type="text"],div#signup-agile input[type="email"],div#signup-agile input[type="password"] {
 	padding: 10px;
     width: 100%;
     border-bottom: 2px solid #f9dc9c;
@@ -203,7 +203,7 @@ div#signin-agile input[type="text"],div#signin-agile input[type="password"],div#
     font-family: 'Open Sans', cursive;
     background: none;
 }
-div#signin-agile input[type="text"]:focus,div#signin-agile input[type="password"]:focus,div#signup-agile input[type="text"]:focus,div#signup-agile input[type="email"]:focus,div#signup-agile input[type="password"]:focus   {
+div#signin-agile input[type="email"]:focus,div#signin-agile input[type="password"]:focus,div#signup-agile input[type="text"]:focus,div#signup-agile input[type="email"]:focus,div#signup-agile input[type="password"]:focus   {
 	background-color:#fbf0da;
 	border-color:#fbf0da;
 }
@@ -398,7 +398,7 @@ p.copyright a:hover {
 	.form-w3ls {
 		width: 60%;
 	}
-	div#signin-agile input[type="text"], div#signin-agile input[type="password"], div#signup-agile input[type="text"], div#signup-agile input[type="email"], div#signup-agile input[type="password"] {
+	div#signin-agile input[type="email"], div#signin-agile input[type="password"], div#signup-agile input[type="text"], div#signup-agile input[type="email"], div#signup-agile input[type="password"] {
 		margin:13px 0 25px;
 	}
 	.tab-group {
@@ -442,7 +442,7 @@ p.copyright a:hover {
 	p.header {
 		font-size: 13px;
 	}
-	div#signin-agile input[type="text"], div#signin-agile input[type="password"], div#signup-agile input[type="text"], div#signup-agile input[type="email"], div#signup-agile input[type="password"] {
+	div#signin-agile input[type="email"], div#signin-agile input[type="password"], div#signup-agile input[type="text"], div#signup-agile input[type="email"], div#signup-agile input[type="password"] {
 		font-size:15px;
 	}
 }
@@ -480,7 +480,7 @@ p.copyright a:hover {
 	p.header {
 		font-size: 13px;
 	}
-	div#signin-agile input[type="text"], div#signin-agile input[type="password"], div#signup-agile input[type="text"],div#signup-agile input[type="email"], div#signup-agile input[type="password"] {
+	div#signin-agile input[type="email"], div#signin-agile input[type="password"], div#signup-agile input[type="text"],div#signup-agile input[type="email"], div#signup-agile input[type="password"] {
 		margin: 10px 0 12px;
 	}	
 }
@@ -521,7 +521,7 @@ p.copyright a:hover {
 		width: 90%;
 		padding:10px 20px;
 	}
-	div#signin-agile input[type="text"], div#signin-agile input[type="password"], div#signup-agile input[type="text"], div#signup-agile input[type="email"], div#signup-agile input[type="password"] {
+	div#signin-agile input[type="email"], div#signin-agile input[type="password"], div#signup-agile input[type="text"], div#signup-agile input[type="email"], div#signup-agile input[type="password"] {
 		font-size:15px;
 		margin: 10px 0 20px;
 	}

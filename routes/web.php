@@ -14,10 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('users',
-	['as'=>'nguoi-dung',
-	'uses'=>'UserController@user_show'
-]);
+
 Route::get('previewcart',
 	['as'=>'don-dat-hang',
 	'uses'=>'UserController@previewCart'
@@ -50,10 +47,7 @@ Route::get('categories/product/{id}',
 	['as'=>'chi-tiet-san-pham',
 	'uses'=>'ProductController@getProduct_Detail'
 ]);
-// Route::get('product_details',
-// 	['as'=>'chi-tiet-san-pham',
-// 	'uses'=>'ProductController@getProduct_Detail'
-// ]);
+
 Route::get('contact',
 	['as'=>'lien-he',
 	'uses'=>'PageController@contact'
@@ -66,3 +60,30 @@ Route::get('checkout',
 	['as'=>'dat-hang',
 	'uses'=>'BillController@checkout'
 ]);
+/** User Profile**/
+
+Route::patch('users/update/{id}',
+	['as'=>'sua-profile',
+	'uses'=>'UserController@user_update'
+]);
+Route::post('users/login',
+	['as'=>'dang-nhap',
+	'uses'=>'UserController@login'
+]);
+Route::get('users/logout',
+	['as'=>'dang-xuat',
+	'uses'=>'UserController@logout'
+]);
+Route::get('users/{id}',
+	['as'=>'profile',
+	'uses'=>'UserController@user_show'
+]);
+Route::post('users/signup',
+	['as' => 'dang-ky',
+	'uses' => 'UserController@signup'
+]);
+/** ------------**/
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
