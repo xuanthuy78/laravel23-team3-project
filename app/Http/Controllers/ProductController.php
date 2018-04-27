@@ -17,20 +17,37 @@ class ProductController extends Controller
     {
         return view('page.product');
     }
+
     public function getProduct_Detail($id)
     {
-        $product=Product::findOrFail($id);
-        return view('page.product_detail',compact('product'));
-    }
-    public function searchProducts()
-    {
-        $data=Input::all();
-        $product_key=$data['search_key'];
-        $products=Product::where('name','like',"%".$product_key."%")
-        ->orWhere('description','like',"%".$product_key."%")->paginate(8); 
-        return view('page.products.search_product',compact('product_key','products'));
+        $product = Product::findOrFail($id);
+        return view('page.product_detail', compact('product'));
     }
 
+    public function searchProducts()
+    {
+        $data = Input::all();
+        $product_key = $data['search_key'];
+        $min = $data["min_slider"];
+        $max = $data["max_slider"];
+        if($min <> '0' && $max <> '500000') {
+            $str_min = str_limit($min, -3, "");
+            $str_max = str_limit($max, -3, "");   
+        }
+        else {
+            $str_min = $min;
+            $str_max = $max;
+        }
+        if($product_key <> "") {
+            $products = Product::where('name','like',"%".$product_key."%")
+            ->orWhere('description','like',"%".$product_key."%")
+            ->WhereBetween('unit_price',[$str_min,$str_max])->paginate(8);;    
+        }
+        else {
+            $products = Product::WhereBetween('unit_price',[$str_min,$str_max])->paginate(8);
+        }
+        return view('page.products.search_product',compact('product_key','products'));
+    }
 
     public function index()
     {

@@ -3,14 +3,14 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Sweet Bakery</title>
+	<title>Laravel </title>
 	<base href="{{asset('')}}">
 	
 	
 	<!-- <link href='http://fonts.googleapis.com/css?family=Dosis:300,400' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'> -->
-	<!-- <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"> -->
-	<link rel="stylesheet" href="source/assets/dest/css/bootstrap.min.css">
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+
 	<link rel="stylesheet" href="source/assets/dest/css/font-awesome.min.css">
 	<link rel="stylesheet" href="source/assets/dest/vendors/colorbox/example3/colorbox.css">
 	<link rel="stylesheet" href="source/assets/dest/rs-plugin/css/settings.css">
@@ -33,7 +33,7 @@
 		@include('footer')
 	<div class="copyright">
 		<div class="container">
-			<p class="pull-left"></p>
+			<p class="pull-left"><!-- Privacy policy. (&copy;) 2014 --></p>
 			<p class="pull-right pay-options">
 				<!-- <a href="#"><img src="source/assets/dest/images/pay/master.jpg" alt="" /></a>
 				<a href="#"><img src="source/assets/dest/images/pay/pay.jpg" alt="" /></a>
@@ -43,10 +43,11 @@
 			<div class="clearfix"></div>
 		</div> <!-- .container -->
 	</div> <!-- .copyright -->
-	@yield('script')
+
 
 	<!-- include js files -->
 	<!-- <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script> -->
+	<script src="{{url('public/source/assets/dest/js/myscript.js')}}"></script>
 	<script src="source/assets/dest/js/jquery.min.js"></script>
 	<script src="source/assets/dest/js/index.js"></script>
 	<script src="source/assets/dest/js/jquery.js"></script>
@@ -65,6 +66,7 @@
 	<!--customjs-->
 	<script src="source/assets/dest/js/custom2.js"></script>
 	<script src="source/assets/dest/vendors/dug/dug.js"></script>
+
 	<script>
 	$(document).ready(function($) {    
 		$(window).scroll(function(){
@@ -76,7 +78,8 @@
 		)
 	})
 	</script>
-	
+
+
 
 </body>
 </html>
