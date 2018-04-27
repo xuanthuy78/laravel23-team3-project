@@ -44,10 +44,10 @@ class UserController extends Controller
         $Email=$request->Email;
         $Password=($request->Password);
         if(Auth::attempt(['email'=> $Email,'password' => $Password]))
-            {
-                  return redirect('index');
-            }
-            return redirect('index')->with('flash_message','Tài khoản không đúng');
+        {
+            return redirect('index');
+        }
+        return redirect('index')->with('flash_message','Tài khoản không đúng');
     }
 
     public function logout()

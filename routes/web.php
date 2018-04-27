@@ -11,15 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Route::get('previewcart',
 	['as'=>'don-dat-hang',
 	'uses'=>'UserController@previewCart'
 ]);
-Route::get('index',
+Route::get('/index',
 	['as'=>'trang-chu',
 	'uses'=>'HomeController@index'
 ]);
