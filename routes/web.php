@@ -52,10 +52,7 @@ Route::get('contact',
 	['as'=>'lien-he',
 	'uses'=>'PageController@contact'
 ]);
-Route::get('cart',
-	['as'=>'shopping-cart',
-	'uses'=>'BillController@listcart'
-]);
+
 Route::get('checkout',
 	['as'=>'dat-hang',
 	'uses'=>'BillController@checkout'
@@ -83,6 +80,25 @@ Route::post('users/signup',
 	'uses' => 'UserController@signup'
 ]);
 /** ------------**/
+
+/** --Add Item cart and Check out---- **/
+Route::get('additemcart/{id}',
+	['as' => 'themgiohang',
+	'uses' => 'PageController@getAddtoCart'
+]);
+
+Route::get('deleteitemcart/{id}',
+	['as' => 'xoagiohang',
+	'uses' => 'PageController@getDeletetoCart'
+]);
+
+Route::get('detailcart',
+	['as'=>'shopping-cart',
+	'uses'=>'BillController@listcart'
+]);
+
+/** ----------------------------------**/
+
 
 Auth::routes();
 

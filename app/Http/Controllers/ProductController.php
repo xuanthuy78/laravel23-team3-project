@@ -41,7 +41,7 @@ class ProductController extends Controller
         if($product_key <> "") {
             $products = Product::where('name','like',"%".$product_key."%")
             ->orWhere('description','like',"%".$product_key."%")
-            ->WhereBetween('unit_price',[$str_min,$str_max])->paginate(8);;    
+            ->WhereBetween('unit_price',[$str_min,$str_max])->paginate(8);    
         }
         else {
             $products = Product::WhereBetween('unit_price',[$str_min,$str_max])->paginate(8);

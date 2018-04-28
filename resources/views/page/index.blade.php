@@ -223,7 +223,7 @@
 											</p>
 										</div>
 										<div class="single-item-caption">
-											<a class="add-to-cart pull-left" href="shopping_cart.html"><i class="fa fa-shopping-cart"></i></a>
+											<a class="add-to-cart pull-left" href="{{url('additemcart/'.$newproduct->id)}}"><i class="fa fa-shopping-cart"></i></a>
 											<a class="beta-btn primary" href="product.html">Details <i class="fa fa-chevron-right"></i></a>
 											<div class="clearfix"></div>
 										</div>
@@ -265,11 +265,16 @@
 										<div class="single-item-body">
 											<p class="single-item-title">{{$promotionproduct->name}}</p>
 											<p class="single-item-price">
-												<span>{{number_format($promotionproduct->promotion_price)}} VNĐ</span>
+												@if($promotionproduct->promotion_price != 0)
+												<span class="flash-del">{{number_format($promotionproduct->unit_price)}}</span>
+												<span class="flash-sale">{{number_format($promotionproduct->promotion_price)}}</span>
+												@else
+												<span class="flash-sale">{{number_format($promotionproduct->unit_price)}}</span>
+												@endif
 											</p>
 										</div>
 										<div class="single-item-caption">
-											<a class="add-to-cart pull-left" href="shopping_cart.html"><i class="fa fa-shopping-cart"></i></a>
+											<a class="add-to-cart pull-left" href="{{url('additemcart/'.$promotionproduct->id)}}"><i class="fa fa-shopping-cart"></i></a>
 											<a class="beta-btn primary" href="product.html">Details <i class="fa fa-chevron-right"></i></a>
 											<div class="clearfix"></div>
 										</div>

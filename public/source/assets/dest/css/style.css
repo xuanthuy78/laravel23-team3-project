@@ -2807,7 +2807,7 @@ background:rgba(0,0,0,0.025)
 }
 
 table.shop_table {
-border:1px solid #f1f1f1;
+border:1px solid #FFA803;
 margin:0 -1px 24px 0;
 text-align:left;
 width:100%;
@@ -2818,15 +2818,15 @@ table.shop_table th {
 line-height:55px;
 text-align:center;
 height:55px;
-background-color:#f6f6f6;
+background-color:#FFA803;
 font-size:18px;
 font-family:Open Sans;
-border-right:1px solid #eee
+border-right:1px solid #FFA803
 }
 
 table.shop_table td {
-border-top:1px solid #f1f1f1;
-border-right:1px solid #f1f1f1;
+border-top:1px solid #FFA803;
+border-right:1px solid #FFA803;
 padding:38px;
 text-align:center;
 vertical-align:middle
@@ -2860,7 +2860,7 @@ color:#a3a2a2
 }
 
 table.shop_table tfoot td,table.shop_table tfoot th {
-border-top:1px solid #f1f1f1;
+border-top:1px solid #FFA803;
 text-align:left
 }
 
@@ -2890,8 +2890,9 @@ margin-right:5px
 
 table.shop_table tfoot td .beta-btn,table.shop_table tfoot th .beta-btn {
 height:37px;
-background-color:#3a5c83;
-color:#fff
+background-color:#FFA803;
+color:#fff;
+border: 1px solid #FFA803;
 }
 
 table.shop_table tfoot td .beta-btn i,table.shop_table tfoot th .beta-btn i {
@@ -3207,8 +3208,8 @@ color:#a3a2a2
 }
 
 .cart-total-title {
-background-color:#fdfdfd;
-color:#000;
+background-color:#FFA803;
+color:#fff;
 font-size:22px;
 line-height:55px;
 margin-bottom:0;
@@ -6329,7 +6330,8 @@ color: #2fdab8;
 
 }
 .rev-slider {
-	background-color: #f8f8f8;
+	/*background-color: #f8f8f8;*/
+	background-image: url("./image/product/111.jpg");
 }
 
 

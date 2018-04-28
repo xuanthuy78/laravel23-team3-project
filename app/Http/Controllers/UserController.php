@@ -21,7 +21,10 @@ class UserController extends Controller
      public function user_show()
    
     {
-        return view('page.users.user');
+        if(Auth::user()) {
+            return view('page.users.user'); 
+        }
+            return redirect('index');     
     }
 
     public function previewCart()

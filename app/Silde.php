@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Slide extends Model
 {
     protected $fillable = [
-        'link', 'imgage',
+        'link', 'image',
     ];
 }
