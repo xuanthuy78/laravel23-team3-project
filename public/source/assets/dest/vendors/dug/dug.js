@@ -201,7 +201,7 @@ var dug = function( opts ){
 		   		startFrag 	= tpl.indexOf( m );
 		   		endFrag 	= tpl.indexOf( m.replace('#','/') ) + m.length;
 		   		frag 		= tpl.substring( startFrag + m.length , endFrag - m.length );
-		   		dataFrag    = dotData( data, name );
+		   		//dataFrag    = dotData(data2, name );
 		   		rendered    = '';
 
 		   		//loop over the scope

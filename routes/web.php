@@ -52,14 +52,8 @@ Route::get('contact',
 	['as'=>'lien-he',
 	'uses'=>'PageController@contact'
 ]);
-Route::get('cart',
-	['as'=>'shopping-cart',
-	'uses'=>'BillController@listcart'
-]);
-Route::get('checkout',
-	['as'=>'dat-hang',
-	'uses'=>'BillController@checkout'
-]);
+
+
 /** User Profile**/
 
 Route::patch('users/update/{id}',
@@ -83,6 +77,34 @@ Route::post('users/signup',
 	'uses' => 'UserController@signup'
 ]);
 /** ------------**/
+Route::get('additemcart/{id}',
+	['as' => 'add-item-cart',
+	'uses' => 'PageController@addItemCart'
+]);
+Route::get('cart',
+	['as' => 'shopping-cart',
+	'uses' => 'PageController@listCart'
+]);
+Route::get('deleteitemcart/{id}',
+	['as' => 'delete-item-cart',
+	'uses' => 'PageController@deleteItemCart'
+]);
+Route::get('cart/update/{id}',
+	['as' => 'update-item-cart',
+	'uses' => 'PageController@updateItemCart'
+]);
+Route::get('checkout',
+	['as'=>'dat-hang',
+	'uses'=>'BillController@checkout'
+]);
+Route::post('checkout',
+	['as' => 'xn-dathang',
+	'uses' => 'BillController@confirmCheckout'
+]);
+Route::get('additemcartqty/{id}',
+	['as' => 'add-item-cart-qty',
+	'uses' => 'PageController@addItemCartQty'
+]);
 
 Auth::routes();
 

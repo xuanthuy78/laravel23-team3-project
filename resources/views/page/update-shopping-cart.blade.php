@@ -1,26 +1,5 @@
-@extends('master')
-@section('content')
 
-	<div class="inner-header">
-		<div class="container">
-			<div class="pull-left"><br>
-				<h3 class="wthree_text_info">Shopping <span>Cart</span>
-			    			<div class="line-text"></div>
-			    			</h3>	
-			</div>
-			<div class="pull-right">
-				<div class="beta-breadcrumb font-large">
-					<a href="{{url('index')}}">Home</a> / <span>Shopping Cart</span>
-				</div>
-			</div>
-			<div class="clearfix"></div>
-		</div>
-	</div>
-
-		<div class="container">
-		<div id="content">
-			<div id="update">
-				<div class="container">
+<div class="container">
 			<div class="table-responsive">
 				<!-- Shop Products Table -->
 				
@@ -62,6 +41,16 @@
 							</td>
 
 							<td class="product-quantity">
+								<!-- <select name="product-qty" id="product-qty">
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+								</select> -->
+
+						
+
 								<input type="hidden" value="{{$item->rowId}}" id="rowID<?php echo $count;?>"> 
 								<input type="hidden" value="{{$item->id}}" id="proID<?php echo $count;?>">
 								<input type="number" size="2" value="{{$item->qty}}" name="product_qty" id="newQty<?php echo $count; ?>"
@@ -85,34 +74,51 @@
 					<tfoot>
 						<tr>
 							<td colspan="6" class="actions">
+								
 								<a type="submit" href="{{url('checkout')}}" class="beta-btn primary" name="proceed">Proceed to Checkout <i class="fa fa-chevron-right"></i></a>
 
+							</td>
+							</td>
 						</tr>
 					</tfoot>
 				</table>
 				<!-- End of Shop Table Products -->
 				</div>
-			</div>
-		</div>
+</div>
 
+	<script>
+		$(document).ready(function($) { 
+			<?php for($i=1;$i<100;$i++) {?>
+		$('#newQty<?php echo $i;?>').on('change keyup',function(){
+			// alert('i am here');
+			var newQty = $('#newQty<?php echo $i; ?>').val();
+			var rowID = $('#rowID<?php echo $i; ?>').val();
+			var proID = $('#proID<?php echo $i; ?>').val();
 
-			<div class="table-responsive">
-			<!-- Cart Collaterals -->
-			<div class="cart-collaterals">
+			if(newQty<=0){
+				alert('Vui lòng xem lại số lượng')
+			}
+			else {
 
-				<div class="cart-totals pull-right">
-					<div class="cart-totals-row"><h5 class="cart-total-title">Cart Totals</h5></div>
-					<div class="cart-totals-row"><span>Shipping:</span> <span>Next Step</span></div>
-					<div class="cart-totals-row"><span>Order Total:</span> <span>Next Step</span></div>
-				</div>
-				<div class="clearfix"></div>
-			</div>
-			<!-- End of Cart Collaterals -->
-			<div class="clearfix"></div>
-			</div>
-
-		</div> <!-- #content -->
-		</div> <!-- .container -->
-
-@endsection
-
+				$.ajax({
+        		type: 'get',
+        		dataType: 'html',
+       			url: '<?php echo url('/cart/update');?>/'+proID,
+        		data: "newQty=" + newQty + "& rowID=" + rowID + "& proID=" + proID,
+        		 success: function (response) {
+             	console.log(response);
+             	$('#update').html(response);
+        		 }
+        		// success: function (data)
+        		// {
+        		// 	if(data == "Ok")
+        		// 	{
+        		// 		window.location = "cart";
+        		// 	}
+        		// }
+    			});
+				}
+		});
+		<?php } ?>	
+		});
+	</script>

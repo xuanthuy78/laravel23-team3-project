@@ -1287,8 +1287,8 @@ font-size:16px;
 text-transform:uppercase;
 border:1px solid #e1e1e1;
 padding-left:20px;
-border-left:3px solid #606366;
-color:#606366;
+border-left:3px solid #2fdab8;
+color:#f90;
 padding:15px;
 }
 
@@ -1551,20 +1551,21 @@ float:left
     6.3 BETA CART
 ============================================================================= */
 .cart {
-border:1px solid #e1e1e1;
-height:60px;
+border:1px solid #d9534f;
+height:65px;
 line-height:37px;
 padding:10px 10px;
 cursor:pointer
 }
 
 .cart .beta-select {
-position:static
+position:static;
+color:#d9534f;
 }
 
 .cart .beta-select i:first-child {
 margin-right:3px;
-color:#999da0;
+color:#d9534f;
 padding-left:0;
 padding-right:0;
 font-size:16px
@@ -1581,7 +1582,7 @@ position:absolute;
 right:15px;
 z-index:100;
 background:#fff;
-border:1px solid #e1e1e1;
+border:1px solid #d9534f;
 padding:0 10px 10px;
 cursor:default
 }
@@ -1596,7 +1597,7 @@ border-bottom:1px solid #e1e1e1
 position:absolute;
 top:20px;
 right:16px;
-background:#e1e1e1;
+background:#d9534f;
 font-size:10px;
 width:15px;
 height:15px;
@@ -2807,7 +2808,7 @@ background:rgba(0,0,0,0.025)
 }
 
 table.shop_table {
-border:1px solid #f1f1f1;
+border:1px solid #FFA803;
 margin:0 -1px 24px 0;
 text-align:left;
 width:100%;
@@ -2818,15 +2819,15 @@ table.shop_table th {
 line-height:55px;
 text-align:center;
 height:55px;
-background-color:#f6f6f6;
+background-color:#FFA803;
 font-size:18px;
 font-family:Open Sans;
 border-right:1px solid #eee
 }
 
 table.shop_table td {
-border-top:1px solid #f1f1f1;
-border-right:1px solid #f1f1f1;
+border-top:1px solid #FFA803;
+border-right:1px solid #FFA803;
 padding:38px;
 text-align:center;
 vertical-align:middle
@@ -2860,7 +2861,7 @@ color:#a3a2a2
 }
 
 table.shop_table tfoot td,table.shop_table tfoot th {
-border-top:1px solid #f1f1f1;
+border-top:1px solid #FFA803;
 text-align:left
 }
 
@@ -5386,6 +5387,8 @@ border:none;}
    
     padding: 15px 14px;
     line-height: 30px;
+    padding-right: 20px;
+    padding-left: 20px;
 }
 .remove-cart-item {
     background-color: #d9534f;
@@ -6329,7 +6332,7 @@ color: #2fdab8;
 
 }
 .rev-slider {
-	background-color: #f8f8f8;
+	/*background-color: #f8f8f8;*/
 }
 
 
@@ -6355,8 +6358,9 @@ color: #2fdab8;
     outline: none;
     font-size: 16px;
     margin-bottom: 0;
-    background: url(../images/arrow.png) no-repeat 92% center #ffffff;
-    background-size: 5% !important;
+    /*background: url(../images/arrow.png) no-repeat 92% center #ffffff;*/
+    /*background-size: 5% !important;*/
+    padding-left: 30px;
    
 }
 .header-middle form input[type="submit"]{
@@ -6393,6 +6397,10 @@ color: #2fdab8;
 .search input {
 	width: 100%;
     border: 1px solid #e1e1e1;
-    height: 60px;
+    height: 62px;
     padding: 0 12px;
+    margin-right: 70px;
+}
+.logofooter {
+	margin-left:120px;
 }

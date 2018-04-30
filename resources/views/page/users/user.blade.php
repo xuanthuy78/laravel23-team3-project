@@ -55,7 +55,7 @@
                 <label class="control-label col-sm-3">Set Password <span class="text-danger">*</span></label>
                 <div class="col-md-5 col-sm-8">
                   <div class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
                     <input type="password" class="form-control password" name="password" id="password" placeholder="Choose password (5-15 chars)" value="" disabled="">
                  </div>   
                 </div>
@@ -65,7 +65,7 @@
                 <label class="control-label col-sm-3">Confirm Password <span class="text-danger">*</span></label>
                 <div class="col-md-5 col-sm-8">
                   <div class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
                     <input type="password" class="form-control password" name="cpassword" id="cpassword" placeholder="Confirm your password" value="" disabled="">
                   </div>  
                 </div>
@@ -94,7 +94,7 @@
                 <label class="control-label col-sm-3">Contact No. <span class="text-danger">*</span></label>
                 <div class="col-md-5 col-sm-8">
                   <div class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+                    <span class="input-group-addon"><i class="fa fa-phone"></i></span>
                   <input type="text" class="form-control" name="phone" id="contactnum" placeholder="Enter your Primary contact no." value="{{Auth::user()->phone}}">
                   </div>
                 </div>
@@ -111,20 +111,6 @@
 <br>
 @endsection
 @section('script')
-  <script>
-        $(document).ready(function(){
-            $("#changePassword").change(function(){
-                if($(this).is(":checked"))
-                {
-                    $(".password").removeAttr('disabled');
-                }
-                else
-                {
-                    $(".password").val()=""
-                    $(".password").attr('disabled','');
-                }
-            });
-        });
-    </script>
+  
 @endsection
   
