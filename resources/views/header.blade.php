@@ -51,8 +51,8 @@
                 <div class="container">
                     <div class="topbar-left">
                         <ul class="topbar-nav clearfix">
-                            <li><span class="phone">0(123) 456 789</span></li>
-                            <li><span class="email">info@plazathemes.com</span></li>
+                            <li><span class="phone">0935 444 294</span></li>
+                            <li><span class="email">sweetbakery@gmail.com</span></li>
                         </ul>
                     </div>
                     <div class="topbar-right">
@@ -71,17 +71,17 @@
                             <li><a href="#" class="login" data-toggle="modal" data-target="#myModal88">Login</a></li>
                             @endif
                             <li class="dropdown">
-                                <a href="#" class="currency dropdown-toggle" data-toggle="dropdown">USD</a>
+                                <a href="#" class="currency dropdown-toggle" data-toggle="dropdown">VND</a>
                                 <ul class="dropdown-menu dropdown-menu-right">
-                                    <li><a href="#">Euro</a></li>
-                                    <li><a href="#">US Dollar</a></li>
+                                   
+                                    <li><a href="{{url('index')}}">US Dollar</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="language dropdown-toggle" data-toggle="dropdown"><img src="images/flag-us.png" alt=""> English</a>
+                                <a  class="language dropdown-toggle" data-toggle="dropdown"><img src="images/flag-us.png" alt=""> English</a>
                                 <ul class="dropdown-menu dropdown-menu-right">
-                                    <li><a href="#"><img src="images/flag-us.png" alt=""> &nbsp;English</a></li>
-                                    <li><a href="#"><img src="images/flag-spain.png" alt=""> &nbsp;Spanish</a></li>
+                                    <li><a ><img src="images/flag-us.png" alt=""> &nbsp;English</a></li>
+                                    <li><a ><img src="images/flag-spain.png" alt=""> &nbsp;Viet Nam</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -133,54 +133,40 @@
 
 					<div class="beta-comp">
 						<div class="cart">
-							<div class="beta-select"><i class="fa fa-shopping-cart"></i> Giỏ hàng (Trống) <i class="fa fa-chevron-down"></i></div>
+							<div class="beta-select"><i class="fa fa-shopping-cart"></i> Giỏ hàng ( 
+								@if(Cart::count()>0 ) 
+								{{Cart::count()}} 
+								@else Trống 
+								@endif )<i class="fa fa-chevron-down"></i></div>
+							<?php $content=Cart::Content() ?>
+							@if(Cart::count() >0)	
 							<div class="beta-dropdown cart-body">
+								@foreach($content as $item)
 								<div class="cart-item">
-									<div class="media">
-										<a class="pull-left" href="#"><img src="source/assets/dest/images/products/cart/1.png" alt=""></a>
+									<div class="media"> 
+										<a class="pull-left" href="#"><img src="source/image/product/{{$item->options->has('img')?$item->options->img:''}}" alt="" ></a>
 										<div class="media-body">
-											 <button type="button" class="remove-cart-item" >&times;</button>
-											<span class="cart-item-title">Sample Woman Top</span>
-											<span class="cart-item-options">Size: XS; Colar: Navy</span>
-											<span class="cart-item-amount">1*<span>$49.50</span></span>
+											 <a href="{{url('deleteitemcart/'.$item->rowId)}}"><button type="button" class="remove-cart-item" >&times;</button></a>
+											<span class="cart-item-title">{{$item->name}}</span>
+											<!-- <span class="cart-item-options">Size: XS; Colar: Navy</span> -->
+											<span class="cart-item-amount">{{$item->qty}}*<span>{{number_format($item->price)}}</span></span>
 										</div>
 									</div>
 								</div>
-
-								<div class="cart-item">
-									<div class="media">
-										<a class="pull-left" href="#"><img src="source/assets/dest/images/products/cart/2.png" alt=""></a>
-										<div class="media-body">
-											 <button type="button" class="remove-cart-item" >&times;</button>
-											<span class="cart-item-title">Sample Woman Top</span>
-											<span class="cart-item-options">Size: XS; Colar: Navy</span>
-											<span class="cart-item-amount">1*<span>$49.50</span></span>
-										</div>
-									</div>
-								</div>
-
-								<div class="cart-item">
-									<div class="media">
-										<a class="pull-left" href="#"><img src="source/assets/dest/images/products/cart/3.png" alt=""></a>
-										<div class="media-body">
-											 <button type="button" class="remove-cart-item" >&times;</button>
-											<span class="cart-item-title">Sample Woman Top</span>
-											<span class="cart-item-options">Size: XS; Colar: Navy</span>
-											<span class="cart-item-amount">1*<span>$49.50</span></span>
-										</div>
-									</div>
-								</div>
+								@endforeach
 
 								<div class="cart-caption">
-									<div class="cart-total text-right">Tổng tiền: <span class="cart-total-value">$34.55</span></div>
+									<div class="cart-total text-right">Tổng tiền: <span class="cart-total-value">{{Cart::subtotal(0,'.',',')}}</span></div>
 									<div class="clearfix"></div>
 
 									<div class="center">
 										<div class="space10">&nbsp;</div>
-										<a href="checkout.html" class="beta-btn primary text-center">Đặt hàng <i class="fa fa-chevron-right"></i></a>
+										<a href="{{url('cart')}}" class="beta-btn primary text-center">Đặt hàng <i class="fa fa-chevron-right"></i></a>
 									</div>
 								</div>
+								
 							</div>
+							@endif
 						</div> <!-- .cart -->
 					</div>
 				</div>

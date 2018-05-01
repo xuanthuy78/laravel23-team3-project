@@ -15,43 +15,50 @@
 	<div class="container">
 		<div id="content">
 			
-			<form action="#" method="post" class="beta-form-checkout">
+			<form action="{{url('checkout')}}" method="post" class="beta-form-checkout">
+				<input type="hidden" name="_token" value="{{csrf_token()}}">
 				<div class="row">
 					<div class="col-sm-6">
 						<div><h2 color="red">Đặt hàng</h2></div>
 						<div class="space20">&nbsp;</div>
 
 						<div class="form-block">
-							<label for="name">Họ tên*</label>
-							<input type="text" id="name" placeholder="Họ tên" required>
+							<label for="name">Họ tên <span class="text-danger">*</span></label>
+							<input type="text" id="name" placeholder="Họ tên" value="{{Auth::user()->name}}" required name="name">
 						</div>
 						<div class="form-block">
 							<label>Giới tính </label>
-							<input id="gender" type="radio" class="input-radio" name="gender" value="nam" checked="checked" style="width: 10%"><span style="margin-right: 10%">Nam</span>
-							<input id="gender" type="radio" class="input-radio" name="gender" value="nữ" style="width: 10%"><span>Nữ</span>
+							<input id="gender" type="radio" class="input-radio" name="gender" value="1"  style="width: 10%" @if(Auth::user()->gender ==1) {{ "checked" }}
+            				@endif><span style="margin-right: 10%">Nam</span>
+							<input id="gender" type="radio" class="input-radio" name="gender" value="0" style="width: 10%" @if(Auth::user()->gender ==0) {{ "checked" }}
+            				@endif><span>Nữ</span>
 										
 						</div>
 
 						<div class="form-block">
-							<label for="email">Email*</label>
-							<input type="email" id="email" required placeholder="expample@gmail.com">
+							<label for="email">Email <span class="text-danger">*</span></label>
+							<input type="email" id="email" required placeholder="" value="{{Auth::user()->email}}" name="email" disabled="">
 						</div>
 
 						<div class="form-block">
-							<label for="adress">Địa chỉ*</label>
-							<input type="text" id="adress" placeholder="Street Address" required>
+							<label for="adress">Địa chỉ <span class="text-danger">*</span></label>
+							<input type="text" id="adress" placeholder="" value="{{Auth::user()->address}}" required name="address">
 						</div>
 						
 
 						<div class="form-block">
-							<label for="phone">Điện thoại*</label>
-							<input type="text" id="phone" required>
+							<label for="phone">Điện thoại <span class="text-danger">*</span></label>
+							<input type="text" id="phone" value="{{Auth::user()->phone}}" required name="phone">
 						</div>
 						
 						<div class="form-block">
-							<label for="notes">Ghi chú</label>
-							<textarea id="notes"></textarea>
+							<label for="notes">Ghi chú <span class="text-danger">*</span></label>
+							<textarea id="notes" required="Vui lòng nhập thời gian giao nhận" placeholder="Nhập thời gian giao nhận ở đây" name="note"></textarea>
+							@if($errors->has('note'))
+   							<p class="text-danger">{{$errors->first('note')}}</p>
+  							@endif
 						</div>
+						
 					</div>
 					<div class="col-sm-6">
 						<div class="your-order">
@@ -60,22 +67,25 @@
 								<div class="your-order-item">
 									<div>
 									<!--  one item	 -->
+										@foreach($content as $item)
 										<div class="media">
-											<img width="25%" src="source/assets/dest/images/shoping1.jpg" alt="" class="pull-left">
+											<img width="25%" src="source/image/product/{{$item->options->has('img')?$item->options->img:''}}" alt="" class="pull-left">
 											<div class="media-body">
-												<p class="font-large">Men's Belt</p>
-												<span class="color-gray your-order-info">Color: Red</span>
-												<span class="color-gray your-order-info">Size: M</span>
-												<span class="color-gray your-order-info">Qty: 1</span>
+												<p class="font-large">{{$item->name}}</p>
+												<span class="color-gray your-order-info">Số lượng: {{$item->qty}}</span>
+												<span class="color-gray your-order-info">Đơn giá: {{number_format($item->price)}}</span>
+												<span class="color-gray your-order-info">Thành tiền: {{number_format($item->subtotal)}}</span>
+												
 											</div>
 										</div>
+										@endforeach
 									<!-- end one item -->
 									</div>
 									<div class="clearfix"></div>
 								</div>
 								<div class="your-order-item">
 									<div class="pull-left"><p class="your-order-f18">Tổng tiền:</p></div>
-									<div class="pull-right"><h5 class="color-black">$235.00</h5></div>
+									<div class="pull-right"><h5 class="color-black">{{Cart::subtotal(0,'.',',')}}</h5></div>
 									<div class="clearfix"></div>
 								</div>
 							</div>
@@ -105,7 +115,7 @@
 								</ul>
 							</div>
 
-							<div class="text-center"><a class="beta-btn primary" href="#">Đặt hàng <i class="fa fa-chevron-right"></i></a></div>
+							<div class="text-center"><button type="submit "class="beta-btn primary" >Đặt hàng <i class="fa fa-chevron-right"></i></button></div>
 						</div> <!-- .your-order -->
 					</div>
 				</div>

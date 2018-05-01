@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Bill;
 use Illuminate\Http\Request;
+use Auth;
+use App\BillDetail;
+use Cart;
+use App\Http\Requests\CreateCheckoutRequest;
 
 class BillController extends Controller
 {
@@ -18,8 +22,40 @@ class BillController extends Controller
     }
     public function checkout()
     {
-        return view('page.checkout');
-    
+        if(Auth::user()) {
+            $content = Cart::Content();
+            return view('page.checkout',compact('content'));
+        }
+            return redirect('index')->with('flash_message','Vui lòng đăng nhập trước khi đặt hàng');
+    }
+    public function confirmCheckout(CreateCheckoutRequest $request)
+            
+    {
+        $cart=Cart::Content();
+        $bill = new Bill;
+        $bill->user_id = Auth::id();
+        $bill->name = $request->name;
+        $bill->phone = $request->phone;
+        $bill->address = $request->address;
+        $bill->date_order = date('Y-m-d H:i:s');
+        $bill->total = Cart::subtotal(0,'.','');
+        $bill->payment = $request->payment_method;
+        $bill->note = $request->note;
+        $bill->status = 0;
+        $bill->save();
+
+        foreach($cart as $item)
+        {
+            $bill_detail = new BillDetail;
+            $bill_detail->bill_id = $bill->id;
+            $bill_detail->product_id = $item->id;
+            $bill_detail->quantity = $item->qty;
+            $bill_detail->unit_price = $item->price;
+            $bill_detail->save();
+        }
+        Cart::destroy();
+        return redirect('index')->with('flash_message','Đặt hàng thành công!');
+       
     }
     public function index()
     {

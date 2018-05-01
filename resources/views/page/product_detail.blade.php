@@ -24,36 +24,32 @@
 							<img src="source/image/product/{{$product->image}}" alt="">
 						</div>
 						<div class="col-sm-8">
-							<div class="single-item-body">
-								<p class="single-item-title">{{$product->name}}</p>
-								<p class="single-item-price">
-									@if($product->promotion_price !=0)
-										<span class="beta-sales-price">{{number_format($product->promotion_price)}} VND</span>
-										@else
-										<span class="beta-sales-price">{{number_format($product->unit_price)}} VND</span>
-									@endif
-								</p>
-							</div>
-
-							<div class="clearfix"></div>
-							<div class="space20">&nbsp;</div>
-
-							<div class="single-item-desc">
-								<p>{{$product->description}}</p>
-							</div>
-							<div class="space20">&nbsp;</div>
-
-							<p>Số lượng:</p>
-							<div class="single-item-options">
-								<select class="wc-select" name="size">
-									@for($i=1;$i<=10;$i++)
-									<option value="{{$i}}">{{$i}}</option>
-									@endfor
-								</select>
-								
-								<a class="add-to-cart" href="#"><i class="fa fa-shopping-cart"></i></a>
-								<div class="clearfix"></div>
-							</div>
+							<div class="single-top-in">
+							<div class="span_2_of_a1 ">
+								<h3>{{$product->name}}</h3>
+								<p class="in-para">Bánh có thể sử dùng liền không cần sơ chế lại</p>
+			    				<div class="price_single">
+				  				<span class="reducedfrom item_price">@if($product->promotion_price ==0)
+				  				{{number_format($product->unit_price)}} @else {{number_format($product->promotion_price)}}@endif</span>
+				 				<div class="clearfix"></div>
+								</div>
+								<h4 class="quick">Mô tả:</h4>
+								<p class="quick_desc"> {{$product->description}}</p>
+			    
+								<form action="{{url('additemcartqty/'.$product->id)}}" method="get" id="qtyform">
+								<div class="quantity"> 
+												<div class="quantity-select">                           
+													<div class="entry value-minus">&nbsp;</div>
+													<input type="hidden" value="valtg" id="valtg" name ="val">
+													<!-- <input type="hidden" value="{{$product->id}}" name ="id"> -->
+													<div class="entry value" id="value2"><span>1</span></div>
+													<div class="entry value-plus active">&nbsp;</div>
+												</div>
+								</div>
+											<button type="submit" class="add-to item_add hvr-skew-backward">Add to cart</button>
+								</form>
+				 				</div>
+						</div>	
 						</div>
 					</div>
 
@@ -77,63 +73,33 @@
 						<h4>Related Products</h4>
 
 						<div class="row">
+							@foreach($product_copy as $product_cp)
 							<div class="col-sm-4">
 								<div class="single-item">
 									<div class="single-item-header">
-										<a href="product.html"><img src="source/assets/dest/images/products/4.jpg" alt=""></a>
+										<a href="product.html"><img src="source/image/product/{{$product_cp->image}}" alt=""></a>
 									</div>
 									<div class="single-item-body">
-										<p class="single-item-title">Sample Woman Top</p>
+										<p class="single-item-title">{{$product_cp->name}}</p>
 										<p class="single-item-price">
-											<span>$34.55</span>
+											@if($product_cp->promotion_price != 0)
+												<span class="flash-del">{{number_format($product_cp->unit_price)}}</span>
+												<span class="flash-sale">{{number_format($product_cp->promotion_price)}}</span>
+												@else
+												<span class="flash-sale">{{number_format($product_cp->unit_price)}}</span>
+												@endif
 										</p>
 									</div>
 									<div class="single-item-caption">
-										<a class="add-to-cart pull-left" href="product.html"><i class="fa fa-shopping-cart"></i></a>
-										<a class="beta-btn primary" href="product.html">Details <i class="fa fa-chevron-right"></i></a>
+										<a class="add-to-cart pull-left" href="{{url('additemcart/'.$product_cp->id)}}"><i class="fa fa-shopping-cart"></i></a>
+										<a class="beta-btn primary" href="{{url('categories/product/'.$product_cp->id)}}">Details<i class="fa fa-chevron-right"></i></a>
 										<div class="clearfix"></div>
 									</div>
 								</div>
 							</div>
-							<div class="col-sm-4">
-								<div class="single-item">
-									<div class="single-item-header">
-										<a href="product.html"><img src="source/assets/dest/images/products/5.jpg" alt=""></a>
-									</div>
-									<div class="single-item-body">
-										<p class="single-item-title">Sample Woman Top</p>
-										<p class="single-item-price">
-											<span>$34.55</span>
-										</p>
-									</div>
-									<div class="single-item-caption">
-										<a class="add-to-cart pull-left" href="product.html"><i class="fa fa-shopping-cart"></i></a>
-										<a class="beta-btn primary" href="product.html">Details <i class="fa fa-chevron-right"></i></a>
-										<div class="clearfix"></div>
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-4">
-								<div class="single-item">
-									<div class="ribbon-wrapper"><div class="ribbon sale">Sale</div></div>
+							@endforeach
+							
 
-									<div class="single-item-header">
-										<a href="#"><img src="source/assets/dest/images/products/6.jpg" alt=""></a>
-									</div>
-									<div class="single-item-body">
-										<p class="single-item-title">Sample Woman Top</p>
-										<p class="single-item-price">
-											<span class="flash-del">$34.55</span>
-											<span class="flash-sale">$33.55</span>
-										</p>
-									</div>
-									<div class="single-item-caption">
-										<a class="add-to-cart pull-left" href="#"><i class="fa fa-shopping-cart"></i></a>
-										<a class="beta-btn primary" href="#">Details <i class="fa fa-chevron-right"></i></a>
-										<div class="clearfix"></div>
-									</div>
-								</div>
-							</div>
 						</div>
 					</div> <!-- .beta-products-list -->
 				</div>
@@ -142,34 +108,20 @@
 						<h3 class="widget-title">Best Sellers</h3>
 						<div class="widget-body">
 							<div class="beta-sales beta-lists">
+								@foreach($product_top as $product_t)
 								<div class="media beta-sales-item">
-									<a class="pull-left" href="product.html"><img src="source/assets/dest/images/products/sales/1.png" alt=""></a>
+									<a class="pull-left" href="{{url('categories/product/'.$product_t->id)}}"><img src="source/image/product/{{$product_t->image}}" alt=""></a>
 									<div class="media-body">
-										Sample Woman Top
-										<span class="beta-sales-price">$34.55</span>
+										{{$product_t->name}}
+										<span class="beta-sales-price">
+											@if($product_t->promotion_price != 0 || $product_t->promotion_price >0 )
+												{{number_format($product_t->promotion_price)}}
+												@else
+												{{number_format($product_t->unit_price)}}
+											@endif</span>
 									</div>
 								</div>
-								<div class="media beta-sales-item">
-									<a class="pull-left" href="product.html"><img src="source/assets/dest/images/products/sales/2.png" alt=""></a>
-									<div class="media-body">
-										Sample Woman Top
-										<span class="beta-sales-price">$34.55</span>
-									</div>
-								</div>
-								<div class="media beta-sales-item">
-									<a class="pull-left" href="product.html"><img src="source/assets/dest/images/products/sales/3.png" alt=""></a>
-									<div class="media-body">
-										Sample Woman Top
-										<span class="beta-sales-price">$34.55</span>
-									</div>
-								</div>
-								<div class="media beta-sales-item">
-									<a class="pull-left" href="product.html"><img src="source/assets/dest/images/products/sales/4.png" alt=""></a>
-									<div class="media-body">
-										Sample Woman Top
-										<span class="beta-sales-price">$34.55</span>
-									</div>
-								</div>
+								@endforeach
 							</div>
 						</div>
 					</div> <!-- best sellers widget -->
@@ -177,34 +129,21 @@
 						<h3 class="widget-title">New Products</h3>
 						<div class="widget-body">
 							<div class="beta-sales beta-lists">
+								@foreach($product_new as $product_n)
 								<div class="media beta-sales-item">
-									<a class="pull-left" href="product.html"><img src="source/assets/dest/images/products/sales/1.png" alt=""></a>
+									<a class="pull-left" href="{{url('categories/product/'.$product_n->id)}}"><img src="source/image/product/{{$product_n->image}}" alt=""></a>
 									<div class="media-body">
-										Sample Woman Top
-										<span class="beta-sales-price">$34.55</span>
+										{{$product_n->name}}
+										<span class="beta-sales-price">
+											@if($product_n->promotion_price != 0 || $product_n->promotion_price >0 )
+												{{number_format($product_n->promotion_price)}}
+												@else
+												{{number_format($product_n->unit_price)}}
+											@endif
+										</span>
 									</div>
 								</div>
-								<div class="media beta-sales-item">
-									<a class="pull-left" href="product.html"><img src="source/assets/dest/images/products/sales/2.png" alt=""></a>
-									<div class="media-body">
-										Sample Woman Top
-										<span class="beta-sales-price">$34.55</span>
-									</div>
-								</div>
-								<div class="media beta-sales-item">
-									<a class="pull-left" href="product.html"><img src="source/assets/dest/images/products/sales/3.png" alt=""></a>
-									<div class="media-body">
-										Sample Woman Top
-										<span class="beta-sales-price">$34.55</span>
-									</div>
-								</div>
-								<div class="media beta-sales-item">
-									<a class="pull-left" href="product.html"><img src="source/assets/dest/images/products/sales/4.png" alt=""></a>
-									<div class="media-body">
-										Sample Woman Top
-										<span class="beta-sales-price">$34.55</span>
-									</div>
-								</div>
+								@endforeach
 							</div>
 						</div>
 					</div> <!-- best sellers widget -->
