@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Auth;
 use App\Http\Requests\CreateUserSignUpRequest;
+use App\Bill;
+use App\BillDetail;
 
 class UserController extends Controller
 {
@@ -26,7 +28,13 @@ class UserController extends Controller
 
     public function previewCart()
     {
-        return view('page.users.previewcart');
+        if (Auth::user()) {
+            $id = Auth::user()->id;
+            $bills = Bill::get()->where('user_id','=',$id);
+            $billdetails = BillDetail::get();
+            return view('page.users.previewcart',compact('bills','billdetails'));
+        }
+        return redirect('index');
     }
 
     public function login(Request $request)

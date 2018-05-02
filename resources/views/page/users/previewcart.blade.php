@@ -17,26 +17,95 @@
     <div class=" container col-md-8">
       <table class="table table-bordered table-hover">
         <tr> 
-          <th>STT</th>
+          <th>Mã đơn hàng</th>
           <th>Ngày Đặt Hàng</th>
           <th>Trạng Thái</th>
           <th>Chi Tiết</th>
           <th>Delete</th>
         </tr>
-        @for($i=1;$i<=1;$i++)
+        @foreach ($bills as $bill)
         <tr class="content">
-          <td>{{$i}}</td>
-          <td>........</td>
-          <td>........</td>
-          <td><a href="" class="btn btn-primary">View</a> </td>
+          <td>#{{$bill->id}}</td>
+          <td>{{$bill->date_order}}</td>
+          <td>{{$bill->status}}</td>
+          <td><a href="" class="btn btn-primary" role="dialog" data-toggle="modal" data-target="#myModal{{$bill->id}}">View</a> </td>
           <td><button class="btn btn-danger" data-catid="" data-toggle="modal" data-target="#delete">Delete</button></td>
         </tr>
-        @endfor
+        @endforeach
       </table>
         
     </div>
     <div class="clearfix"></div>
 </div>
+@foreach ($bills as $bill)
+<div class="modal fade" id="myModal{{$bill->id}}" tabindex="-1" role="dialog" aria-labelledby="myModal{{$bill->id}}"
+  aria-hidden="true">
+  <div class="container">
+    <div id="content">
+      <div id="update">
+        <div class="container">
+      <div class="table-responsive">
+        <!-- Shop Products Table -->
+        
+        <table class="shop_table beta-shopping-cart-table" cellspacing="0">
+          <thead>
+            <tr>
+              <th class="product-quantity">STT</th>
+              <th class="product-name">Product</th>
+              <th class="product-quantity">Qty.</th>
+              <th class="product-price">Price</th>
+            </tr>
+          </thead>
+          @foreach($billdetails as $billdetail)
+          <?php $count=1;?>
+          @if (($billdetail->bill_id) == ($bill->id))
+          <tbody style="background-color: #ffffff!important">
+          
+            <tr class="cart_item">
+              <td class="product-quantity">
+                <span class="amount">{{$count}}</span>
+              </td>
+              <td class="product-name">
+                <div class="media">
+                  <img class="pull-left" src="source/image/product/{{$billdetail->product->image}}" width="100px" alt="">
+                  <div class="media-body">
+                    <p class="font-large table-title">{{$billdetail->product->name}}</p>
+                  </div>
+                </div>
+              </td>
+
+              <td class="product-quantity">
+                <span class="amount">{{$billdetail->quantity}}</span>
+              </td>
+              
+              <td class="product-price">
+                <span class="amount">{{$billdetail->unit_price}}</span>
+              </td>
+            
+            </tr>
+          </tbody>
+          @endif
+          <?php $count++; ?>
+          @endforeach
+
+          <tfoot>
+            <tr>
+              <td colspan="6" class="actions" style="text-align: right;">
+                <label>Total: </label>
+                <a type="submit" class="beta-btn primary" name="proceed">${{$bill->total}} <i class="fa fa-chevron-right"></i></a>
+
+            </tr>
+          </tfoot>
+        </table>
+        <!-- End of Shop Table Products -->
+        </div>
+      </div>
+    </div>
+
+    </div> <!-- #content -->
+    </div> <!-- .container -->
+</div> 
+@endforeach
 <br>
 <br>
 <br>
