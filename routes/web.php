@@ -11,9 +11,17 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+//Routes use for admin_side
+Route::group(['prefix' => 'admin'], function (){
+    Route::get('', function (){
+        return redirect('admin/login');
+    });
+    Route::get('/dashboard', 'AdminController@index' );
+    Auth::routes();
 });
+
+
+
 
 Route::get('previewcart',
 	['as'=>'don-dat-hang',
@@ -106,6 +114,8 @@ Route::get('additemcartqty/{id}',
 	'uses' => 'PageController@addItemCartQty'
 ]);
 
-Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+
+
