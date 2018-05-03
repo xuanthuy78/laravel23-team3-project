@@ -17,7 +17,13 @@ class PageController extends Controller
     {
         $product=Product::findOrFail($id);
         if($product->promotion_price ==0) {
-            Cart::add(array('id' => $id, 'name' => $product->name, 'qty' => 1, 'price' => $product->unit_price, 'options' =>array('img' => $product->image)));
+            Cart::add(array('id' => $id,
+                            'name' => $product->name,
+                            'qty' => 1,
+                            'price' => $product->unit_price,
+                            'options' =>array('img' => $product->image)
+                            )
+                     );
         }
         else {
             Cart::add(array('id' => $id, 'name' => $product->name, 'qty' => 1, 'price' => $product->promotion_price, 'options' =>array('img' => $product->image)));

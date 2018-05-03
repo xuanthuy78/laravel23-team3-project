@@ -27,7 +27,7 @@
         <tr class="content">
           <td>#{{$bill->id}}</td>
           <td>{{$bill->date_order}}</td>
-          <td>{{$bill->status}}</td>
+          <td>@if(($bill->status) == 0)Đang xử lí@endif</td>
           <td><a href="" class="btn btn-primary" role="dialog" data-toggle="modal" data-target="#myModal{{$bill->id}}">View</a> </td>
           <td><button class="btn btn-danger" data-catid="" data-toggle="modal" data-target="#delete">Delete</button></td>
         </tr>
@@ -56,8 +56,8 @@
               <th class="product-price">Price</th>
             </tr>
           </thead>
-          @foreach($billdetails as $billdetail)
           <?php $count=1;?>
+          @foreach($billdetails as $billdetail)
           @if (($billdetail->bill_id) == ($bill->id))
           <tbody style="background-color: #ffffff!important">
           
@@ -84,8 +84,8 @@
             
             </tr>
           </tbody>
-          @endif
           <?php $count++; ?>
+          @endif
           @endforeach
 
           <tfoot>
