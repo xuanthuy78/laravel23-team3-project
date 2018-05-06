@@ -63,6 +63,7 @@
                                 <a href="#" class="account dropdown-toggle" data-toggle="dropdown">My Account</a>
                                 <ul class="dropdown-menu dropdown-menu-right">
                                     <li><a title="My Account" href="{{url('users/'.Auth::user()->id)}}">Profile</a></li>
+                                    <li><a title="My Account" href="{{url('changePassword/'.Auth::user()->id)}}">Change Password</a></li>
                                     <li><a title="My Cart" href="{{url('previewcart')}}">My Cart</a></li>  
                                     <li><a title="Testimonial" href="{{url('users/logout')}}">Log Out</a></li>
                                 </ul>

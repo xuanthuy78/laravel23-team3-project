@@ -72,6 +72,14 @@ Route::get('users/{id}',
 	['as'=>'profile',
 	'uses'=>'UserController@user_show'
 ]);
+Route::get('changePassword/{id}',
+	['as'=>'profile',
+	'uses'=>'UserController@changePassword_show'
+]);
+Route::patch('password/update/{id}',
+	['as'=>'sua-profile',
+	'uses'=>'UserController@changePassword'
+]);
 Route::post('users/signup',
 	['as' => 'dang-ky',
 	'uses' => 'UserController@signup'

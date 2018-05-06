@@ -20,10 +20,15 @@ class UserController extends Controller
             }
     }
 
-     public function user_show()
+    public function user_show()
    
     {
         return view('page.users.user');
+    }
+
+    public function changePassword_show()
+    {
+        return view('page.users.password');
     }
 
     public function previewCart()
@@ -110,6 +115,27 @@ class UserController extends Controller
         $user->save();
         //dd($user);
         return redirect('users/'.$id)->with('flash_message','Sửa thành công');
+    }
+
+    public function changePassword(Request $request,$id)
+    {
+        $user=User::find($id);
+        $this->validate($request,
+            [
+                'password' => 'required|min:3|max:15',
+                'cpassword' => 'required|same:password'
+            ],
+            [
+                'password.required' => 'Bạn chưa nhập mật khẩu',
+                'password.min' => 'Mật khẩu phải có ít nhât 5 ký tự',
+                'password.max' => 'Mật khẩu chỉ được tối đã 15 ký tự',
+                'cpassword.required' => 'Bạn chưa nhập lại mật khẩu',
+                'cpassword.same' => 'Mật khẩu nhập lại chưa khớp'
+            ]
+        );
+        $user->password = Hash::make($request->password); 
+        $user->save();
+        return redirect('changePassword/'.$id)->with('flash_message','Sửa thành công');
     }
 
     public function signup(CreateUserSignUpRequest $request)

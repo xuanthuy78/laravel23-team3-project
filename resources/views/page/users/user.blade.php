@@ -8,6 +8,8 @@
                 <ul class="tree-list-pad">
                     <li><input type="checkbox" checked="checked" id="item-0" /><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a href="{{url('users/'.Auth::user()->id)}}">Cập nhật thông tin</a></label>
                     </li>
+                    <li><input type="checkbox" checked="checked" id="item-0" /><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a href="{{url('changePassword/'.Auth::user()->id)}}">Đổi password</a></label>
+                    </li>
                     <li><input type="checkbox" id="item-1" checked="checked" /><label for="item-1"><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a>Xem lại đơn hàng</a></label>
                     </li>
                    
@@ -42,32 +44,6 @@
                 <label class="control-label col-sm-3">Address <span class="text-danger">*</span></label>
                 <div class="col-md-8 col-sm-9">
                   <input type="text" class="form-control" name="address" id="mem_name" placeholder="Enter your Name here" value="{{Auth::user()->address}}">
-                </div>
-              </div>
-               <div class="form-group">
-                <label class="control-label col-sm-3">Change Password</label>
-                <div class="col-md-5 col-sm-8">
-                <input type="checkbox" name="changePassword" id="changePassword">
-              </div>
-              </div>
-
-              <div class="form-group">
-                <label class="control-label col-sm-3">Set Password <span class="text-danger">*</span></label>
-                <div class="col-md-5 col-sm-8">
-                  <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                    <input type="password" class="form-control password" name="password" id="password" placeholder="Choose password (5-15 chars)" value="" disabled="">
-                 </div>   
-                </div>
-              </div>
-             
-              <div class="form-group">  
-                <label class="control-label col-sm-3">Confirm Password <span class="text-danger">*</span></label>
-                <div class="col-md-5 col-sm-8">
-                  <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                    <input type="password" class="form-control password" name="cpassword" id="cpassword" placeholder="Confirm your password" value="" disabled="">
-                  </div>  
                 </div>
               </div>
               
