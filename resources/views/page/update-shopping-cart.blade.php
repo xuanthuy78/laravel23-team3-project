@@ -6,11 +6,11 @@
 				<table class="shop_table beta-shopping-cart-table" cellspacing="0">
 					<thead>
 						<tr>
-							<th class="product-name">Product</th>
-							<th class="product-price">Price</th>
-							<th class="product-status">Status</th>
-							<th class="product-quantity">Qty.</th>
-							<th class="product-subtotal">Total</th>
+							<th class="product-name">Sản phẩm</th>
+							<th class="product-price">Đơn giá</th>
+							<th class="product-status">Ghi chú</th>
+							<th class="product-quantity">Số lượng</th>
+							<th class="product-subtotal">Thành tiền</th>
 							<th class="product-remove">Remove</th>
 						</tr>
 					</thead>
@@ -62,7 +62,7 @@
 							</td>
 
 							<td class="product-remove">
-								<a href="{{url('deleteitemcart/'.$item->rowId)}}" class="remove" title="Remove this item"><i class="fa fa-trash-o"></i></a>
+								<a href="{{url('cart/delete/'.$item->rowId)}}" class="remove" title="Remove this item"><i class="fa fa-trash-o"></i></a>
 							</td>
 						</tr>
 						
@@ -75,7 +75,7 @@
 						<tr>
 							<td colspan="6" class="actions">
 								
-								<a type="submit" href="{{url('checkout')}}" class="beta-btn primary" name="proceed">Proceed to Checkout <i class="fa fa-chevron-right"></i></a>
+								<a type="submit" href="{{url('checkout')}}" class="beta-btn primary" name="proceed">Xác nhận thông tin đặt hàng <i class="fa fa-chevron-right"></i></a>
 
 							</td>
 							</td>
@@ -96,7 +96,7 @@
 			var proID = $('#proID<?php echo $i; ?>').val();
 
 			if(newQty<=0){
-				alert('Vui lòng xem lại số lượng')
+				alert('Vui lòng xem lại số lượng');
 			}
 			else {
 

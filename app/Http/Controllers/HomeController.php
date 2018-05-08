@@ -25,12 +25,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $slides=Slide::all();
-        $categories=Category::all();
-        $newproducts=Product::where('new',1)->paginate(3);
-        $promotionproducts=Product::where('promotion_price','<>',0)->paginate(6);
+        $slides = Slide::all();
+        $categories = Category::all();
+        $newProducts = Product::where('new', 1)->paginate(6);
+        $promotionProducts = Product::where('promotion_price', '<>', 0)->paginate(3);
         //dd($newproduct);
-        return view('page.index',compact('slides','categories','newproducts','promotionproducts'));
+        return view('page.index', compact('slides', 'categories', 'newProducts', 'promotionProducts'));
         
     }
 

@@ -86,10 +86,10 @@ class UserController extends Controller
         ]);
         $user = User::find($id);
         // $email=$user->email;
-        $user->name=$request->name;
-        $user->address=$request->address;
-        $user->phone=$request->phone;
-        $user->gender=$request->gender;
+        $user->name = $request->name;
+        $user->address = $request->address;
+        $user->phone = $request->phone;
+        $user->gender = $request->gender;
         //$user->email=$email;
         if($request->changePassword == "on")
         {
@@ -138,9 +138,12 @@ class UserController extends Controller
         $data['phone'] = "";
         $data['gender'] = 1;
         $data['password'] = Hash::make($data['password']);
-        //dd($data);
         $user = User::create($data);
         return redirect('index')->with('flash_message','Đã đăng ký thành công, xin mời đăng nhập !');
 
+    }
+    public function forgetPassword()
+    {
+        return view('auth.passwords.email');
     }
 }

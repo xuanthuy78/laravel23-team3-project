@@ -12,5 +12,13 @@ class Bill_detailsTableSeeder extends Seeder
     public function run()
     {
         //
+         DB::table('bill_details')->insert([
+        	['bill_id'=>1,'product_id'=>25,'quantity'=> 2,'unit_price' => 180000],
+        	['bill_id'=>1,'product_id'=>41,'quantity'=> 1,'unit_price' => 150000],
+        	['bill_id'=>1,'product_id'=>4,'quantity'=> 1,'unit_price' => 120000],
+        	['bill_id'=>2,'product_id'=>4,'quantity'=> 2,'unit_price' => 120000],
+        	['bill_id'=>2,'product_id'=>34,'quantity'=> 4,'unit_price' => 110000],
+        	['bill_id'=>2,'product_id'=>14,'quantity'=> 1,'unit_price' => 120000],
+        ]);
     }
 }

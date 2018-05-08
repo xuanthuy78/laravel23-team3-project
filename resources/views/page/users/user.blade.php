@@ -1,6 +1,23 @@
 @extends('master')
 @section('content')
-<br>
+
+<div class="page-head_agile_info_w3l">
+    <div class="container">
+      <h3>Sweet<span> Bakery</span></h3>
+      <!--/w3_short-->
+         <div class="services-breadcrumb">
+            <div class="agile_inner_breadcrumb">
+
+               <ul class="w3_short">
+                <li><a href="{{url('index')}}">Trang chủ</a><i>|</i></li>
+                <li>Profile </li>
+              </ul>
+             </div>
+
+        </div>
+     <!--//w3_short-->
+  </div>
+</div>
 <div class="container mixcontainer">
     <div class="col-sm-4">
 	 <div class="css-treeview">
