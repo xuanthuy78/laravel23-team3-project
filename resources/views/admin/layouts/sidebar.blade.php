@@ -7,7 +7,7 @@
                 <img src="{{asset('adminlte/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-                <p>Alexander Pierce</p>
+                <p>{{$admin}}</p>
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
         </div>
@@ -15,11 +15,22 @@
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
             <li>
-                <a href="#">
-                    <i class="fa fa-th"></i> <span>User</span>
-                    <span class="pull-right-container">
-              {{--<small class="label pull-right bg-green">new</small>--}}
-            </span>
+                <a href="{{route('list_user')}}" id="user">
+                    <i class="fa fa-user"></i> <span>User</span>
+                    <span class="pull-right-container"></span>
+                </a>
+            </li>
+            <li>
+                <a href="{{route('list_category')}}">
+                    <i class="fa fa-box"></i> <span>Category</span>
+                    <span class="pull-right-container"></span>
+
+                </a>
+            </li>
+            <li>
+                <a href="{{route('list_bill')}}">
+                    <i class="fa fa-file"></i> <span>Bill</span>
+                    <span class="pull-right-container"></span>
                 </a>
             </li>
         </ul>
