@@ -6,16 +6,18 @@
 	 <div class="css-treeview">
                 <h4>Profile</h4>
                 <ul class="tree-list-pad">
-                    <li><input type="checkbox" checked="checked" id="item-0" /><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> Cập nhật thông tin</label>
+                    <li><input type="checkbox" checked="checked" id="item-0" /><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a href="{{url('users/'.Auth::user()->id)}}">Cập nhật thông tin</a></label>
                     </li>
-                    <li><input type="checkbox" id="item-1" checked="checked" /><label for="item-1"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> Xem lại đơn hàng</label>
+                    <li><input type="checkbox" checked="checked" id="item-0" /><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a href="{{url('users/'.Auth::user()->id)}}">Đổi password</a></label>
+                    </li>
+                    <li><input type="checkbox" id="item-1" checked="checked" /><label for="item-1"><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a href="{{url('previewcart')}}">Xem lại đơn hàng</a></label>
                     </li>
                    
                 </ul>
             </div>
     </div>
-    <div class=" container col-md-8">
-      <table class="table table-bordered table-hover">
+    <div class="container col-md-8 tablecart">
+      <table class="table table-bordered ">
         <tr> 
           <th>Mã đơn hàng</th>
           <th>Ngày Đặt Hàng</th>
@@ -24,12 +26,12 @@
           <th>Delete</th>
         </tr>
         @foreach ($bills as $bill)
-        <tr class="content">
-          <td>#{{$bill->id}}</td>
-          <td>{{$bill->date_order}}</td>
-          <td>@if(($bill->status) == 0)Đang xử lí@endif</td>
-          <td><a href="" class="btn btn-primary" role="dialog" data-toggle="modal" data-target="#myModal{{$bill->id}}">View</a> </td>
-          <td><button class="btn btn-danger" data-catid="" data-toggle="modal" data-target="#delete">Delete</button></td>
+        <tr class="content table-hover">
+          <td>{{$bill->id}}</td>
+          <td>{{ date('d.m.Y H:i:s', strtotime($bill->date_order)) }}</td>
+          <td>@if(($bill->status) == 0) Đang xử lí @else Giao dịch thành công @endif</td>
+          <td><a href="" class="btn btn-primary" role="dialog" data-toggle="modal" data-target="#myModal{{$bill->id}}"><i class="fa fa-star-o" style="color:white;"></i>&nbsp;View</a> </td>
+          <td><button class="btn btn-danger" data-catid="" data-toggle="modal" data-target="#delete"><i class="fa fa-trash-o"></i> &nbsp;Delete</button></td>
         </tr>
         @endforeach
       </table>
@@ -51,9 +53,9 @@
           <thead>
             <tr>
               <th class="product-quantity">STT</th>
-              <th class="product-name">Product</th>
-              <th class="product-quantity">Qty.</th>
-              <th class="product-price">Price</th>
+              <th class="product-name">Tên bánh</th>
+              <th class="product-quantity">Số lượng</th>
+              <th class="product-price">Đơn giá</th>
             </tr>
           </thead>
           <?php $count=1;?>

@@ -6199,7 +6199,7 @@ color: #2fdab8;
 }
 
 .css-treeview a {
-    padding: 7px 0 0 31px;
+    padding: 0px 0 0 31px;
     margin: 2px;
     font-size: 14px;
     letter-spacing: 1px;
@@ -6830,6 +6830,7 @@ color: #545454;
 	background: rgba(255, 168, 3, 0.5);
 	color:white;
 	z-index: 999;	
+	text-decoration: none;
 }
 
 #panel-search span {
@@ -6841,4 +6842,12 @@ color: #545454;
 #line-auto {
 	margin-top: 10px;
 	border-bottom: 2px solid #d9534f;
+}
+.tablecart table th,td {
+	text-align: center;
+	font-weight: Open Sans ;
+}
+.tablecart table th {
+	background-color: #FFA803;
+	color:white;
 }
