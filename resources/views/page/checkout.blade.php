@@ -1,17 +1,22 @@
 @extends('master')
 @section('content')
-	<div class="inner-header">
+	<div class="page-head_agile_info_w3l">
 		<div class="container">
-			<div class="pull-left">
-			</div>
-			<div class="pull-right">
-				<div class="beta-breadcrumb font-large">
-					<a href="index.html">Home</a> / <span>Đặt hàng</span>
+			<h3>Sweet<span> Bakery</span></h3>
+			<!--/w3_short-->
+				 <div class="services-breadcrumb">
+						<div class="agile_inner_breadcrumb">
+
+						   <ul class="w3_short">
+								<li><a href="{{url('index')}}">Trang chủ</a><i>|</i></li>
+								<li>Đặt hàng</li>
+							</ul>
+						 </div>
+
 				</div>
-			</div>
-			<div class="clearfix"></div>
-		</div>
+	   <!--//w3_short-->
 	</div>
+</div>
 	<div class="container">
 		<div id="content">
 			

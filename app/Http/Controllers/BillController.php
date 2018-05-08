@@ -20,14 +20,16 @@ class BillController extends Controller
     {
         return view('page.shopping-cart');
     }
+    
     public function checkout()
     {
         if(Auth::user()) {
             $content = Cart::Content();
-            return view('page.checkout',compact('content'));
+            return view('page.checkout', compact('content'));
         }
-            return redirect('index')->with('flash_message','Vui lòng đăng nhập trước khi đặt hàng');
+            return redirect('index')->with('flash_message', 'Vui lòng đăng nhập trước khi đặt hàng');
     }
+
     public function confirmCheckout(CreateCheckoutRequest $request)
             
     {
@@ -46,15 +48,15 @@ class BillController extends Controller
 
         foreach($cart as $item)
         {
-            $bill_detail = new BillDetail;
-            $bill_detail->bill_id = $bill->id;
-            $bill_detail->product_id = $item->id;
-            $bill_detail->quantity = $item->qty;
-            $bill_detail->unit_price = $item->price;
-            $bill_detail->save();
+            $billDetail = new BillDetail;
+            $billDetail->bill_id = $bill->id;
+            $billDetail->product_id = $item->id;
+            $billDetail->quantity = $item->qty;
+            $billDetail->unit_price = $item->price;
+            $billDetail->save();
         }
         Cart::destroy();
-        return redirect('index')->with('flash_message','Đặt hàng thành công!');
+        return redirect('index')->with('flash_message', 'Đặt hàng thành công!');
        
     }
     public function index()

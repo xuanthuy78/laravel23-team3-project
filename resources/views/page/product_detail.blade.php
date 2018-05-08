@@ -1,18 +1,22 @@
 @extends('master')
 @section('content')
-<div class="inner-header">
+<div class="page-head_agile_info_w3l">
 		<div class="container">
-			<div class="pull-left">
-				<h6 class="inner-title">Product</h6>
-			</div>
-			<div class="pull-right">
-				<div class="beta-breadcrumb font-large">
-					<a href="index.html">Home</a> / <span>Product</span>
+			<h3>Sweet<span> Bakery</span></h3>
+			<!--/w3_short-->
+				 <div class="services-breadcrumb">
+						<div class="agile_inner_breadcrumb">
+
+						   <ul class="w3_short">
+								<li><a href="{{url('index')}}">Trang chủ</a><i>|</i></li>
+								<li>Chi tiết sản phẩm</li>
+							</ul>
+						 </div>
+
 				</div>
-			</div>
-			<div class="clearfix"></div>
-		</div>
+	   <!--//w3_short-->
 	</div>
+</div>
 
 	<div class="container">
 		<div id="content">
@@ -36,7 +40,7 @@
 								<h4 class="quick">Mô tả:</h4>
 								<p class="quick_desc"> {{$product->description}}</p>
 			    
-								<form action="{{url('additemcartqty/'.$product->id)}}" method="get" id="qtyform">
+								<form action="{{url('cart/add/'.$product->id.'/qty')}}" method="get" id="qtyform">
 								<div class="quantity"> 
 												<div class="quantity-select">                           
 													<div class="entry value-minus">&nbsp;</div>
@@ -70,29 +74,29 @@
 					</div>
 					<div class="space50">&nbsp;</div>
 					<div class="beta-products-list">
-						<h4>Related Products</h4>
+						<h4>Bánh cùng loại</h4>
 
 						<div class="row">
-							@foreach($product_copy as $product_cp)
+							@foreach($productRelated as $productR)
 							<div class="col-sm-4">
 								<div class="single-item">
 									<div class="single-item-header">
-										<a href="product.html"><img src="source/image/product/{{$product_cp->image}}" alt=""></a>
+										<a href="{{url('categories/product/'.$productR->id)}}"><img src="source/image/product/{{$productR->image}}" alt=""></a>
 									</div>
 									<div class="single-item-body">
-										<p class="single-item-title">{{$product_cp->name}}</p>
+										<p class="single-item-title">{{$productR->name}}</p>
 										<p class="single-item-price">
-											@if($product_cp->promotion_price != 0)
-												<span class="flash-del">{{number_format($product_cp->unit_price)}}</span>
-												<span class="flash-sale">{{number_format($product_cp->promotion_price)}}</span>
+											@if($productR->promotion_price != 0)
+												<span class="flash-del">{{number_format($productR->unit_price)}}</span>
+												<span class="flash-sale">{{number_format($productR->promotion_price)}}</span>
 												@else
-												<span class="flash-sale">{{number_format($product_cp->unit_price)}}</span>
+												<span class="flash-sale">{{number_format($productR->unit_price)}}</span>
 												@endif
 										</p>
 									</div>
 									<div class="single-item-caption">
-										<a class="add-to-cart pull-left" href="{{url('additemcart/'.$product_cp->id)}}"><i class="fa fa-shopping-cart"></i></a>
-										<a class="beta-btn primary" href="{{url('categories/product/'.$product_cp->id)}}">Details<i class="fa fa-chevron-right"></i></a>
+										<a class="add-to-cart pull-left" href="{{url('cart/add/'.$productR->id)}}"><i class="fa fa-shopping-cart"></i></a>
+										<a class="beta-btn primary" href="{{url('categories/product/'.$productR->id)}}">Details<i class="fa fa-chevron-right"></i></a>
 										<div class="clearfix"></div>
 									</div>
 								</div>
@@ -105,19 +109,19 @@
 				</div>
 				<div class="col-sm-3 aside">
 					<div class="widget">
-						<h3 class="widget-title">Best Sellers</h3>
+						<h3 class="widget-title">Bánh HOT</h3>
 						<div class="widget-body">
 							<div class="beta-sales beta-lists">
-								@foreach($product_top as $product_t)
+								@foreach($productTop as $productT)
 								<div class="media beta-sales-item">
-									<a class="pull-left" href="{{url('categories/product/'.$product_t->id)}}"><img src="source/image/product/{{$product_t->image}}" alt=""></a>
+									<a class="pull-left" href="{{url('categories/product/'.$productT->id)}}"><img src="source/image/product/{{$productT->image}}" alt=""></a>
 									<div class="media-body">
-										{{$product_t->name}}
+										{{$productT->name}}
 										<span class="beta-sales-price">
-											@if($product_t->promotion_price != 0 || $product_t->promotion_price >0 )
-												{{number_format($product_t->promotion_price)}}
+											@if($productT->promotion_price != 0 || $productT->promotion_price >0 )
+												{{number_format($productT->promotion_price)}}
 												@else
-												{{number_format($product_t->unit_price)}}
+												{{number_format($productT->unit_price)}}
 											@endif</span>
 									</div>
 								</div>
@@ -126,19 +130,19 @@
 						</div>
 					</div> <!-- best sellers widget -->
 					<div class="widget">
-						<h3 class="widget-title">New Products</h3>
+						<h3 class="widget-title">Bánh mới</h3>
 						<div class="widget-body">
 							<div class="beta-sales beta-lists">
-								@foreach($product_new as $product_n)
+								@foreach($productNew as $productN)
 								<div class="media beta-sales-item">
-									<a class="pull-left" href="{{url('categories/product/'.$product_n->id)}}"><img src="source/image/product/{{$product_n->image}}" alt=""></a>
+									<a class="pull-left" href="{{url('categories/product/'.$productN->id)}}"><img src="source/image/product/{{$productN->image}}" alt=""></a>
 									<div class="media-body">
-										{{$product_n->name}}
+										{{$productN->name}}
 										<span class="beta-sales-price">
-											@if($product_n->promotion_price != 0 || $product_n->promotion_price >0 )
-												{{number_format($product_n->promotion_price)}}
+											@if($productN->promotion_price != 0 || $productN->promotion_price >0 )
+												{{number_format($productN->promotion_price)}}
 												@else
-												{{number_format($product_n->unit_price)}}
+												{{number_format($productN->unit_price)}}
 											@endif
 										</span>
 									</div>

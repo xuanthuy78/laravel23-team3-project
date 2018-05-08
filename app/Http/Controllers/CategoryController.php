@@ -19,23 +19,43 @@ class CategoryController extends Controller
     {
         $category=Category::findOrFail($id);
         $products=$category->products;
-        return view('page.product',compact('category','products'));
+        return view('page.product', compact('category', 'products'));
     }
+
     public function searchCategories()
     {
-        $data=Input::all();
-        $category_id=$data['nameCategory'];
-        $product_key=$data['search_key'];
-        if($product_key<>"")
-        {
-        $products=Product::where('category_id',$category_id)->where('name','like','%'.$product_key.'%')->get();
+        $data = Input::all();
+        $categoryId = $data['nameCategory'];
+        $productKey = $data['search_key'];
+        if($productKey <> "") {
+        $products = Product::where('category_id', $categoryId)->where('name', 'like', '%'.$productKey.'%')->get();
         }
-        else
-        {
-        $products=Product::where('category_id',$category_id)->get();  
+        else {
+        $products = Product::where('category_id', $categoryId)->get();  
         }
-        $category=Category::findOrFail($category_id);
-        return view('page.categories.search_category',compact('products','category'));
+        $category = Category::findOrFail($categoryId);
+        return view('page.categories.search_category', compact('products', 'category'));
+    }
+    public function autoGetSearch(Request $request)
+    {
+        $key = $request->key;
+        $categoryId = $request->categoryId;
+        $products = Product::where('category_id', $categoryId)->where('name', 'like', '%'.$key.'%')->get();
+        //dd($products);
+        if($key != "" && count($products) > 0) 
+        {
+           foreach($products as $product)
+        {
+           echo "   <a href='categories/product/". $product->id."'>
+                    <div id='panel-search'> 
+                    <img id='pic' width='80px' src='source/image/product/". $product->image."'/>
+                    &nbsp; &nbsp;<span> ".$product->name."</span></div></a>
+                    <div id='line-auto'></div>
+                " ;  
+        } 
+        }
+        
+
     }
     public function index()
     {

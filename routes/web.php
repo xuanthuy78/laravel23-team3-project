@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('index');
 });
 
 Route::get('previewcart',
@@ -23,10 +23,6 @@ Route::get('index',
 	['as'=>'trang-chu',
 	'uses'=>'HomeController@index'
 ]);
-Route::get('menu-content',
-	['as'=>'menu-content',
-	'uses'=>'HomeController@menuContent'
-]);
 Route::get('search_categories',
 	['as'=>'tim-kiem-the-loai',
 	'uses'=>'CategoryController@searchCategories'
@@ -35,17 +31,21 @@ Route::get('search_products',
 	['as'=>'tim-kiem-san-pham',
 	'uses'=>'ProductController@searchProducts'
 ]);
-Route::get('products',
-	['as'=>'san-pham',
-	'uses'=>'ProductController@getProduct'
+Route::get('categories/products/autoget',
+	['as' => 'auto-name-search',
+	'uses' => 'CategoryController@autoGetSearch'
 ]);
+// Route::get('products',
+// 	['as'=>'san-pham',
+// 	'uses'=>'ProductController@getProduct'
+// ]);
 Route::get('categories/{id}',
 	['as'=>'san-pham-the-loai',
 	'uses'=>'CategoryController@showProducts'
 ]);
 Route::get('categories/product/{id}',
 	['as'=>'chi-tiet-san-pham',
-	'uses'=>'ProductController@getProduct_Detail'
+	'uses'=>'ProductController@getProductDetail'
 ]);
 
 Route::get('contact',
@@ -55,7 +55,10 @@ Route::get('contact',
 
 
 /** User Profile**/
-
+Route::get('users/forgetpassword',
+	['as' => 'quen-mat-khau',
+	'uses' => 'UserController@forgetPassword'
+]);
 Route::patch('users/update/{id}',
 	['as'=>'sua-profile',
 	'uses'=>'UserController@user_update'
@@ -77,22 +80,37 @@ Route::post('users/signup',
 	'uses' => 'UserController@signup'
 ]);
 /** ------------**/
-Route::get('additemcart/{id}',
+Route::group(['prefix' => 'cart'],function(){
+	
+	Route::get('add/{id}',
 	['as' => 'add-item-cart',
 	'uses' => 'PageController@addItemCart'
-]);
-Route::get('cart',
-	['as' => 'shopping-cart',
-	'uses' => 'PageController@listCart'
-]);
-Route::get('deleteitemcart/{id}',
+	]);
+
+	Route::get('delete/{id}',
 	['as' => 'delete-item-cart',
 	'uses' => 'PageController@deleteItemCart'
-]);
-Route::get('cart/update/{id}',
+	]);
+
+	Route::get('update/{id}',
 	['as' => 'update-item-cart',
 	'uses' => 'PageController@updateItemCart'
-]);
+	]);
+
+	Route::get('add/{id}/qty',
+	['as' => 'add-item-cart-qty',
+	'uses' => 'PageController@addItemCartQty'
+	]);
+
+	Route::get('',
+	['as' => 'shopping-cart',
+	'uses' => 'PageController@listCart'
+	]);
+});
+
+
+
+
 Route::get('checkout',
 	['as'=>'dat-hang',
 	'uses'=>'BillController@checkout'
@@ -101,10 +119,7 @@ Route::post('checkout',
 	['as' => 'xn-dathang',
 	'uses' => 'BillController@confirmCheckout'
 ]);
-Route::get('additemcartqty/{id}',
-	['as' => 'add-item-cart-qty',
-	'uses' => 'PageController@addItemCartQty'
-]);
+
 
 Auth::routes();
 

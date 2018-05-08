@@ -32,18 +32,18 @@ class UserController extends Controller
     public function login(Request $request)
     {
     	$this->validate($request,[
-                'Email'=>'required',
-                'Password'=>'required|min:3|max:32'
+                'Email' => 'required',
+                'Password' => 'required|min:3|max:32'
         ],[
-                'Email.required'=>'Bạn chưa nhập Email',
-                'Password.required'=>'Bạn chưa nhập Password',
-                'Password.min'=>'Password không nhỏ hơn 3 ký tự',
-                'Password.max'=>'Password không được quá 32 ký tự'
+                'Email.required' => 'Bạn chưa nhập Email',
+                'Password.required' => 'Bạn chưa nhập Password',
+                'Password.min' => 'Password không nhỏ hơn 3 ký tự',
+                'Password.max' => 'Password không được quá 32 ký tự'
 
         ]);
-        $Email=$request->Email;
-        $Password=($request->Password);
-        if(Auth::attempt(['email'=> $Email,'password' => $Password]))
+        $Email = $request->Email;
+        $Password = ($request->Password);
+        if(Auth::attempt(['email'=> $Email, 'password' => $Password]))
             {
                   return redirect('index');
             }
@@ -59,38 +59,38 @@ class UserController extends Controller
     public function user_update(Request $request,$id)
     {
     	$this->validate($request,[
-        'name'=>'required|min:3',
-        'address'=>'required|min:10',
-        'phone'=>'required|min:10|max:12'
+        'name' => 'required|min:3',
+        'address' => 'required|min:10',
+        'phone' => 'required|min:10|max:12'
         ],[
-        'name.required'=>'Bạn chưa nhập tên người dùng',
-        'name.min'=>'Tên người dùng phải có ít nhât 3 ký tự',
-        'address.required'=>'Bạn chưa nhập địa chỉ',
-        'address.min'=>'Địa chỉ phải trên 10 ký tự',
-        'phone.required'=>'Bạn chưa nhập điện thoại',
-        'phone.min'=>'Địa thoại phải từ 10 số',
-        'phone.max'=>'Địa thoại tối đa 12 số'
+        'name.required' => 'Bạn chưa nhập tên người dùng',
+        'name.min' => 'Tên người dùng phải có ít nhât 3 ký tự',
+        'address.required' => 'Bạn chưa nhập địa chỉ',
+        'address.min' => 'Địa chỉ phải trên 10 ký tự',
+        'phone.required' => 'Bạn chưa nhập điện thoại',
+        'phone.min' => 'Địa thoại phải từ 10 số',
+        'phone.max' => 'Địa thoại tối đa 12 số'
         ]);
-        $user=User::find($id);
+        $user = User::find($id);
         // $email=$user->email;
-        $user->name=$request->name;
-        $user->address=$request->address;
-        $user->phone=$request->phone;
-        $user->gender=$request->gender;
+        $user->name = $request->name;
+        $user->address = $request->address;
+        $user->phone = $request->phone;
+        $user->gender = $request->gender;
         //$user->email=$email;
-        if($request->changePassword =="on")
+        if($request->changePassword == "on")
         {
          $this->validate($request,[
-        'password'=>'required|min:3|max:15',
-        'cpassword'=>'required|same:password'
+        'password' => 'required|min:3|max:15',
+        'cpassword' => 'required|same:password'
         ],[
-        'password.required'=>'Bạn chưa nhập mật khẩu',
-        'password.min'=>'Mật khẩu phải có ít nhât 5 ký tự',
-        'password.max'=>'Mật khẩu chỉ được tối đã 15 ký tự',
-        'cpassword.required'=>'Bạn chưa nhập lại mật khẩu',
-        'cpassword.same'=>'Mật khẩu nhập lại chưa khớp'
+        'password.required' => 'Bạn chưa nhập mật khẩu',
+        'password.min' => 'Mật khẩu phải có ít nhât 5 ký tự',
+        'password.max' => 'Mật khẩu chỉ được tối đã 15 ký tự',
+        'cpassword.required' => 'Bạn chưa nhập lại mật khẩu',
+        'cpassword.same' => 'Mật khẩu nhập lại chưa khớp'
         ]);
-            $user->password=Hash::make($request->password); 
+            $user->password = Hash::make($request->password); 
         }
         $user->save();
         //dd($user);
@@ -104,9 +104,12 @@ class UserController extends Controller
         $data['phone'] = "";
         $data['gender'] = 1;
         $data['password'] = Hash::make($data['password']);
-        //dd($data);
         $user = User::create($data);
         return redirect('index')->with('flash_message','Đã đăng ký thành công, xin mời đăng nhập !');
 
+    }
+    public function forgetPassword()
+    {
+        return view('auth.passwords.email');
     }
 }

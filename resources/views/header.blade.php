@@ -15,12 +15,13 @@
 			<form action="{{url('users/login')}}" method="post">
 				<input type="hidden" name="_token" value="{{csrf_token()}}">
 				<p class="header">Email</p>
-				<input type="email" name="Email" placeholder="User Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'User Name';}" required="required">
+				<input type="email" name="Email" placeholder="email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'User Name';}" required="required">
 				
 				<p class="header">Password</p>
 				<input type="password" name="Password" placeholder="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" required="required">
 				<input type="submit" class="sign-in" value="Sign In">
-			</form>
+			</form> 
+			<br><br><a href="{{url('users/forgetpassword')}}" style="color:#FFA803; font-weight: bold;">* Quên mật khẩu</a>
 		</div>
 		<div id="signup-agile">   
 			<form action="{{url('users/signup')}}" method="post">
@@ -40,6 +41,7 @@
 				
 				<input type="submit" class="register" value="Sign up">
 			</form>
+
 		</div> 
     </div><!-- tab-content -->
 </div>
@@ -47,7 +49,7 @@
 	
 <!-- login modal -->
 <div id="header">
-		 <div class="topbar">
+		 <div class="topbar" id="home">
                 <div class="container">
                     <div class="topbar-left">
                         <ul class="topbar-nav clearfix">
@@ -71,14 +73,14 @@
                             <li><a href="#" class="login" data-toggle="modal" data-target="#myModal88">Login</a></li>
                             @endif
                             <li class="dropdown">
-                                <a href="#" class="currency dropdown-toggle" data-toggle="dropdown">VND</a>
+                                <a  class="currency dropdown-toggle" data-toggle="dropdown">VND</a>
                                 <ul class="dropdown-menu dropdown-menu-right">
                                    
                                     <li><a href="{{url('index')}}">US Dollar</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a  class="language dropdown-toggle" data-toggle="dropdown"><img src="images/flag-us.png" alt=""> English</a>
+                                <a class="language dropdown-toggle" data-toggle="dropdown"><img src="images/flag-us.png" alt=""> English</a>
                                 <ul class="dropdown-menu dropdown-menu-right">
                                     <li><a ><img src="images/flag-us.png" alt=""> &nbsp;English</a></li>
                                     <li><a ><img src="images/flag-spain.png" alt=""> &nbsp;Viet Nam</a></li>
@@ -113,10 +115,10 @@
 							<div class="header-middle">
 								<form class="form-search" action="{{url('search_categories')}}" method="get">
 									<div class="search">
-										<input type="text" name="search_key" placeholder="Nhập tên bánh cần tìm">
+										<input type="text" name="search_key" id="search" placeholder="Nhập tên bánh cần tìm">
 									</div>
 									<div class="section_room">
-										<select id="country" onchange="change_country(this.value)" class="frm-field required" name="nameCategory">
+										<select onchange="change_country(this.value)" class="frm-field required" name="nameCategory" id="categoryId">
 											@foreach($categories as $category)
 											<option value="{{$category->id}}">{{$category->name}}</option>     
 											@endforeach
@@ -129,11 +131,12 @@
 									<div class="clearfix"></div>
 								</form>
 							</div>
+							<div id="back_result"></div>
 					</div>
 
 					<div class="beta-comp">
 						<div class="cart">
-							<div class="beta-select"><i class="fa fa-shopping-cart"></i> Giỏ hàng ( 
+							<div class="beta-select" ><i class="fa fa-shopping-cart"></i> Giỏ hàng ( 
 								@if(Cart::count()>0 ) 
 								{{Cart::count()}} 
 								@else Trống 
@@ -142,11 +145,11 @@
 							@if(Cart::count() >0)	
 							<div class="beta-dropdown cart-body">
 								@foreach($content as $item)
-								<div class="cart-item">
+								<div class="cart-item" >
 									<div class="media"> 
 										<a class="pull-left" href="#"><img src="source/image/product/{{$item->options->has('img')?$item->options->img:''}}" alt="" ></a>
 										<div class="media-body">
-											 <a href="{{url('deleteitemcart/'.$item->rowId)}}"><button type="button" class="remove-cart-item" >&times;</button></a>
+											 <a href="{{url('cart/delete/'.$item->rowId)}}"><button type="button" class="remove-cart-item" >&times;</button></a>
 											<span class="cart-item-title">{{$item->name}}</span>
 											<!-- <span class="cart-item-options">Size: XS; Colar: Navy</span> -->
 											<span class="cart-item-amount">{{$item->qty}}*<span>{{number_format($item->price)}}</span></span>
@@ -155,7 +158,7 @@
 								</div>
 								@endforeach
 
-								<div class="cart-caption">
+								<div class="cart-caption" id="updateCart" >
 									<div class="cart-total text-right">Tổng tiền: <span class="cart-total-value">{{Cart::subtotal(0,'.',',')}}</span></div>
 									<div class="clearfix"></div>
 
@@ -164,9 +167,9 @@
 										<a href="{{url('cart')}}" class="beta-btn primary text-center">Đặt hàng <i class="fa fa-chevron-right"></i></a>
 									</div>
 								</div>
-								
+								@endif
 							</div>
-							@endif
+							
 						</div> <!-- .cart -->
 					</div>
 				</div>
@@ -188,7 +191,7 @@
 							</ul>
 						</li>
 						<li><a href="{{url('contact')}}">Giới thiệu</a></li>
-						<li><a href="contacts.html">Liên hệ</a></li>
+						<li><a href="contacts.html">Tin tức</a></li>
 					</ul>
 					<div class="clearfix"></div>
 				</nav>

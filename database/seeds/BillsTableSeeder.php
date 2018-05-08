@@ -12,5 +12,9 @@ class BillsTableSeeder extends Seeder
     public function run()
     {
         //
+        DB::table('bills')->insert([
+        	['user_id'=>1,'name'=>'Phan Thanh Hùng','phone'=> '0935444294','address' => 'Phạm Như Xương, Đà Nẵng','date_order'=>'2018/01/04','total'=>630000,'payment'=>'COD','note'=>'giao trong ngày lúc 16h00','status'=>'1'],
+        	['user_id'=>1,'name'=>'Mai Mỹ Nhung','phone'=> '01223569397','address' => '220 Lê Duẩn, Đà Nẵng','date_order'=>'2018/02/01','total'=>800000,'payment'=>'COD','note'=>'giao trong ngày lúc 16h00','status'=>'1'],
+        ]);
     }
 }
