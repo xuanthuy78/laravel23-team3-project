@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
+use App\User;
 
 class AdminController extends Controller
 {
@@ -42,6 +44,27 @@ class AdminController extends Controller
     public function logout() {
         Auth::logout();
         return redirect('/admin');
+    }
+
+    public function listCustomers(){
+        $users = DB::table('users')->paginate(10);
+        $admin = Auth::user()->name;
+        return view('admin.customer', ['users' => $users, 'admin' => $admin]);
+    }
+
+    public function searchCustomer()
+    {
+        $data = Input::all();
+        // $customerID = $data['userID'];
+        // $customerEmail = $data['email'];
+        // $customerAddress = $data['address'];
+        // $customerPhone = $data['phone'];
+        $customerCreated = $data['date_up'];
+        $customerUpdated = $data['date_crea'];
+        $customers = User::Where('created_at','like',"%".$customerCreated."%")  
+        ->orWhere('updated_at','like',"%".$customerUpdated."%")->get();
+        $admin = Auth::user()->name;
+        return view('admin.search_customer',compact('customers','admin'));
     }
 }
 

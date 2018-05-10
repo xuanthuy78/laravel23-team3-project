@@ -33,6 +33,18 @@
                     <span class="pull-right-container"></span>
                 </a>
             </li>
+            <li>
+                <a href="{{route('list_customer')}}">
+                    <i class="fa fa-user"></i> <span>Customer</span>
+                    <span class="pull-right-container"></span>
+                </a>
+            </li>
+            <li>
+                <a href="{{route('list_bill')}}">
+                    <i class="fa fa-car"></i> <span>Shipping report</span>
+                    <span class="pull-right-container"></span>
+                </a>
+            </li>
         </ul>
     </section>
     <!-- /.sidebar -->

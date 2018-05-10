@@ -12,7 +12,6 @@
 */
 
 //Routes use for admin_side
-Route::group(['prefix' => 'admin'], function () {
 
     Auth::routes();
 
@@ -40,11 +39,15 @@ Route::group(['prefix' => 'admin'], function () {
     Route::group(['prefix' => 'category'], function() {
         Route::get('/', 'Admin\AdminController@showCategory')->name('list_category');
     });
-
+    // Routes use for search customer
+    Route::group(['prefix' => 'search_customer'], function() {
+        Route::get('/', 'Admin\AdminController@listCustomers')->name('list_customer');
+        Route::get('/search', 'Admin\AdminController@searchCustomer')->name('search_customer');
+        Route::get('/delete/{id}', 'Admin\AdminController@deleteUser')->name('delete_user');
+    });
 
     Route::get('/logout', 'Admin\AdminController@logout' )->name('admin_logout');
 
-});
 
 
 
