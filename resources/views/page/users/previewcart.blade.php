@@ -29,7 +29,7 @@
           <td>{{$bill->date_order}}</td>
           <td>@if(($bill->status) == 0)Đang xử lí@endif</td>
           <td><a href="" class="btn btn-primary" role="dialog" data-toggle="modal" data-target="#myModal{{$bill->id}}">View</a> </td>
-          <td><button class="btn btn-danger" data-catid="" data-toggle="modal" data-target="#delete">Delete</button></td>
+          <td><a class="btn btn-danger" href="{{ url('deleteBill/' .$bill->id) }}">Delete</a></td>
         </tr>
         @endforeach
       </table>

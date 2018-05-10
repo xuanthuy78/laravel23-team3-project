@@ -117,3 +117,8 @@ Route::get('additemcartqty/{id}',
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('deleteBill/{id}',
+	['as' => 'delete-bill',
+	'uses' => 'BillController@deleteBill'
+]);

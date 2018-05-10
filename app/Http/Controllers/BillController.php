@@ -8,6 +8,7 @@ use Auth;
 use App\BillDetail;
 use Cart;
 use App\Http\Requests\CreateCheckoutRequest;
+use DB;
 
 class BillController extends Controller
 {
@@ -56,6 +57,13 @@ class BillController extends Controller
         Cart::destroy();
         return redirect('index')->with('flash_message','Đặt hàng thành công!');
        
+    }
+
+    public function deleteBill($id){
+        $bill = Bill::findOrFail($id);
+        $bill_detail = BillDetail::where('bill_id','=',$id)->delete();
+        $bill->delete();
+        return redirect('previewcart');
     }
     public function index()
     {
