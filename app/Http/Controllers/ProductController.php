@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use DB;
+use App\BillDetail;
 
 class ProductController extends Controller
 {
@@ -21,7 +23,26 @@ class ProductController extends Controller
     public function getProduct_Detail($id)
     {
         $product = Product::findOrFail($id);
-        return view('page.product_detail', compact('product'));
+        $category_id = $product->category_id;
+        $product_copy = Product::where('id','<>',$id)->where('category_id',$category_id)->paginate(3);
+        $product_new = Product::where('new',1)->take(4)->get();
+        $product_top = DB::table('Bill_Details')
+                     ->join('Products','Bill_Details.product_id','=','Products.id')
+                     ->selectRaw('product_id as id ,Products.name as name,Products.unit_price as unit_price,Products.promotion_price as promotion_price,Products.image as image,SUM(quantity) as sum')
+                     ->groupBy('product_id','Products.name','Products.unit_price','Products.promotion_price','image')
+                     ->orderBy('sum','desc')
+                     ->get();
+        /*Cach 2 Eloquen*/
+       /*$nhap =BillDetail::groupBy('product_id')->orderBy('sum','desc')->selectRaw('product_id,sum(quantity) as sum')->get();
+       foreach($nhap as $key=>$n)
+       {
+        $a=$n->product->name." | ".$n->product->unit_price." | ".$n->product->promotion_price;
+
+        echo $a."<br>";
+       }    */ 
+        //dd($product_top);
+        return view('page.product_detail', compact('product','product_copy','product_new','product_top'));
+       
     }
 
     public function searchProducts()
@@ -41,7 +62,7 @@ class ProductController extends Controller
         if($product_key <> "") {
             $products = Product::where('name','like',"%".$product_key."%")
             ->orWhere('description','like',"%".$product_key."%")
-            ->WhereBetween('unit_price',[$str_min,$str_max])->paginate(8);;    
+            ->WhereBetween('unit_price',[$str_min,$str_max])->paginate(8);   
         }
         else {
             $products = Product::WhereBetween('unit_price',[$str_min,$str_max])->paginate(8);

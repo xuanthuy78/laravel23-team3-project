@@ -2,8 +2,8 @@
 @section('content')
 <div class="fullwidthbanner-container">
 					<div class="fullwidthbanner">
-						<div class="bannercontainer" >
-					    <div class="banner" >
+						<div class="bannercontainer">
+					    <div class="banner">
 								<ul>
 									<!-- THE FIRST SLIDE -->
 									@foreach($slides as $slide)
@@ -12,19 +12,15 @@
 													<div class="tp-bgimg defaultimg" data-lazyload="undefined" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat" data-lazydone="undefined" src="source/image/slide/{{$slide->image}}" data-src="source/image/slide/{{$slide->image}}"  style="background-color: rgba(0, 0, 0, 0); background-repeat: no-repeat; background-image: url('source/image/slide/{{$slide->image}}'); background-size: cover; background-position: center center; width: 100%; height: 100%; opacity: 1; visibility: inherit;">
 													</div>
 												</div>
-
 						        </li>
 						        @endforeach
-								
 								</ul>
 							</div>
 						</div>
-
 						<div class="tp-bannertimer"></div>
 					</div>
 				</div>
-				<!--slider-->
-	</div>
+</div> 
 <div class="inner-header ">
 		<div class="container ">
 			<div class="pull-left">
@@ -69,91 +65,6 @@
 								
 					</div>
 					@endforeach
-
-					<!-- <div class="panel panel-default">
-						<div class="panel-heading">
-							<h4 class="panel-title">
-								<a data-toggle="collapse" data-parent="#accordian" href="#mens">
-									<span class="span-heart"><i class="fa fa-caret-square-o-down"></i></span>
-										<p class="category-label-sportswear">Áo</p>
-								</a>
-							</h4>
-								<div class="line"></div>
-						</div> -->
-							<!-- <div id="mens" class="panel-collapse collapse">
-								<div class="panel-body">
-									<ul>
-										<li><a href="#">Fendi</a></li>
-										<li><a href="#">Guess</a></li>
-										<li><a href="#">Valentino</a></li>
-										<li><a href="#">Dior</a></li>
-										<li><a href="#">Versace</a></li>
-										<li><a href="#">Armani</a></li>
-										<li><a href="#">Prada</a></li>
-										<li><a href="#">Dolce and Gabbana</a></li>
-										<li><a href="#">Chanel</a></li>
-										<li><a href="#">Gucci</a></li>
-									</ul>
-								</div>
-							</div>
-					</div> -->
-					<!-- <div class="panel panel-default">
-						<div class="panel-heading">
-							<h4 class="panel-title">
-								<a data-toggle="collapse" data-parent="#accordian" href="#womens">
-									<span class="span-heart"><i class="fa fa-caret-square-o-down"></i></span>
-										<p class="category-label-sportswear">Womens</p>
-								</a>
-							</h4>
-								<div class="line"></div>
-						</div>
-						<div id="womens" class="panel-collapse collapse">
-							<div class="panel-body">
-								<ul>
-								<li><a href="#">Fendi</a></li>
-								<li><a href="#">Guess</a></li>
-								<li><a href="#">Valentino</a></li>
-								<li><a href="#">Dior</a></li>
-								<li><a href="#">Versace</a></li>
-								</ul>
-							</div>
-						</div>
-					</div> -->
-					<!-- <div class="panel panel-default">
-						<div class="panel-heading">
-							<h4 class="panel-title"><a href="#">Kids</a></h4>
-						</div>
-					</div>
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h4 class="panel-title"><a href="#">Fashion</a></h4>
-						</div>
-					</div>
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h4 class="panel-title"><a href="#">Households</a></h4>
-						</div>
-					</div>
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h4 class="panel-title"><a href="#">Interiors</a></h4>
-						</div>
-					</div>
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h4 class="panel-title"><a href="#">Clothing</a></h4>
-						</div>
-					</div>
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h4 class="panel-title"><a href="#">Bags</a></h4>
-						</div>
-					</div>
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h4 class="panel-title"><a href="#">Shoes</a></h4>
-						</div>
-					</div> -->
 			</div>
 			<!--</div>-->
 			<!--/category-products-->
@@ -167,7 +78,7 @@
 						<h3 class="agileits-sear-head">  Search Here..</h3>
 							<form id="target" action="{{url('search_products')}}" method="get">
 								<input type="hidden" value="min_slide" id="min_slider" name ="min_slider">
-								<input type="hidden" value="min_slide" id="max_slider" name ="max_slider">
+								<input type="hidden" value="max_slide" id="max_slider" name ="max_slider">
 								<input type="search" placeholder="Product name..." name="search_key">
 								<input type="submit" value="Tìm" class="bstn btn-info" id="submit">
 								<br> <br>
@@ -223,8 +134,8 @@
 											</p>
 										</div>
 										<div class="single-item-caption">
-											<a class="add-to-cart pull-left" href="shopping_cart.html"><i class="fa fa-shopping-cart"></i></a>
-											<a class="beta-btn primary" href="product.html">Details <i class="fa fa-chevron-right"></i></a>
+											<a class="add-to-cart pull-left" href="{{url('additemcart/'.$newproduct->id)}}"><i class="fa fa-shopping-cart"></i></a>
+											<a class="beta-btn primary" href="{{url('categories/product/'.$newproduct->id)}}">Details <i class="fa fa-chevron-right"></i></a>
 											<div class="clearfix"></div>
 										</div>
 									</div>
@@ -265,12 +176,17 @@
 										<div class="single-item-body">
 											<p class="single-item-title">{{$promotionproduct->name}}</p>
 											<p class="single-item-price">
-												<span>{{number_format($promotionproduct->promotion_price)}} VNĐ</span>
+												@if($promotionproduct->promotion_price != 0)
+												<span class="flash-del">{{number_format($promotionproduct->unit_price)}}</span>
+												<span class="flash-sale">{{number_format($promotionproduct->promotion_price)}}</span>
+												@else
+												<span class="flash-sale">{{number_format($promotionproduct->unit_price)}}</span>
+												@endif
 											</p>
 										</div>
 										<div class="single-item-caption">
-											<a class="add-to-cart pull-left" href="shopping_cart.html"><i class="fa fa-shopping-cart"></i></a>
-											<a class="beta-btn primary" href="product.html">Details <i class="fa fa-chevron-right"></i></a>
+											<a class="add-to-cart pull-left" href="{{url('additemcart/'.$promotionproduct->id)}}"><i class="fa fa-shopping-cart"></i></a>
+											<a class="beta-btn primary" href="{{url('categories/product/'.$promotionproduct->id)}}">Details <i class="fa fa-chevron-right"></i></a>
 											<div class="clearfix"></div>
 										</div>
 									</div>

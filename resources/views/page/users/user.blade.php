@@ -8,6 +8,8 @@
                 <ul class="tree-list-pad">
                     <li><input type="checkbox" checked="checked" id="item-0" /><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a href="{{url('users/'.Auth::user()->id)}}">Cập nhật thông tin</a></label>
                     </li>
+                    <li><input type="checkbox" checked="checked" id="item-0" /><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a href="{{url('changePassword/'.Auth::user()->id)}}">Đổi password</a></label>
+                    </li>
                     <li><input type="checkbox" id="item-1" checked="checked" /><label for="item-1"><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a>Xem lại đơn hàng</a></label>
                     </li>
                    
@@ -44,32 +46,6 @@
                   <input type="text" class="form-control" name="address" id="mem_name" placeholder="Enter your Name here" value="{{Auth::user()->address}}">
                 </div>
               </div>
-               <div class="form-group">
-                <label class="control-label col-sm-3">Change Password</label>
-                <div class="col-md-5 col-sm-8">
-                <input type="checkbox" name="changePassword" id="changePassword">
-              </div>
-              </div>
-
-              <div class="form-group">
-                <label class="control-label col-sm-3">Set Password <span class="text-danger">*</span></label>
-                <div class="col-md-5 col-sm-8">
-                  <div class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                    <input type="password" class="form-control password" name="password" id="password" placeholder="Choose password (5-15 chars)" value="" disabled="">
-                 </div>   
-                </div>
-              </div>
-             
-              <div class="form-group">  
-                <label class="control-label col-sm-3">Confirm Password <span class="text-danger">*</span></label>
-                <div class="col-md-5 col-sm-8">
-                  <div class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                    <input type="password" class="form-control password" name="cpassword" id="cpassword" placeholder="Confirm your password" value="" disabled="">
-                  </div>  
-                </div>
-              </div>
               
               <div class="form-group">
                 <label class="control-label col-sm-3">Gender <span class="text-danger">*</span></label>
@@ -94,7 +70,7 @@
                 <label class="control-label col-sm-3">Contact No. <span class="text-danger">*</span></label>
                 <div class="col-md-5 col-sm-8">
                   <div class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+                    <span class="input-group-addon"><i class="fa fa-phone"></i></span>
                   <input type="text" class="form-control" name="phone" id="contactnum" placeholder="Enter your Primary contact no." value="{{Auth::user()->phone}}">
                   </div>
                 </div>
@@ -111,20 +87,6 @@
 <br>
 @endsection
 @section('script')
-  <script>
-        $(document).ready(function(){
-            $("#changePassword").change(function(){
-                if($(this).is(":checked"))
-                {
-                    $(".password").removeAttr('disabled');
-                }
-                else
-                {
-                    $(".password").val()=""
-                    $(".password").attr('disabled','');
-                }
-            });
-        });
-    </script>
+  
 @endsection
   
