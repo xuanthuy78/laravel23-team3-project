@@ -10,7 +10,7 @@
                     </li>
                     <li><input type="checkbox" checked="checked" id="item-0" /><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a href="{{url('users/'.Auth::user()->id)}}">Đổi password</a></label>
                     </li>
-                    <li><input type="checkbox" id="item-1" checked="checked" /><label for="item-1"><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a>Xem lại đơn hàng</a></label>
+                    <li><input type="checkbox" id="item-1" checked="checked" /><label for="item-1"><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a href="{{url('previewcart')}}">Xem lại đơn hàng</a></label>
                     </li>
                    
                 </ul>

@@ -1,6 +1,23 @@
 @extends('master')
 @section('content')
-<br>
+
+<div class="page-head_agile_info_w3l">
+    <div class="container">
+      <h3>Sweet<span> Bakery</span></h3>
+      <!--/w3_short-->
+         <div class="services-breadcrumb">
+            <div class="agile_inner_breadcrumb">
+
+               <ul class="w3_short">
+                <li><a href="{{url('index')}}">Trang chủ</a><i>|</i></li>
+                <li>Profile </li>
+              </ul>
+             </div>
+
+        </div>
+     <!--//w3_short-->
+  </div>
+</div>
 <div class="container mixcontainer">
     <div class="col-sm-4">
 	 <div class="css-treeview">
@@ -10,7 +27,7 @@
                     </li>
                     <li><input type="checkbox" checked="checked" id="item-0" /><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a href="{{url('changePassword/'.Auth::user()->id)}}">Đổi password</a></label>
                     </li>
-                    <li><input type="checkbox" id="item-1" checked="checked" /><label for="item-1"><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a>Xem lại đơn hàng</a></label>
+                    <li><input type="checkbox" id="item-1" checked="checked" /><label for="item-1"><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a href="{{url('previewcart')}}">Xem lại đơn hàng</a></label>
                     </li>
                    
                 </ul>
@@ -77,7 +94,7 @@
               </div>
               <div class="form-group">
                 <div class="col-xs-offset-3 col-xs-10">
-                  <input name="Submit" type="submit" value="Sign Up" class="btn btn-warning">
+                  <input name="Submit" type="submit" value="Update" class="btn btn-warning">
                 </div>
               </div>  
       </form>

@@ -1,6 +1,22 @@
 @extends('master')
 @section('content')
+<div class="page-head_agile_info_w3l">
+		<div class="container">
+			<h3>Sweet<span> Bakery</span></h3>
+			<!--/w3_short-->
+				 <div class="services-breadcrumb">
+						<div class="agile_inner_breadcrumb">
 
+						   <ul class="w3_short">
+								<li><a href="{{url('index')}}">Trang chủ</a><i>|</i></li>
+								<li>Giỏ hàng</li>
+							</ul>
+						 </div>
+
+				</div>
+	   <!--//w3_short-->
+	</div>
+</div>
 	<div class="inner-header">
 		<div class="container">
 			<div class="pull-left"><br>
@@ -8,13 +24,7 @@
 			    			<div class="line-text"></div>
 			    			</h3>	
 			</div>
-			<div class="pull-right">
-				<div class="beta-breadcrumb font-large">
-					<a href="{{url('index')}}">Home</a> / <span>Shopping Cart</span>
-				</div>
-			</div>
-			<div class="clearfix"></div>
-		</div>
+			
 	</div>
 
 		<div class="container">
@@ -27,11 +37,11 @@
 				<table class="shop_table beta-shopping-cart-table" cellspacing="0">
 					<thead>
 						<tr>
-							<th class="product-name">Product</th>
-							<th class="product-price">Price</th>
-							<th class="product-status">Status</th>
-							<th class="product-quantity">Qty.</th>
-							<th class="product-subtotal">Total</th>
+							<th class="product-name">Sản phẩm</th>
+							<th class="product-price">Đơn giá</th>
+							<th class="product-status">Ghi chú</th>
+							<th class="product-quantity">Số lượng</th>
+							<th class="product-subtotal">Thành tiền</th>
 							<th class="product-remove">Remove</th>
 						</tr>
 					</thead>
@@ -68,12 +78,12 @@
 								autocomplete="off" style="text-align:center; max-width: 100px; " min="1" max="1000" >
 							</td>
 
-							<td class="product-subtotal">
+							<td class="product-subtotal" >
 								<span class="amount">{{number_format($item->subtotal)}}</span>
 							</td>
 
 							<td class="product-remove">
-								<a href="{{url('deleteitemcart/'.$item->rowId)}}" class="remove" title="Remove this item"><i class="fa fa-trash-o"></i></a>
+								<a href="{{url('cart/delete/'.$item->rowId)}}" class="remove" title="Remove this item"><i class="fa fa-trash-o"></i></a>
 							</td>
 						</tr>
 						
@@ -85,7 +95,7 @@
 					<tfoot>
 						<tr>
 							<td colspan="6" class="actions">
-								<a type="submit" href="{{url('checkout')}}" class="beta-btn primary" name="proceed">Proceed to Checkout <i class="fa fa-chevron-right"></i></a>
+								<a type="submit" href="{{url('checkout')}}" class="beta-btn primary" name="proceed">Xác nhận thông tin đặt hàng <i class="fa fa-chevron-right"></i></a>
 
 						</tr>
 					</tfoot>
