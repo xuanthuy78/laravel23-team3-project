@@ -26,21 +26,12 @@
           <th>Delete</th>
         </tr>
         @foreach ($bills as $bill)
-<<<<<<< HEAD
-        <tr class="content">
-          <td>#{{$bill->id}}</td>
-          <td>{{$bill->date_order}}</td>
-          <td>@if(($bill->status) == 0)Đang xử lí@endif</td>
-          <td><a href="" class="btn btn-primary" role="dialog" data-toggle="modal" data-target="#myModal{{$bill->id}}">View</a> </td>
-          <td><a class="btn btn-danger" href="{{ url('deleteBill/' .$bill->id) }}">Delete</a></td>
-=======
         <tr class="content table-hover">
           <td>{{$bill->id}}</td>
           <td>{{ date('d.m.Y H:i:s', strtotime($bill->date_order)) }}</td>
           <td>@if(($bill->status) == 0) Đang xử lí @else Giao dịch thành công @endif</td>
           <td><a href="" class="btn btn-primary" role="dialog" data-toggle="modal" data-target="#myModal{{$bill->id}}"><i class="fa fa-star-o" style="color:white;"></i>&nbsp;View</a> </td>
-          <td><button class="btn btn-danger" data-catid="" data-toggle="modal" data-target="#delete"><i class="fa fa-trash-o"></i> &nbsp;Delete</button></td>
->>>>>>> 47723b1e3417498615fb136ee87a0b6a131dc06e
+          <td><a class="btn btn-danger" href="{{ url('deleteBill/' .$bill->id) }}"><i class="fa fa-trash-o"></i> &nbsp;Delete</a></td>
         </tr>
         @endforeach
       </table>
