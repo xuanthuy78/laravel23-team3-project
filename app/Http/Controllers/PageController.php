@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Cart;
 use App\Product;
 use Illuminate\Http\Request;
+use Response;
 
 class PageController extends Controller
 {
@@ -12,8 +13,8 @@ class PageController extends Controller
     {
     	return view('page.contact');
     }
-//rồi để t viêtd
-    public function addItemCart($id)
+
+    public function addItemCart($id) 
     {
         $product = Product::findOrFail($id);
         if($product->promotion_price == 0) {
@@ -22,7 +23,9 @@ class PageController extends Controller
         else {
             Cart::add(array('id' => $id, 'name' => $product->name, 'qty' => 1, 'price' => $product->promotion_price, 'options' =>array('img' => $product->image)));
         }
-        return redirect()->back();    
+        $content = Cart::Content();
+        return response::json($content);
+       
     }
 
     public function listCart()
@@ -32,13 +35,14 @@ class PageController extends Controller
             $total = Cart::subtotal();
             return view('page.shopping-cart', compact('content', 'total'));
         }
-            return redirect('index')->with('flash_message', 'Chưa có giỏ hàng');  
+            return redirect('index')->with('flash_message', 'Giỏ hàng còn trống');  
     }
         
     public function deleteItemCart($id)
     {
         Cart::remove($id);
-        return redirect()->back();
+        $content = Cart::content();
+        return ($content);
     }
 
     public function updateItemCart(Request $request,$id)
@@ -46,16 +50,22 @@ class PageController extends Controller
         $newqty = $request->newQty;
         $proId = $request->proID;
         $rowId = $request->rowID;
+        //$value_amount = $request->value_amount;
+        //$total_amount = $request->total_amount;
         //echo $rowID;
-        Cart::update($rowId, $newqty);
-        $content = Cart::Content();
-        //echo "Ok";
-        return view('page.update-shopping-cart', compact('content'));      
+        Cart::update($rowId, $newqty); 
+        //$content['value_amount'] = $value_amount;
+        // $content['total_amount'] = $total_amount;
+        // $content['rowId'] = $rowId;
+        $content = Cart::Content();  
+        return response::json($content);
+        //return view('page.update-shopping-cart', compact('content'));      
     }
     public function addItemCartQty(Request $request,$id)
     {
         $product = Product::findOrFail($id);
-        $qty = $request->val;
+        //$qty = $request->val;
+        $qty = $request->qty;
         if($product->promotion_price == 0) {
             Cart::add(array('id' => $id, 'name' => $product->name, 'qty' => $qty, 'price' => $product->unit_price, 'options' =>array('img' => $product->image)));
         }
@@ -63,7 +73,7 @@ class PageController extends Controller
             Cart::add(array('id' => $id, 'name' => $product->name, 'qty' => $qty, 'price' => $product->promotion_price, 'options' =>array('img' => $product->image)));
         }
         $content = Cart::Content();
-        return redirect()->back(); 
+        return response::json($content);
     }
 
 }

@@ -34,7 +34,7 @@
 			<div class="table-responsive">
 				<!-- Shop Products Table -->
 				
-				<table class="shop_table beta-shopping-cart-table" cellspacing="0">
+				<table class="shop_table beta-shopping-cart-table" cellspacing="0" id="tableId">
 					<thead>
 						<tr>
 							<th class="product-name">Sản phẩm</th>
@@ -46,11 +46,11 @@
 						</tr>
 					</thead>
 					@if(Cart::count()>0)
-					<?php $count=1;?>
-						@foreach($content as $item)
-					<tbody>
 					
-						<tr class="cart_item">
+						@foreach($content as $item)
+					<tbody id="pageCart" >
+						<div>
+						<tr class="cart_item" id="{{$item->rowId}}">
 							<td class="product-name">
 								<div class="media">
 									<img class="pull-left" src="source/image/product/{{$item->options->has('img')?$item->options->img:''}}" width="100px" alt="">
@@ -64,7 +64,7 @@
 							</td>
 
 							<td class="product-price">
-								<span class="amount">{{number_format($item->price)}}</span>
+								<span class="amount sub_amount">{{number_format($item->price)}}</span>
 							</td>
 
 							<td class="product-status">
@@ -72,23 +72,23 @@
 							</td>
 
 							<td class="product-quantity">
-								<input type="hidden" value="{{$item->rowId}}" id="rowID<?php echo $count;?>"> 
-								<input type="hidden" value="{{$item->id}}" id="proID<?php echo $count;?>">
-								<input type="number" size="2" value="{{$item->qty}}" name="product_qty" id="newQty<?php echo $count; ?>"
+								<input type="hidden" value="{{$item->rowId}}" id="rowID" name="{{$item->rowId}}"> 
+								<input type="hidden" value="{{$item->id}}" id="proID" name="proID">
+								<input type="number" size="2" value="{{$item->qty}}" id="newQty" class="newQty"
 								autocomplete="off" style="text-align:center; max-width: 100px; " min="1" max="1000" >
 							</td>
-
+							
 							<td class="product-subtotal" >
-								<span class="amount">{{number_format($item->subtotal)}}</span>
+								<span class="amount total_sub_amount">{{number_format($item->subtotal)}}</span>
 							</td>
-
+							
 							<td class="product-remove">
-								<a href="{{url('cart/delete/'.$item->rowId)}}" class="remove" title="Remove this item"><i class="fa fa-trash-o"></i></a>
+								<a  class="remove deletePageCartUpdate" title="Remove this item"><i class="fa fa-trash-o"></i></a>
 							</td>
 						</tr>
-						
+						</div>
 					</tbody>
-					<?php $count++; ?>
+					
 						@endforeach
 					@endif
 
@@ -113,7 +113,7 @@
 				<div class="cart-totals pull-right">
 					<div class="cart-totals-row"><h5 class="cart-total-title">Cart Totals</h5></div>
 					<div class="cart-totals-row"><span>Shipping:</span> <span>Next Step</span></div>
-					<div class="cart-totals-row"><span>Order Total:</span> <span>Next Step</span></div>
+					<div class="cart-totals-row"><span>Order Total:</span> <span id="sum">{{Cart::subtotal(0,'.',',')}}</span></div>
 				</div>
 				<div class="clearfix"></div>
 			</div>

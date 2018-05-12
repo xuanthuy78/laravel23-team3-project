@@ -60,7 +60,7 @@ class UserController extends Controller
             {
                   return redirect('index');
             }
-            return redirect('index')->with('flash_message','Tài khoản không đúng');
+            return redirect('index')->with('flash_message','Tài khoản đăng nhập của bạn không đúng');
     }
 
     public function logout()
@@ -142,6 +142,7 @@ class UserController extends Controller
         return redirect('index')->with('flash_message','Đã đăng ký thành công, xin mời đăng nhập !');
 
     }
+    
     public function forgetPassword()
     {
         return view('auth.passwords.email');

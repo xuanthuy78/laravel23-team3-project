@@ -40,18 +40,18 @@
 								<h4 class="quick">Mô tả:</h4>
 								<p class="quick_desc"> {{$product->description}}</p>
 			    
-								<form action="{{url('cart/add/'.$product->id.'/qty')}}" method="get" id="qtyform">
+								
 								<div class="quantity"> 
 												<div class="quantity-select">                           
 													<div class="entry value-minus">&nbsp;</div>
 													<input type="hidden" value="valtg" id="valtg" name ="val">
-													<!-- <input type="hidden" value="{{$product->id}}" name ="id"> -->
+													<input type="hidden" value="{{$product->id}}" name ="id" id="proId">
 													<div class="entry value" id="value2"><span>1</span></div>
 													<div class="entry value-plus active">&nbsp;</div>
 												</div>
 								</div>
-											<button type="submit" class="add-to item_add hvr-skew-backward">Add to cart</button>
-								</form>
+									<button type="submit" class="add-to item_add hvr-skew-backward qtyAddCart ">Add to cart</button>
+								
 				 				</div>
 						</div>	
 						</div>
@@ -95,7 +95,8 @@
 										</p>
 									</div>
 									<div class="single-item-caption">
-										<a class="add-to-cart pull-left" href="{{url('cart/add/'.$productR->id)}}"><i class="fa fa-shopping-cart"></i></a>
+										 <input type="hidden" value="{{$productR->id}}" name="ProductId">
+										<a class="add-to-cart pull-left submit-cart" ><i class="fa fa-shopping-cart"></i></a>
 										<a class="beta-btn primary" href="{{url('categories/product/'.$productR->id)}}">Details<i class="fa fa-chevron-right"></i></a>
 										<div class="clearfix"></div>
 									</div>

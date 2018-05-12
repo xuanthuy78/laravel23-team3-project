@@ -124,7 +124,8 @@
 											</p>
 										</div>
 										<div class="single-item-caption">
-											<a class="add-to-cart pull-left" href="{{url('cart/add/'.$product->id)}}"><i class="fa fa-shopping-cart"></i></a>
+											<input type="hidden" value="{{$product->id}}" name="ProductId">
+											<a class="add-to-cart pull-left submit-cart" ><i class="fa fa-shopping-cart"></i></a>
 											<a class="beta-btn primary" href="{{url('categories/product/'.$product->id)}}">Details <i class="fa fa-chevron-right"></i></a>
 											<div class="clearfix"></div>
 										</div>

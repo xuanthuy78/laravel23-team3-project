@@ -81,10 +81,10 @@
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a class="language dropdown-toggle" data-toggle="dropdown"><img src="images/flag-us.png" alt=""> English</a>
+                                <a class="language dropdown-toggle" data-toggle="dropdown"> English</a>
                                 <ul class="dropdown-menu dropdown-menu-right">
-                                    <li><a ><img src="images/flag-us.png" alt=""> &nbsp;English</a></li>
-                                    <li><a ><img src="images/flag-spain.png" alt=""> &nbsp;Viet Nam</a></li>
+                                    <li><a > &nbsp;English</a></li>
+                                    <li><a > &nbsp;Viet Nam</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -137,30 +137,39 @@
 
 					<div class="beta-comp">
 						<div class="cart">
+							<div class="totalQty">
 							<div class="beta-select" ><i class="fa fa-shopping-cart"></i> Giỏ hàng ( 
 								@if(Cart::count()>0 ) 
 								{{Cart::count()}} 
 								@else Trống 
 								@endif )<i class="fa fa-chevron-down"></i></div>
+							</div>
 							<?php $content=Cart::Content() ?>
-							@if(Cart::count() >0)	
+							@if(Cart::count()>0)
+							<div id="block" style="display: block">	
 							<div class="beta-dropdown cart-body">
+								<div id="add-cart-item">
 								@foreach($content as $item)
-								<div class="cart-item" >
+								
+								<div class="cart-item"  >
 									<div class="media"> 
 										<a class="pull-left" href="#"><img src="source/image/product/{{$item->options->has('img')?$item->options->img:''}}" alt="" ></a>
 										<div class="media-body">
-											 <a href="{{url('cart/delete/'.$item->rowId)}}"><button type="button" class="remove-cart-item" >&times;</button></a>
+											<input type="hidden" value="{{$item->rowId}}" id="rowId" >
+											 <a><button type="button" class="remove-cart-item deleteCart" >&times;</button></a>
 											<span class="cart-item-title">{{$item->name}}</span>
 											<!-- <span class="cart-item-options">Size: XS; Colar: Navy</span> -->
 											<span class="cart-item-amount">{{$item->qty}}*<span>{{number_format($item->price)}}</span></span>
 										</div>
 									</div>
 								</div>
+								
 								@endforeach
+								
 
+								
 								<div class="cart-caption" id="updateCart" >
-									<div class="cart-total text-right">Tổng tiền: <span class="cart-total-value">{{Cart::subtotal(0,'.',',')}}</span></div>
+									<div class="cart-total text-right"">Tổng tiền: <span class="cart-total-value">{{Cart::subtotal(0,'.',',')}}</span></div>
 									<div class="clearfix"></div>
 
 									<div class="center">
@@ -168,9 +177,47 @@
 										<a href="{{url('cart')}}" class="beta-btn primary text-center">Đặt hàng <i class="fa fa-chevron-right"></i></a>
 									</div>
 								</div>
-								@endif
+								</div>
+								
 							</div>
-							
+							</div>
+							@else
+							<div id="block" >	
+							<div class="beta-dropdown cart-body">
+								<div id="add-cart-item">
+								@foreach($content as $item)
+								
+								<div class="cart-item"  >
+									<div class="media"> 
+										<a class="pull-left" href="#"><img src="source/image/product/{{$item->options->has('img')?$item->options->img:''}}" alt="" ></a>
+										<div class="media-body">
+											<input type="hidden" value="{{$item->rowId}}" id="rowId" >
+											 <a><button type="button" class="remove-cart-item deleteCart" >&times;</button></a>
+											<span class="cart-item-title">{{$item->name}}</span>
+											<!-- <span class="cart-item-options">Size: XS; Colar: Navy</span> -->
+											<span class="cart-item-amount">{{$item->qty}}*<span>{{number_format($item->price)}}</span></span>
+										</div>
+									</div>
+								</div>
+								
+								@endforeach
+								
+
+								
+								<div class="cart-caption" id="updateCart" >
+									<div class="cart-total text-right"">Tổng tiền: <span class="cart-total-value">{{Cart::subtotal(0,'.',',')}}</span></div>
+									<div class="clearfix"></div>
+
+									<div class="center">
+										<div class="space10">&nbsp;</div>
+										<a href="{{url('cart')}}" class="beta-btn primary text-center">Đặt hàng <i class="fa fa-chevron-right"></i></a>
+									</div>
+								</div>
+								</div>
+								
+							</div>
+							</div>
+							@endif
 						</div> <!-- .cart -->
 					</div>
 				</div>

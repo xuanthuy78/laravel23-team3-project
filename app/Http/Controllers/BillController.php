@@ -30,7 +30,7 @@ class BillController extends Controller
             return redirect('index')->with('flash_message', 'Vui lòng đăng nhập trước khi đặt hàng');
     }
 
-    public function confirmCheckout(CreateCheckoutRequest $request)
+    public function confirmCheckout(Request $request)
             
     {
         $cart=Cart::Content();
