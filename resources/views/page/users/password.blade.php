@@ -8,9 +8,9 @@
                 <ul class="tree-list-pad">
                     <li><input type="checkbox" checked="checked" id="item-0" /><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a href="{{url('users/'.Auth::user()->id)}}">Cập nhật thông tin</a></label>
                     </li>
-                    <li><input type="checkbox" checked="checked" id="item-0" /><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a href="{{url('users/'.Auth::user()->id)}}">Đổi password</a></label>
+                    <li><input type="checkbox" checked="checked" id="item-0" /><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a href="{{url('users/changePassword/'.Auth::user()->id)}}">Đổi password</a></label>
                     </li>
-                    <li><input type="checkbox" id="item-1" checked="checked" /><label for="item-1"><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a href="{{url('previewcart')}}">Xem lại đơn hàng</a></label>
+                    <li><input type="checkbox" id="item-1" checked="checked" /><label for="item-1"><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a href="{{url('users/previewCart')}}">Xem lại đơn hàng</a></label>
                     </li>
                    
                 </ul>
@@ -18,15 +18,15 @@
     </div>
     <div class="col-md-8">
       <section>      
-        <h1 class="entry-title2"><span>Change Password</span> </h1>
+        <h1 class="entry-title2"><span>Đổi mật khẩu</span> </h1>
         <hr>
        
-            <form action="{{url('password/update/'.Auth::user()->id)}}" class="form-horizontal" method="post" name="signup" id="signup" enctype="multipart/form-data" > 
+            <form action="{{url('users/changePassword/update/'.Auth::user()->id)}}" class="form-horizontal" method="post" name="signup" id="signup" enctype="multipart/form-data" > 
                   <input type="hidden" name="_method" value="PATCH">
                   <input type="hidden" name="_token" value="{{csrf_token()}}">      
 
               <div class="form-group">
-                <label class="control-label col-sm-3">Set Password <span class="text-danger">*</span></label>
+                <label class="control-label col-sm-4">Mật khẩu mới<span class="text-danger">*</span></label>
                 <div class="col-md-5 col-sm-8">
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-lock"></i></span>
@@ -36,7 +36,7 @@
               </div>
              
               <div class="form-group">  
-                <label class="control-label col-sm-3">Confirm Password <span class="text-danger">*</span></label>
+                <label class="control-label col-sm-4">Nhập lại mật khẩu mới<span class="text-danger">*</span></label>
                 <div class="col-md-5 col-sm-8">
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-lock"></i></span>
@@ -46,7 +46,7 @@
               </div>
           
               <div class="form-group">
-                <div class="col-xs-offset-3 col-xs-10">
+                <div class="col-xs-offset-4 col-xs-10">
                   <input name="Submit" type="submit" value="Sign Up" class="btn btn-warning">
                 </div>
               </div>  

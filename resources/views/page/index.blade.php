@@ -1,6 +1,6 @@
 @extends('master')
 @section('content')
-<div >
+<div>
 					
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
 		<!-- Indicators -->
@@ -175,7 +175,7 @@
 			    			<div class="line-text"></div>
 			    			</h3>		
 							<div class="beta-products-details">
-								<p class="pull-left"><i class="fa fa-spinner fa-spin"> </i>Có {{count($newProducts)." "}}  Bánh mới</p>
+								<p class="pull-left"><i class="fa fa-spinner fa-spin"> </i> &nbsp; Có {{count($newProducts)." "}}  Bánh mới</p>
 								<div class="clearfix"></div>
 							</div>
 							
@@ -193,8 +193,8 @@
 											</p>
 										</div>
 										<div class="single-item-caption">
-											<!-- <input type="hidden" value="{{$newProduct->id}}" name="newProductId"> -->
-											<a href="{{url('cart/add/'.$newProduct->id)}} " class="add-to-cart pull-left submit-cart"><i class="fa fa-shopping-cart"></i></a>
+											 <input type="hidden" value="{{$newProduct->id}}" name="ProductId">
+											<a  class="add-to-cart pull-left submit-cart"><i class="fa fa-shopping-cart"></i></a>
 											<a class="beta-btn primary" href="{{url('categories/product/'.$newProduct->id)}}">Details <i class="fa fa-chevron-right"></i></a>
 											<div class="clearfix"></div>
 										</div>
@@ -245,7 +245,8 @@
 											</p>
 										</div>
 										<div class="single-item-caption">
-											<a class="add-to-cart pull-left" href="{{url('cart/add/'.$promotionProduct->id)}}"><i class="fa fa-shopping-cart"></i></a>
+											<input type="hidden" value="{{$promotionProduct->id}}" name="ProductId">
+											<a class="add-to-cart pull-left submit-cart" ><i class="fa fa-shopping-cart"></i></a>
 											<a class="beta-btn primary" href="{{url('categories/product/'.$promotionProduct->id)}}">Details <i class="fa fa-chevron-right"></i></a>
 											<div class="clearfix"></div>
 										</div>

@@ -20,16 +20,18 @@
 	<div class="container">
 		<div id="content">
 			
-			<form action="{{url('checkout')}}" method="post" class="beta-form-checkout">
+			<form action="{{url('users/checkout')}}" method="post" class="beta-form-checkout" id="formCheckout">
 				<input type="hidden" name="_token" value="{{csrf_token()}}">
 				<div class="row">
 					<div class="col-sm-6">
-						<div><h2 color="red">Đặt hàng</h2></div>
+						<div><h3 class="wthree_text_info">Xác nhận<span> đặt hàng</span>
+			    			<div class="line-text"></div>
+			    			</h3>	</div>
 						<div class="space20">&nbsp;</div>
 
 						<div class="form-block">
 							<label for="name">Họ tên <span class="text-danger">*</span></label>
-							<input type="text" id="name" placeholder="Họ tên" value="{{Auth::user()->name}}" required name="name">
+							<input type="text" id="name" placeholder="Họ tên" value="{{Auth::user()->name}}" name="name" class="form-control">
 						</div>
 						<div class="form-block">
 							<label>Giới tính </label>
@@ -47,18 +49,18 @@
 
 						<div class="form-block">
 							<label for="adress">Địa chỉ <span class="text-danger">*</span></label>
-							<input type="text" id="adress" placeholder="" value="{{Auth::user()->address}}" required name="address">
+							<input type="text" id="adress" placeholder="" value="{{Auth::user()->address}}"  name="address" class="form-control">
 						</div>
 						
 
 						<div class="form-block">
 							<label for="phone">Điện thoại <span class="text-danger">*</span></label>
-							<input type="text" id="phone" value="{{Auth::user()->phone}}" required name="phone">
+							<input type="text" id="phone" value="{{Auth::user()->phone}}"  name="phone" class="form-control">
 						</div>
 						
 						<div class="form-block">
 							<label for="notes">Ghi chú <span class="text-danger">*</span></label>
-							<textarea id="notes" required="Vui lòng nhập thời gian giao nhận" placeholder="Nhập thời gian giao nhận ở đây" name="note"></textarea>
+							<textarea id="notes"  placeholder="Nhập thời gian giao nhận ở đây" name="note" class="form-control"></textarea>
 							@if($errors->has('note'))
    							<p class="text-danger">{{$errors->first('note')}}</p>
   							@endif

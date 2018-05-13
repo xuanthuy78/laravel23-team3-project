@@ -20,13 +20,19 @@ class UserController extends Controller
             }
     }
 
-    public function user_show()
+    public function userProfile()
    
     {
-        return view('page.users.user');
+        if(Auth::user()) {
+           return view('page.users.user'); 
+        }
+        else {
+            return redirect('index');
+        }
+        
     }
 
-    public function changePassword_show()
+    public function changePasswordShow()
     {
         return view('page.users.password');
     }
@@ -60,7 +66,7 @@ class UserController extends Controller
             {
                   return redirect('index');
             }
-            return redirect('index')->with('flash_message','Tài khoản không đúng');
+            return redirect('index')->with('flash_message','Tài khoản đăng nhập của bạn không đúng');
     }
 
     public function logout()
@@ -69,7 +75,7 @@ class UserController extends Controller
   		return redirect('index');
     }
 
-    public function user_update(Request $request,$id)
+    public function userUpdate(Request $request,$id)
     {
     	$this->validate($request,[
         'name' => 'required|min:3',
@@ -84,29 +90,12 @@ class UserController extends Controller
         'phone.min' => 'Địa thoại phải từ 10 số',
         'phone.max' => 'Địa thoại tối đa 12 số'
         ]);
-        $user = User::find($id);
-        // $email=$user->email;
+        $user = User::find($id);  
         $user->name = $request->name;
         $user->address = $request->address;
         $user->phone = $request->phone;
         $user->gender = $request->gender;
-        //$user->email=$email;
-        if($request->changePassword == "on")
-        {
-         $this->validate($request,[
-        'password' => 'required|min:3|max:15',
-        'cpassword' => 'required|same:password'
-        ],[
-        'password.required' => 'Bạn chưa nhập mật khẩu',
-        'password.min' => 'Mật khẩu phải có ít nhât 5 ký tự',
-        'password.max' => 'Mật khẩu chỉ được tối đã 15 ký tự',
-        'cpassword.required' => 'Bạn chưa nhập lại mật khẩu',
-        'cpassword.same' => 'Mật khẩu nhập lại chưa khớp'
-        ]);
-            $user->password = Hash::make($request->password); 
-        }
         $user->save();
-        //dd($user);
         return redirect('users/'.$id)->with('flash_message','Sửa thành công');
     }
 
@@ -134,14 +123,12 @@ class UserController extends Controller
     public function signup(CreateUserSignUpRequest $request)
     {
         $data = $request->all();
-        $data['address'] = "";
-        $data['phone'] = "";
-        $data['gender'] = 1;
         $data['password'] = Hash::make($data['password']);
         $user = User::create($data);
         return redirect('index')->with('flash_message','Đã đăng ký thành công, xin mời đăng nhập !');
 
     }
+    
     public function forgetPassword()
     {
         return view('auth.passwords.email');

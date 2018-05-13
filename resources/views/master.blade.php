@@ -5,8 +5,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Sweet Bakery</title>
 	<base href="{{asset('')}}">
-	
-	
 	<!-- <link href='http://fonts.googleapis.com/css?family=Dosis:300,400' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'> -->
 	<!-- <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"> -->
@@ -20,22 +18,15 @@
 	<link rel="stylesheet" href="source/assets/dest/css/animate.css">
 	<link rel="stylesheet" href="source/assets/dest/css/style-modal.css">
 	<link rel="stylesheet" href="source/assets/dest/css/single.css">
-
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	
 	<link rel="stylesheet" href="source/assets/dest/css/slide.css">
-	<link rel="stylesheet" href="source/assets/dest/css/special.css">
+	<!-- <link rel="stylesheet" href="source/assets/dest/css/special.css"> -->
 	<!-- <link rel="stylesheet" href="css/jquery-ui.css"> -->
-	<link rel="stylesheet" title="style" href="source/assets/dest/css/huong-style.css">
-
-   
-
-   
+	<link rel="stylesheet" title="style" href="source/assets/dest/css/huong-style.css"> 
 </head>
 <body>
-		@include('header')
+	@include('header')
 	<div class="rev-slider">
-
 		@yield('content')
 	</div> <!-- .container -->
 		@include('footer')
@@ -49,9 +40,7 @@
 	</div> <!-- .copyright -->
 	
 	@yield('script')
-<a href="#home" class="scroll" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"></span></a>
-
-	<!-- include js files -->
+	<a href="#home" class="scroll" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"></span></a>
 	<!-- <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script> -->
 	<!-- <script src="source/assets/dest/js/myscript.js"></script> -->
 	<script src="source/assets/dest/js/jquery.min.js"></script>
@@ -74,105 +63,455 @@
 	<!--customjs-->
 	<script src="source/assets/dest/js/custom2.js"></script>
 	<script src="source/assets/dest/js/password.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/1.4.5/numeral.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
 
 
 
-	<script>
-	$(document).ready(function($) {    
-		$(window).scroll(function(){
-			if($(this).scrollTop()>150){
-			$(".header-bottom").addClass('fixNav')
-			}else{
-				$(".header-bottom").removeClass('fixNav')
+<script>
+	$(document).ready(function($) {
+
+	$("div.alert").delay(700).slideUp();
+
+	$(window).scroll(function(){
+		if($(this).scrollTop()>150){
+		$(".header-bottom").addClass('fixNav')
+		}else{
+			$(".header-bottom").removeClass('fixNav')
+		}
+	})
+		
+	$("#search").keyup(function(){
+		var key = $(this).val();
+		var categoryId = $(this).parent().parent().find("#categoryId").val();
+		if ($(this).val() == "") {
+			$('div#back_result').css({'display':'none'});
+		}
+		else {
+			$.ajax({
+			type: 'get',
+			dataType: 'html',
+			url: '<?php echo url('categories/products/autoget') ?>',
+			data: "key=" + key + "& categoryId=" + categoryId,
+			success: function (data) {
+				console.log(data);
+				$('div#back_result').css({'display':'block'});
+				$('#back_result').html(data);
 			}
-		})
-		<?php for($i=1;$i<100;$i++) {?>
-		$('#newQty<?php echo $i; ?>').on('change keyup',function(){
-			// alert('i am here');
-			var newQty = $('#newQty<?php echo $i; ?>').val();
-			var rowID = $('#rowID<?php echo $i; ?>').val();
-			var proID = $('#proID<?php echo $i; ?>').val();
-
-			if(newQty<=0){
-				alert('Vui lòng xem lại số lượng')
-			}
-			else {
-				$.ajax({
-        		type: 'get',
-        		dataType: 'html',
-       			url: '<?php echo url('/cart/update');?>/'+proID,
-        		data: "newQty=" + newQty + "& rowID=" + rowID + "& proID=" + proID,
-        		success: function (response) {
-             	console.log(response);
-             	$('#update').html(response); 
-        		 }
-        		// success: function (data)
-        		// {
-        		// 	if(data == "Ok")
-        		// 	{
-        		// 		window.location = "cart"; 
-        		// 	}
-        		// }
-    			});
-				}
-		});
-		<?php } ?> 
-		$("#search").keyup(function(){
-			var key = $(this).val();
-			var categoryId = $(this).parent().parent().find("#categoryId").val();
-			if ($(this).val() == "") {
-				$('div#back_result').css({'display':'none'});
-			}
-			else {
-				$.ajax({
-				type: 'get',
-				dataType: 'html',
-				url: '<?php echo url('categories/products/autoget') ?>',
-				data: "key=" + key + "& categoryId=" + categoryId,
-				success: function (data) {
-					console.log(data);
-					$('div#back_result').css({'display':'block'});
-					$('#back_result').html(data);
-				}
 
 			});
-			}
-			
-		})
-		$("div.alert").delay(2000).slideUp();
-		// $('div').on('focusout', function () {
-  // 			$('div#back_result').css({'display':'none'});
-		// });
+		}	
+	});
 
-		
+	$('.submit-cart').click(function(){
+		var productId = $(this).parent().find("input[name='ProductId']").val();
+		$.ajax ({
+    		type: 'get',
+    		dataType: 'html',
+   			url: '<?php echo url('/cart/add');?>/'+productId, 
+    		success: 
+        		function (data) {
+        			var result = ''; 
+        			var total =0;
+        			var totalQty=0;
+        			var cart ='';
+        			var obj = jQuery.parseJSON(data);
+        			var strText = "";
+        			$.each( obj, function( key, value ) {
+        				total += (value.qty*value.price);
+        				totalQty += parseInt(value.qty);
+        				console.log(value); 
+					   	result += "<div class='cart-item'>" +
+		                		"<div class='media'>" + 
+		                		"<a class='pull-left' href='#''><img src='source/image/product/"+value.options.img+"' alt='' ></a>"+			             
+		                		"<div class='media-body'>"+
+		                    	"<input type='hidden' value='"+value.rowId+"' id='rowId'>"+
+		                    	"<a ><button type='button' class='remove-cart-item deleteCart'>×</button></a>"+
+		                    	"<span class='cart-item-title'>"+ value.name + "</span>"+
+		                		"<span class='cart-item-amount'>"+value.qty+"*<span>"+numeral(value.price).format('0,0')+"</span></span>"+
+	                			"</div>"+
+	                		"</div>"+
+	                		"</div>";
+					});
+					result+= "<div class='cart-caption' id='updateCart' >"+
+							"<div class='cart-total text-right'>Tổng tiền: <span class='cart-total-value'>"+numeral(total).format('0,0')+"</span></div>"+
+							"<div class='clearfix'></div>"+
 
-		$(".scroll").click(function(event){		
-			event.preventDefault();
-			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+							"<div class='center'>"+
+								"<div class='space10'>&nbsp;</div>"+
+								"<a href='{{url('cart')}}' class='beta-btn primary text-center'>Đặt hàng <i class='fa fa-chevron-right'></i></a>"+
+							"</div>"+
+						"</div>"
+		            if(totalQty>0 ) {
+		                strText = totalQty;
+		                $('div#block').css({'display':'block'});
+		            }
+		            else {
+		                strText = "Trống";
+		            }
+		            cart+= "<i class='fa fa-shopping-cart'></i> Giỏ hàng "+
+							"( "+ strText +" )" +
+							"<i class='fa fa-chevron-down'></i>"
+	        		console.log(cart);
+	        		$('.beta-select').html(cart);
+             		$('#add-cart-item').html(result);
+             	},
 		});
-		
-	})
-	</script>
-	<script>
-		$('.value-plus').on('click', function(){
-    	var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10)+1;
-    	divUpd.text(newVal);
-    
-    });
+	});
 
+	function formatNumber (num) {
+		return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "0,");
+	}
+
+	$(document).on("click",".deleteCart",function(event){
+		var rowId = $(this).parent().parent().find('#rowId').val();
+		event.preventDefault();
+		$.ajax ({
+        	type: 'get',
+        	dataType: 'html',
+       		url: '<?php echo url('/cart/delete');?>/'+rowId,
+        	success: 
+    			function (data) {
+    				var result = ''; 
+        			var total = 0;
+        			var totalQty = 0;
+        			var cart ='';
+        			var obj = jQuery.parseJSON(data);
+        			var strText = "";
+        			var pageCart ='';
+        			var sum = 0;
+        			$("#tableId tbody").find('#'+rowId+'').each(function(){
+       				 	$(this).remove();
+    				});
+	        		$.each( obj, function( key, value ) {
+        				total += (value.qty*value.price);
+        				totalQty += parseInt(value.qty);
+        				console.log(value); 
+					   	result += "<div class='cart-item'>" +
+		                		"<div class='media'>" + 
+		                		"<a class='pull-left' href='#''><img src='source/image/product/"+value.options.img+"' alt='' ></a>"+			             
+		                		"<div class='media-body'>"+
+		                		"<input type='hidden' value='"+value.rowId+"' id='rowId'>"+
+		                    	"<a><button type='button' class='remove-cart-item deleteCart'>×</button></a>"+
+		                    	"<span class='cart-item-title'>"+ value.name + "</span>"+
+		                		"<span class='cart-item-amount'>"+value.qty+"*<span>"+numeral(value.price).format('0,0')+"</span></span>"+
+	                			"</div>"+
+	                		"</div>"+
+	                		"</div>";
+	                	sum += value.subtotal;
+					});
+					result+= "<div class='cart-caption' id='updateCart' >"+
+							"<div class='cart-total text-right'>Tổng tiền: <span class='cart-total-value'>"+numeral(total).format('0,0')+"</span></div>"+
+							"<div class='clearfix'></div>"+
+
+							"<div class='center'>"+
+								"<div class='space10'>&nbsp;</div>"+
+								"<a href='{{url('cart')}}' class='beta-btn primary text-center'>Đặt hàng <i class='fa fa-chevron-right'></i></a>"+
+							"</div>"+
+						"</div>"
+						
+			        if(totalQty>0 ){
+			            strText = totalQty;
+			            $('div#block').css({'display':'block'});
+			        }
+			        else {
+			            strText = "Trống";
+			            $('div#block').css({'display':'none'});
+			        }
+			        cart+= "<i class='fa fa-shopping-cart'></i> Giỏ hàng "+
+							"( "+ strText +" )" +
+							"<i class='fa fa-chevron-down'></i>"
+		        	console.log(cart);
+	        		$('.beta-select').html(cart);
+             		$('#add-cart-item').html(result);
+             		$('#sum').html(numeral(sum).format('0,0'));
+             		if(sum == 0)
+             		{
+             			window.location.href ='index';
+             		}		
+	            },
+	            error: function (request, status, error) {
+				        // alert(request.responseText);
+				}
+		});
+	});
+
+	$('.newQty').on('change keyup',function(){	
+		var newQty = $(this).val();
+		var rowID = $(this).parent().find('#rowID').val();
+		var proID = $(this).parent().find('#proID').val();
+		var amount = $(this).parent().parent().find('.sub_amount').text();
+		var value_amount = parseInt(amount) *1000;
+		var quantity = parseInt(newQty);
+		var total_amount = numeral(value_amount * quantity).format('0,0');	
+		if(newQty<=0){
+			alert('Vui lòng xem lại số lượng')
+		}
+		else {
+			$(this).parent().parent().find('.total_sub_amount').text(total_amount);
+			$.ajax({
+    		type: 'get',
+    		dataType: 'html',
+   			url: '<?php echo url('/cart/update');?>/'+proID,
+    		data: "newQty=" + newQty + "& rowID=" + rowID + "& proID=" + proID,
+    		success:
+    			function (data) {
+         		var object = jQuery.parseJSON(data);
+         		var result = "";
+         		var totalQty = 0;
+         		var total = 0;
+         		var cart = "";
+         		var sum = 0;
+        		$.each( object, function( key, value ) {
+        			total += (value.qty*value.price);
+        			totalQty = totalQty+parseInt(value.qty);
+        			result += "<div class='cart-item'>" +
+		                		"<div class='media'>" + 
+		                		"<a class='pull-left' href='#''><img src='source/image/product/"+value.options.img+"' alt='' ></a>"+			             
+		                		"<div class='media-body'>"+
+		                    	"<input type='hidden' value='"+value.rowId+"' id='rowId'>"+
+		                    	"<a><button type='button' class='remove-cart-item deleteCart'>×</button></a>"+
+		                    	"<span class='cart-item-title'>"+ value.name + "</span>"+
+		                		"<span class='cart-item-amount'>"+value.qty+"*<span>"+numeral(value.price).format('0,0')+"</span></span>"+
+	                			"</div>"+
+	                		"</div>"+
+	                		"</div>";
+	                sum += value.subtotal;
+        		});
+    			result += "<div class='cart-caption' id='updateCart' >"+
+						"<div class='cart-total text-right'>Tổng tiền: <span class='cart-total-value'>"+numeral(total).format('0,0')+"</span></div>"+
+						"<div class='clearfix'></div>"+
+
+						"<div class='center'>"+
+							"<div class='space10'>&nbsp;</div>"+
+							"<a href='{{url('cart')}}' class='beta-btn primary text-center'>Đặt hàng <i class='fa fa-chevron-right'></i></a>"+
+						"</div>"+
+						"</div>";
+				if(totalQty>0 ){
+	                strText = totalQty;
+	                $('div#block').css({'display':'block'});
+	            }
+	            else {
+	                strText = "Trống";
+	                $('div#block').css({'display':'none'});
+	            }
+	            cart+= "<i class='fa fa-shopping-cart'></i> Giỏ hàng "+
+						"( "+ strText +" )" +
+						"<i class='fa fa-chevron-down'></i>"
+				console.log(result);
+        		console.log(cart);
+        		$('.beta-select').html(cart);
+				$('#add-cart-item').html(result);
+				$('#sum').html(numeral(sum).format('0,0'));
+	             		
+    			},
+    						
+			});
+		}
+	});
+
+	$(".deletePageCartUpdate").click(function() {
+		var rowId = $(this).parent().parent().find('#rowID').val();
+		var tr = $(this).closest('tr');
+        $.ajax ({
+    		type: 'get',
+    		dataType: 'html',
+   			url: '<?php echo url('/cart/delete');?>/'+rowId,
+    		success: 
+    			function (data) {
+    				tr.fadeOut(500, function(){
+       				 $(this).remove();
+    				});
+    				var result = ''; 
+        			var total = 0;
+        			var totalQty = 0;
+        			var cart = '';
+        			var obj = jQuery.parseJSON(data);
+        			var strText = "";
+        			var sum = 0;
+        			$.each( obj, function( key, value ) {
+        				total += (value.qty*value.price);
+        				totalQty += parseInt(value.qty);
+        				console.log(value); 
+					   	result += "<div class='cart-item'>" +
+		                		"<div class='media'>" + 
+		                		"<a class='pull-left' href='#''><img src='source/image/product/"+value.options.img+"' alt='' ></a>"+			             
+		                		"<div class='media-body'>"+
+		                		"<input type='hidden' value='"+value.rowId+"' id='rowId'>"+
+		                    	"<a><button type='button' class='remove-cart-item deleteCart'>×</button></a>"+
+		                    	"<span class='cart-item-title'>"+ value.name + "</span>"+
+		                		"<span class='cart-item-amount'>"+value.qty+"*<span>"+numeral(value.price).format('0,0')+"</span></span>"+
+	                			"</div>"+
+	                		"</div>"+
+	                		"</div>";
+	                	sum += value.subtotal;
+					});
+					result += "<div class='cart-caption' id='updateCart' >"+
+							"<div class='cart-total text-right'>Tổng tiền: <span class='cart-total-value'>"+numeral(total).format('0,0')+"</span></div>"+
+							"<div class='clearfix'></div>"+
+
+							"<div class='center'>"+
+								"<div class='space10'>&nbsp;</div>"+
+								"<a href='{{url('cart')}}' class='beta-btn primary text-center'>Đặt hàng <i class='fa fa-chevron-right'></i></a>"+
+							"</div>"+
+						"</div>"
+		            if(totalQty>0 ) {
+		                strText = totalQty;
+		                $('div#block').css({'display':'block'});
+		            }
+		            else {
+		                strText = "Trống";
+		                $('div#block').css({'display':'none'});
+		            }
+		            cart += "<i class='fa fa-shopping-cart'></i> Giỏ hàng "+
+							"( "+ strText +" )" +
+							"<i class='fa fa-chevron-down'></i>"
+	        		console.log(cart);
+	        		$('.beta-select').html(cart);
+             		$('#add-cart-item').html(result);
+             		$('#sum').html(numeral(sum).format('0,0'));
+             		console.log(sum);
+             		if(sum == 0)
+             		{
+             			window.location.href ='index';
+             		}
+             	},
+             	error: function (request, status, error) {
+			        // alert(request.responseText);
+			    }
+		});
+	});
+
+	$( ".qtyAddCart" ).click(function() {
+	 	$("#valtg").val( $("#value2" ).text());
+	 	var qty = $(this).parent().find('#valtg').val();
+	 	var proId = $(this).parent().find('#proId').val();
+		$.ajax ({
+        		type: 'get',
+        		dataType: 'html',
+       			url:  '/cart/add/'+proId+'/qty',
+       			data: "qty=" + qty + "& id=" + proId ,
+        		success: 
+	        		function (data) {
+	        			var result = ''; 
+	        			var total = 0;
+	        			var totalQty = 0;
+	        			var cart ='';
+	        			var obj = jQuery.parseJSON(data);
+	        			var strText = "";
+	        			$.each( obj, function( key, value ) {
+	        				total += (value.qty*value.price);
+	        				totalQty += parseInt(value.qty);
+	        				console.log(value); 
+						   	result += "<div class='cart-item'>" +
+			                		"<div class='media'>" + 
+			                		"<a class='pull-left' href='#''><img src='source/image/product/"+value.options.img+"' alt='' ></a>"+			             
+			                		"<div class='media-body'>"+
+			                    	"<input type='hidden' value='"+value.rowId+"' id='rowId'>"+
+			                    	"<a ><button type='button' class='remove-cart-item deleteCart'>×</button></a>"+
+			                    	"<span class='cart-item-title'>"+ value.name + "</span>"+
+			                		"<span class='cart-item-amount'>"+value.qty+"*<span>"+numeral(value.price).format('0,0')+"</span></span>"+
+		                			"</div>"+
+		                		"</div>"+
+		                		"</div>";
+						});
+						result += "<div class='cart-caption' id='updateCart' >"+
+								"<div class='cart-total text-right'>Tổng tiền: <span class='cart-total-value'>"+numeral(total).format('0,0')+"</span></div>"+
+								"<div class='clearfix'></div>"+
+
+								"<div class='center'>"+
+									"<div class='space10'>&nbsp;</div>"+
+									"<a href='{{url('cart')}}' class='beta-btn primary text-center'>Đặt hàng <i class='fa fa-chevron-right'></i></a>"+
+								"</div>"+
+								"</div>"
+			            if(totalQty>0 ){
+			                strText = totalQty;
+			                $('div#block').css({'display':'block'});
+			            }
+			            else {
+			                strText = "Trống";
+			            }
+			            cart += "<i class='fa fa-shopping-cart'></i> Giỏ hàng "+
+								"( "+ strText +" )" +
+								"<i class='fa fa-chevron-down'></i>"
+		        		console.log(cart);
+		        		$('.beta-select').html(cart);
+	             		$('#add-cart-item').html(result);
+	             	},
+	             	error: function (request, status, error) {
+				        // alert(request.responseText);
+				    }
+		});
+	}); 
+
+	
+
+	$('#formCheckout').validate({
+		rules :{
+			name: {
+				required : true,
+				minlength : 10
+			},
+			address: {
+				required : true,
+				minlength: 15
+			},
+			phone : {
+				required : true,
+				minlength: 10,
+				maxlength: 15,
+				number: true
+			},
+			note : {
+				required : true,
+				minlength : 10
+			}
+		},
+		messages : {
+			name : {
+				required : "* Bạn chưa nhập tên",
+				minlength : "* Tên phải từ 10 ký tự",
+			},
+			address : {
+				required : "* Bạn chưa nhập địa chỉ",
+				minlength : "* Địa chỉ phải từ 15 ký tự trở lên",
+			},
+			phone : {
+				required : "* Bạn chưa nhập số điện thoại",
+				
+				minlength : "* Số điện thoại phải từ 10 số trở lên",
+				maxlength : "* Số điện thoại nhập tối đa 15 số ",
+				number : "* Số điện thoại bạn nhập không đúng",
+			},
+			note : {
+				required : "* Bạn chưa nhập ghi chú",
+				minlength : "* Ghi chú phải từ 10 ký tự",
+			},
+		},
+		
+	}); 	
+
+	
+
+	$(".scroll").click(function(event){		
+		event.preventDefault();
+		$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+	});
+		
+})
+</script>
+
+
+<script>
+	$('.value-plus').on('click', function(){
+    	var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10)+1;
+    	divUpd.text(newVal); 
+    });
     $('.value-minus').on('click', function(){
     	var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10)-1;
-    	if(newVal>=1) divUpd.text(newVal);
-    	
+    	if(newVal>=1) divUpd.text(newVal);	
     });
-	</script>
-	<script>
-    $( "#qtyform" ).submit(function( event )
-				 	{
-		 	$("#valtg").val( $("#value2" ).text());
-		 	//alert($("#value2" ).text());
-  			//event.preventDefault();
-	});  	
 </script>
+
 </body>
 </html>

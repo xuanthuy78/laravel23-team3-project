@@ -8,9 +8,9 @@
                 <ul class="tree-list-pad">
                     <li><input type="checkbox" checked="checked" id="item-0" /><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a href="{{url('users/'.Auth::user()->id)}}">Cập nhật thông tin</a></label>
                     </li>
-                    <li><input type="checkbox" checked="checked" id="item-0" /><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a href="{{url('users/'.Auth::user()->id)}}">Đổi password</a></label>
+                    <li><input type="checkbox" checked="checked" id="item-0" /><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a href="{{url('users/changePassword/'.Auth::user()->id)}}">Đổi password</a></label>
                     </li>
-                    <li><input type="checkbox" id="item-1" checked="checked" /><label for="item-1"><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a href="{{url('previewcart')}}">Xem lại đơn hàng</a></label>
+                    <li><input type="checkbox" id="item-1" checked="checked" /><label for="item-1"><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a href="{{url('users/previewCart')}}">Xem lại đơn hàng</a></label>
                     </li>
                    
                 </ul>
@@ -28,7 +28,7 @@
         @foreach ($bills as $bill)
         <tr class="content table-hover">
           <td>{{$bill->id}}</td>
-          <td>{{ date('d.m.Y H:i:s', strtotime($bill->date_order)) }}</td>
+          <td>{{ date('d.m.Y H:i:s', strtotime($bill->created_at)) }}</td>
           <td>@if(($bill->status) == 0) Đang xử lí @else Giao dịch thành công @endif</td>
           <td><a href="" class="btn btn-primary" role="dialog" data-toggle="modal" data-target="#myModal{{$bill->id}}"><i class="fa fa-star-o" style="color:white;"></i>&nbsp;View</a> </td>
           <td><a class="btn btn-danger" href="{{ url('deleteBill/' .$bill->id) }}"><i class="fa fa-trash-o"></i> &nbsp;Delete</a></td>
@@ -81,7 +81,7 @@
               </td>
               
               <td class="product-price">
-                <span class="amount">{{$billdetail->unit_price}}</span>
+                <span class="amount">{{number_format($billdetail->unit_price)}}</span>
               </td>
             
             </tr>
@@ -94,7 +94,7 @@
             <tr>
               <td colspan="6" class="actions" style="text-align: right;">
                 <label>Total: </label>
-                <a type="submit" class="beta-btn primary" name="proceed">${{$bill->total}} <i class="fa fa-chevron-right"></i></a>
+                <a type="submit" class="btn btn-warning" name="proceed" id="footersum">{{number_format($bill->total)}} </a>
 
             </tr>
           </tfoot>

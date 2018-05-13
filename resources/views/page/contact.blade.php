@@ -15,7 +15,8 @@
 					<div class="space20">&nbsp;</div>
 					<p>Sweet Bakery được sản xuất trên dây chuyền hiện đại, với những nguyên liệu được nhập khẩu trực tiếp từ các nước có truyền thống làm bánh lâu đời trên thế giới. Thực khách tới đây có thể thưởng thức rất nhiều loại bánh : Bánh Sinh Nhật, Bánh Cưới, Bánh Valentine, Bánh Giáng sinh… Barkery, Bánh mỳ Pháp, Pizza, Hotdog, Patechaux, Cookies</p>
 					<div class="space20">&nbsp;</div>
-					<form method="post" class="contact-form">	
+					<form action="index"  class="contact-form">
+					
 						<div class="form-group">
 							<input name="your-name" type="text" placeholder="Tên của bạn" class="form-control">
 						</div>
