@@ -31,7 +31,7 @@
           <td>{{ date('d.m.Y H:i:s', strtotime($bill->created_at)) }}</td>
           <td>@if(($bill->status) == 0) Đang xử lí @else Giao dịch thành công @endif</td>
           <td><a href="" class="btn btn-primary" role="dialog" data-toggle="modal" data-target="#myModal{{$bill->id}}"><i class="fa fa-star-o" style="color:white;"></i>&nbsp;View</a> </td>
-          <td><a class="btn btn-danger" href="{{ url('deleteBill/' .$bill->id) }}"><i class="fa fa-trash-o"></i> &nbsp;Delete</a></td>
+          <td><a class="btn btn-danger" href="{{ url('deleteBill/' .$bill->id) }}"><i class="fa fa-trash-o" style="color:white;"></i> &nbsp;Delete</a></td>
         </tr>
         @endforeach
       </table>
