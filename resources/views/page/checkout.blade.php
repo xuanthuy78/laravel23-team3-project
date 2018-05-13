@@ -20,7 +20,7 @@
 	<div class="container">
 		<div id="content">
 			
-			<form action="{{url('checkout')}}" method="post" class="beta-form-checkout" id="formCheckout">
+			<form action="{{url('users/checkout')}}" method="post" class="beta-form-checkout" id="formCheckout">
 				<input type="hidden" name="_token" value="{{csrf_token()}}">
 				<div class="row">
 					<div class="col-sm-6">

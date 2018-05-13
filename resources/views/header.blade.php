@@ -7,18 +7,18 @@
 	</div>
 
     <ul class="tab-group cl-effect-4">
-        <li class="tab active"><a href="#signin-agile">Sign In</a></li>
-		<li class="tab"><a href="#signup-agile">Sign Up</a></li>        
+        <li class="tab active"><a href="#signin-agile">Đăng Nhập</a></li>
+		<li class="tab"><a href="#signup-agile">Đăng Ký</a></li>        
     </ul>
     <div class="tab-content">
         <div id="signin-agile">   
 			<form action="{{url('users/login')}}" method="post">
 				<input type="hidden" name="_token" value="{{csrf_token()}}">
 				<p class="header">Email</p>
-				<input type="email" name="Email" placeholder="email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'User Name';}" required="required">
+				<input type="email" name="Email" placeholder="Nhập email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Nhập email';}" required="required">
 				
-				<p class="header">Password</p>
-				<input type="password" name="Password" placeholder="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" required="required">
+				<p class="header">Mật khẩu</p>
+				<input type="password" name="Password" placeholder="Nhập mật khẩu"  required="required">
 				<input type="submit" class="sign-in" value="Sign In">
 			</form> 
 			<br><br><a href="{{url('users/forgetpassword')}}" style="color:#FFA803; font-weight: bold;">* Quên mật khẩu</a>
@@ -27,17 +27,17 @@
 			<form action="{{url('users/signup')}}" method="post">
 				<input type="hidden" name="_token" value="{{csrf_token()}}">
 				
-				<p class="header">User Name</p>
-				<input type="text" name="name" placeholder="Your Full Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Your Full Name';}" required="required">
+				<p class="header">Họ và tên</p>
+				<input type="text" name="name" placeholder="Nhập tên" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Nhập tên';}" required="required">
 				
-				<p class="header">Email Address</p>
-				<input type="email" name="email" placeholder="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required="required">
+				<p class="header">Email </p>
+				<input type="email" name="email" placeholder="Nhập Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Nhập Email';}" required="required">
 				
-				<p class="header">Password</p>
-				<input type="password" name="password" placeholder="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" required="required">
+				<p class="header">Mật khẩu</p>
+				<input type="password" name="password" placeholder="Nhập mật khẩu"  required="required">
 				
-				<p class="header">Confirm Password</p>
-				<input type="password" name="password" placeholder="Confirm Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Confirm Password';}" required="required">
+				<p class="header">Nhập lại mật khẩu</p>
+				<input type="password" name="cpassword" placeholder="Nhập lại mật khẩu"  required="required">
 				
 				<input type="submit" class="register" value="Sign up">
 			</form>
@@ -65,8 +65,8 @@
                                 <a href="#" class="account dropdown-toggle" data-toggle="dropdown">My Account</a>
                                 <ul class="dropdown-menu dropdown-menu-right">
                                     <li><a title="My Account" href="{{url('users/'.Auth::user()->id)}}">Profile</a></li>
-                                    <li><a title="My Account" href="{{url('changePassword/'.Auth::user()->id)}}">Change Password</a></li>
-                                    <li><a title="My Cart" href="{{url('previewcart')}}">My Cart</a></li>  
+                                    <li><a title="My Account" href="{{url('users/changePassword/'.Auth::user()->id)}}">Change Password</a></li>
+                                    <li><a title="My Cart" href="{{url('users/previewCart')}}">My Cart</a></li>  
                                     <li><a title="Testimonial" href="{{url('users/logout')}}">Log Out</a></li>
                                 </ul>
                             </li>

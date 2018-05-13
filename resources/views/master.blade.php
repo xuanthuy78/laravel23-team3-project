@@ -71,7 +71,7 @@
 <script>
 	$(document).ready(function($) {
 
-	$("div.alert").delay(500).slideUp();
+	$("div.alert").delay(700).slideUp();
 
 	$(window).scroll(function(){
 		if($(this).scrollTop()>150){
@@ -500,11 +500,7 @@
 		
 })
 </script>
-<script>
-$(function() {
 
-});
-</script>
 
 <script>
 	$('.value-plus').on('click', function(){

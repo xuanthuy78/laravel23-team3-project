@@ -58,20 +58,29 @@
 					</div>
 
 					<div class="space40">&nbsp;</div>
-					<div class="woocommerce-tabs">
-						<ul class="tabs">
-							<li><a href="#tab-description">Description</a></li>
-							<li><a href="#tab-reviews">Reviews (0)</a></li>
-						</ul>
 
-						<div class="panel" id="tab-description">
-							<p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.</p>
-							<p>Consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequaturuis autem vel eum iure reprehenderit qui in ea voluptate velit es quam nihil molestiae consequr, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? </p>
-						</div>
-						<div class="panel" id="tab-reviews">
-							<p>No Reviews</p>
-						</div>
-					</div>
+
+				<div class="well">
+                    <h4>Viết bình luận ...<i class="fa fa-pencil"></i></h4><br>
+                    <form role="form">
+                        <div class="form-group">
+                            <textarea class="form-control" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-warning"> &nbsp; Gửi &nbsp;  </button>
+                    </form>
+                </div>
+				<hr>
+                <div class="media">
+                    <a class="pull-left" href="#">
+                        <img class="media-object" width="40px" src="source/image/product/avart.png" alt="">
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading">Hùng
+                            <small>August 25, 2014 at 9:30 PM</small>
+                        </h4>
+                        Bánh ngon quá đi bà con cô bác êi
+                    </div>
+                </div>
 					<div class="space50">&nbsp;</div>
 					<div class="beta-products-list">
 						<h4>Bánh cùng loại</h4>

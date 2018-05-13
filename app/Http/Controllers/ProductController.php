@@ -42,6 +42,8 @@ class ProductController extends Controller
        }    */ 
         //dd($product_top);
         return view('page.product_detail', compact('product','productRelated','productNew','productTop'));
+
+        
        
     }
 

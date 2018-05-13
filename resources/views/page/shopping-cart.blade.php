@@ -95,7 +95,7 @@
 					<tfoot>
 						<tr>
 							<td colspan="6" class="actions">
-								<a type="submit" href="{{url('checkout')}}" class="beta-btn primary" name="proceed">Xác nhận thông tin đặt hàng <i class="fa fa-chevron-right"></i></a>
+								<a type="submit" href="{{url('users/checkout')}}" class="beta-btn primary" name="proceed">Xác nhận thông tin đặt hàng <i class="fa fa-chevron-right"></i></a>
 
 						</tr>
 					</tfoot>
@@ -109,12 +109,13 @@
 			<div class="table-responsive">
 			<!-- Cart Collaterals -->
 			<div class="cart-collaterals">
-
-				<div class="cart-totals pull-right">
+				<div style="margin-left: 8px;"> <img src="source/image/product/cart.png" width="65%">
+				<div class="cart-totals pull-right" style="margin-top:50px;">
 					<div class="cart-totals-row"><h5 class="cart-total-title">Cart Totals</h5></div>
 					<div class="cart-totals-row"><span>Shipping:</span> <span>Next Step</span></div>
 					<div class="cart-totals-row"><span>Order Total:</span> <span id="sum">{{Cart::subtotal(0,'.',',')}}</span></div>
-				</div>
+				</div></div>
+				
 				<div class="clearfix"></div>
 			</div>
 			<!-- End of Cart Collaterals -->

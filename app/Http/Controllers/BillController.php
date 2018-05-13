@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\BillDetail;
 use Cart;
+use Mail;
 use App\Http\Requests\CreateCheckoutRequest;
 
 class BillController extends Controller
@@ -56,6 +57,11 @@ class BillController extends Controller
             $billDetail->save();
         }
         Cart::destroy();
+        $data = ['name' => $request->name, 'address' => $request->address, 'phone' => $request->phone, 'payment' => $request->payment_method, 'note' => $request->note, 'total' => $bill->total];
+        Mail::send('page.mails.blank',$data,function($msg) {
+            $msg->from('thanhungdn92@gmail.com','Sweet Bakery Store');
+            $msg->to('thanhhungmk92@gmail.com','Thanh Hùng')->subject('Thông tin đặt hàng của bạn');
+        });
         return redirect('index')->with('flash_message', 'Đặt hàng thành công!');
        
     }

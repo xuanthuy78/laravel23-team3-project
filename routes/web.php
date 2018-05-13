@@ -14,11 +14,6 @@
 Route::get('/', function () {
     return redirect('index');
 });
-
-Route::get('previewcart',
-	['as'=>'don-dat-hang',
-	'uses'=>'UserController@previewCart'
-]);
 Route::get('index',
 	['as'=>'trang-chu',
 	'uses'=>'HomeController@index'
@@ -35,10 +30,6 @@ Route::get('categories/products/autoget',
 	['as' => 'auto-name-search',
 	'uses' => 'CategoryController@autoGetSearch'
 ]);
-// Route::get('products',
-// 	['as'=>'san-pham',
-// 	'uses'=>'ProductController@getProduct'
-// ]);
 Route::get('categories/{id}',
 	['as'=>'san-pham-the-loai',
 	'uses'=>'CategoryController@showProducts'
@@ -47,46 +38,71 @@ Route::get('categories/product/{id}',
 	['as'=>'chi-tiet-san-pham',
 	'uses'=>'ProductController@getProductDetail'
 ]);
-
 Route::get('contact',
 	['as'=>'lien-he',
 	'uses'=>'PageController@contact'
 ]);
 
-
 /** User Profile**/
-Route::get('users/forgetpassword',
-	['as' => 'quen-mat-khau',
-	'uses' => 'UserController@forgetPassword'
-]);
-Route::patch('users/update/{id}',
-	['as'=>'sua-profile',
-	'uses'=>'UserController@user_update'
-]);
-Route::post('users/login',
+Route::group(['prefix' => 'users'],function(){
+
+	Route::get('checkout',
+	['as'=>'dat-hang',
+	'uses'=>'BillController@checkout'
+	]);
+	
+	Route::post('checkout',
+	['as' => 'xn-dathang',
+	'uses' => 'BillController@confirmCheckout'
+	]);
+
+	Route::get('previewCart',
+	['as'=>'don-dat-hang',
+	'uses'=>'UserController@previewCart'
+	]);
+
+	Route::post('login',
 	['as'=>'dang-nhap',
 	'uses'=>'UserController@login'
-]);
-Route::get('users/logout',
+	]);
+
+	Route::get('forgetpassword',
+	['as' => 'quen-mat-khau',
+	'uses' => 'UserController@forgetPassword'
+	]);
+
+	Route::get('logout',
 	['as'=>'dang-xuat',
 	'uses'=>'UserController@logout'
-]);
-Route::get('users/{id}',
-	['as'=>'profile',
-	'uses'=>'UserController@user_show'
-]);
-Route::get('changePassword/{id}',
-	['as'=>'profile',
-	'uses'=>'UserController@changePassword_show'
-]);
-Route::patch('password/update/{id}',
-	['as'=>'sua-profile',
-	'uses'=>'UserController@changePassword'
-]);
-Route::post('users/signup',
+	]);
+
+	Route::post('signup',
 	['as' => 'dang-ky',
 	'uses' => 'UserController@signup'
-]);
+	]);
+
+	Route::get('{id}',
+	['as'=>'profile',
+	'uses'=>'UserController@userProfile'
+	]);
+
+	Route::patch('update/{id}',
+	['as'=>'sua-profile',
+	'uses'=>'UserController@userUpdate'
+	]);
+
+	Route::get('changePassword/{id}',
+	['as'=>'profile',
+	'uses'=>'UserController@changePasswordShow'
+	]);
+
+	Route::patch('changePassword/update/{id}',
+	['as'=>'sua-profile',
+	'uses'=>'UserController@changePassword'
+	]);
+
+});
+
 /** ------------**/
 Route::group(['prefix' => 'cart'],function(){
 	
@@ -115,19 +131,6 @@ Route::group(['prefix' => 'cart'],function(){
 	'uses' => 'PageController@listCart'
 	]);
 });
-
-
-
-
-Route::get('checkout',
-	['as'=>'dat-hang',
-	'uses'=>'BillController@checkout'
-]);
-Route::post('checkout',
-	['as' => 'xn-dathang',
-	'uses' => 'BillController@confirmCheckout'
-]);
-
 
 Auth::routes();
 
