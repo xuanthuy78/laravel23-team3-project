@@ -22,13 +22,15 @@ class AppServiceProvider extends ServiceProvider
         \Schema::defaultStringLength(191);
 
         if (Schema::hasTable('slides')) {
-          $slides=Slide::all();
-         View::share('slides', $slides);
-     }
-      if (Schema::hasTable('categories')) {
-          $categories=Category::all();
-         View::share('categories', $categories);   
-     }
+            $slides = Slide::all();
+            View::share('slides', $slides);
+        }
+
+        if (Schema::hasTable('categories')) {
+            $categories = Category::all()->pluck('name','id');
+            View::share('categories', $categories);
+        }
+
     }
     /**
      * Register any application services.

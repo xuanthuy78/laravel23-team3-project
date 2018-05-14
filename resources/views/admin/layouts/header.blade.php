@@ -1,6 +1,6 @@
 <header class="main-header">
     <!-- Logo -->
-    <a href="{{route('admin_dashboard')}}" class="logo">
+    <a href="#" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>A</b>LT</span>
         <!-- logo for regular state and mobile devices -->
@@ -19,7 +19,7 @@
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="{{asset('adminlte/dist/img/user2-160x160.jpg')}}" class="user-image" alt="User Image">
-                        <span class="hidden-xs">{{$admin}}</span>
+                        <span class="hidden-xs">Admin</span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
@@ -34,15 +34,15 @@
                         <!-- Menu Body -->
                         <li class="user-body">
                             {{--<div class="row">--}}
-                                {{--<div class="col-xs-4 text-center">--}}
-                                    {{--<a href="#">Followers</a>--}}
-                                {{--</div>--}}
-                                {{--<div class="col-xs-4 text-center">--}}
-                                    {{--<a href="#">Sales</a>--}}
-                                {{--</div>--}}
-                                {{--<div class="col-xs-4 text-center">--}}
-                                    {{--<a href="#">Friends</a>--}}
-                                {{--</div>--}}
+                            {{--<div class="col-xs-4 text-center">--}}
+                            {{--<a href="#">Followers</a>--}}
+                            {{--</div>--}}
+                            {{--<div class="col-xs-4 text-center">--}}
+                            {{--<a href="#">Sales</a>--}}
+                            {{--</div>--}}
+                            {{--<div class="col-xs-4 text-center">--}}
+                            {{--<a href="#">Friends</a>--}}
+                            {{--</div>--}}
                             {{--</div>--}}
                         </li>
                         <!-- Menu Footer-->
@@ -51,7 +51,7 @@
                                 <a href="#" class="btn btn-default btn-flat">Profile</a>
                             </div>
                             <div class="pull-right">
-                                <a href="{{route('admin_logout')}}" class="btn btn-default btn-flat">Sign out</a>
+                                <a href="#" class="btn btn-default btn-flat">Sign out</a>
                             </div>
                         </li>
                     </ul>

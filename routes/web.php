@@ -13,37 +13,29 @@
 
 //Routes use for admin_side
 Route::group(['prefix' => 'admin'], function () {
+//    Auth::routes();
 
-    Auth::routes();
-
-    Route::get('', function (){
-        return redirect('admin/login');
-    });
-
-    Route::get('/dashboard', 'Admin\AdminController@index')->name('admin_dashboard');
+    Route::get('/', 'Admin\AdminController@index')->name('admin.dashboard');
 
     // Routes use for user management
     Route::group(['prefix' => 'user'], function() {
-        Route::get('/', 'Admin\AdminController@showUser')->name('list_user');
-        Route::get('/delete/{id}', 'Admin\AdminController@deleteUser')->name('delete_user');
-//        Route::get('/?page={index}')
+        Route::get('api/user', 'Admin\UserController@apiUser')->name('api.user');
+        Route::get('/', 'Admin\UserController@index')->name('admin.user.index');
     });
 
     // Routes use for bill management
     Route::group(['prefix' => 'bill'], function() {
-        Route::get('/', 'Admin\AdminController@showBill')->name('list_bill');
-//        Route::delete('/{id}', 'AdminController@deleteUser')->name('delete_bill');
-        Route::get('/ajax/{status}', 'AjaxController@getBillRecord');
+
     });
 
     // Routes use for category management
     Route::group(['prefix' => 'category'], function() {
-        Route::get('/', 'Admin\AdminController@showCategory')->name('list_category');
     });
 
+    // Routes use for product management
+    Route::group(['prefix' => 'product'], function() {
 
-    Route::get('/logout', 'Admin\AdminController@logout' )->name('admin_logout');
-
+    });
 });
 
 
