@@ -31,9 +31,34 @@
           <td>{{ date('d.m.Y H:i:s', strtotime($bill->created_at)) }}</td>
           <td>@if(($bill->status) == 0) Đang xử lí @else Giao dịch thành công @endif</td>
           <td><a href="" class="btn btn-primary" role="dialog" data-toggle="modal" data-target="#myModal{{$bill->id}}"><i class="fa fa-star-o" style="color:white;"></i>&nbsp;View</a> </td>
-          <td><a class="btn btn-danger" href="{{ url('deleteBill/' .$bill->id) }}"><i class="fa fa-trash-o" style="color:white;"></i> &nbsp;Delete</a></td>
+          <td><a class="btn btn-danger" data-toggle="modal" data-target="#delete"><i class="fa fa-trash-o" style="color:white;"></i> &nbsp;Delete</a></td>
         </tr>
         @endforeach
+        <div class="modal modal-danger fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title text-center" id="myModalLabel">Delete Confirmation</h4>
+            </div>
+            <form action="{{url('deleteBill/' .$bill->id)}}" method="get">
+                {{method_field('delete')}}
+                {{csrf_field()}}
+              <div class="modal-body">
+              <p class="text-center">
+                Bạn có chắc là muốn xóa đơn hàng này không
+              </p>
+                  <input type="hidden" name="id" id="id" value="{{$bill->id}}">
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">No, Cancel</button>
+                <button type="submit" class="btn btn-danger">Yes, Delete</button>
+              </div>
+            </form>
+          </div>
+        </div>
+    </div>
       </table>
         
     </div>

@@ -71,7 +71,7 @@ class BillController extends Controller
         $bill = Bill::findOrFail($id);
         $bill_detail = BillDetail::where('bill_id','=',$id)->delete();
         $bill->delete();
-        return redirect('users.PreviewCart');
+        return redirect()->back();
     }
     public function index()
     {
