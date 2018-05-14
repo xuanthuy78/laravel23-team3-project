@@ -3,7 +3,7 @@
 <html>
 <head>
 	<title>Fashion Error Page a Flat Responsive Widget Template :: w3layouts</title>
-	<link rel="stylesheet" href="source/404/css/style.css">
+	<link rel="stylesheet" href="/source/404/css/style.css">
 	<link href='//fonts.googleapis.com/css?family=Josefin+Sans:400,100,100italic,300,300italic,400italic,600,600italic,700,700italic' rel='stylesheet' type='text/css'>
 
 	<!-- For-Mobile-Apps-and-Meta-Tags -->
@@ -32,9 +32,9 @@
 								<div class="social-icons w3agile">
 									<ul>
 										
-										<li><a href="#" class="facebook"><img src="source/404/images/fb.png" title="facebook" alt="facebook"></a></li>
-										<li><a href="#" class="twitter"><img src="source/404/images/tw.png" title="twitter" alt="twitter"></a></li>
-										<li><a href="#" class="googleplus"><img src="source/404/images/gp.png" title="googleplus" alt="googleplus"></a></li>
+										<li><a href="#" class="facebook"><img src="/source/404/images/fb.png" title="facebook" alt="facebook"></a></li>
+										<li><a href="#" class="twitter"><img src="/source/404/images/tw.png" title="twitter" alt="twitter"></a></li>
+										<li><a href="#" class="googleplus"><img src="/source/404/images/gp.png" title="googleplus" alt="googleplus"></a></li>
 										<div class="clear"></div>
 									</ul>	
 								</div>
@@ -54,7 +54,7 @@
 				</div>
 				<div class="agileits_main_grid_right">
 					<div class="menu">
-						<span class="menu-icon"><a href="#"><img src="source/404/images/menu-icon.png" alt=""></a></span>	
+						<span class="menu-icon"><a href="#"><img src="/source/404/images/menu-icon.png" alt=""></a></span>	
 							<ul class="nav1">
 								<li><a href="{{url('index')}}">Home</a></li>
 							</ul> 	
@@ -73,7 +73,7 @@
 				
 		</div>
 	</div>
-	<script src="source/404/js/jquery-1.11.1.min.js"></script> 
+	<script src="/source/404/js/jquery-1.11.1.min.js"></script> 
 	<script>
 		
 		$( "span.menu-icon" ).click(function() {
