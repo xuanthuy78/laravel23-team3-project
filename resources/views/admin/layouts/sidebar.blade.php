@@ -36,6 +36,14 @@
             <li>
                 <a href="#">
                     <i class="fa fa-file"></i> <span>Product</span>
+                <a href="#">
+                    <i class="fa fa-user"></i> <span>Customer</span>
+                    <span class="pull-right-container"></span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa fa-car"></i> <span>Shipping report</span>
                     <span class="pull-right-container"></span>
                 </a>
             </li>
