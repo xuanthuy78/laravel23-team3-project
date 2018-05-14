@@ -36,6 +36,52 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label for="gender" class="col-md-3 control-label">Gender</label>
+                        <div class="col-md-6">
+                            <select id="gender" name="gender">
+                                <option>Male</option>
+                                <option>Female</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address" class="col-md-3 control-label">Address</label>
+                        <div class="col-md-6">
+                            <input type="text" id="address" name="address" class="form-control"  required>
+                            <span class="help-block with-errors"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone" class="col-md-3 control-label">Phone</label>
+                        <div class="col-md-6">
+                            <input type="text" id="phone" name="phone" class="form-control"  required>
+                            <span class="help-block with-errors"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="role" class="col-md-3 control-label">Role</label>
+                        <div class="col-md-6">
+                            <select id="role" name="role">
+                                <option>User</option>
+                                <option>Mod</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="status" class="col-md-3 control-label">Status</label>
+                        <div class="col-md-6">
+                            <select id="status" name="status">
+                                <option>Active</option>
+                                <option>Deactive</option>
+                            </select>
+                        </div>
+                    </div>
+
                 </div>
 
                 <div class="modal-footer">

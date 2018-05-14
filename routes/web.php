@@ -21,6 +21,10 @@ Route::group(['prefix' => 'admin'], function () {
     Route::group(['prefix' => 'user'], function() {
         Route::get('api/user', 'Admin\UserController@apiUser')->name('api.user');
         Route::get('/', 'Admin\UserController@index')->name('admin.user.index');
+        Route::post('/create', 'Admin\UserController@store')->name('admin.user.create');
+        Route::get('/update/{id}', 'Admin\UserController@edit')->name('admin.user.edit');
+        Route::patch('/update/{id}', 'Admin\UserController@update')->name('admin.user.update');
+        Route::delete('/delete/{id}', 'Admin\UserController@destroy')->name('admin.user.destroy');
     });
 
     // Routes use for bill management

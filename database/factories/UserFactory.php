@@ -22,6 +22,7 @@ $factory->define(App\User::class, function (Faker $faker) {
         'address' => $faker->address,
         'phone' => $faker->phoneNumber,
         'role' => $faker->randomElement(['User','Mod']),
+        'status' => $faker->randomElement(['Active', 'Deactive']),
         'remember_token' => str_random(10),
     ];
 });

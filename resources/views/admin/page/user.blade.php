@@ -76,6 +76,11 @@
                 $('#name').val(data.name);
                 $('#email').val(data.email);
                 $('#password').val(data.password);
+                $('#address').val(data.address);
+                $('#phone').val(data.phone);
+                $('#status').val(data.status);
+                $('#role').val(data.role);
+                $('#gender').val(data.gender);
             },
             error : function() {
                 alert("Nothing Data");
@@ -97,7 +102,7 @@
             $.ajax({
                 url : "{{ url('admin/user/delete') }}" + '/' + id ,
                 type : "POST",
-                data : {'_token' : csrf_token},
+                data : {'_method' : 'DELETE', '_token' : csrf_token},
                 success : function(data) {
                     table.ajax.reload();
                     swal({
