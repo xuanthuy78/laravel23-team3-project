@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Category;
 use App\Product;
 use Illuminate\Support\Facades\Input;
+use Response;
 
 class CategoryController extends Controller
 {
@@ -27,23 +28,22 @@ class CategoryController extends Controller
         $data = Input::all();
         $categoryId = $data['nameCategory'];
         $productKey = $data['search_key'];
-        if($productKey <> "") {
-        $products = Product::where('category_id', $categoryId)->where('name', 'like', '%'.$productKey.'%')->get();
+        $products = new Product;
+        $products = Product::where('category_id', $categoryId);
+        if($productKey != "") {
+        $products = $products->where('name', 'like', '%'.$productKey.'%');
         }
-        else {
-        $products = Product::where('category_id', $categoryId)->get();  
-        }
+        $products = $products->paginate(8);
         $category = Category::findOrFail($categoryId);
-        return view('page.categories.search_category', compact('products', 'category'));
+        return view('page.categories.search_category', compact('products', 'category','productKey'));
     }
+    
     public function autoGetSearch(Request $request)
     {
         $key = $request->key;
         $categoryId = $request->categoryId;
         $products = Product::where('category_id', $categoryId)->where('name', 'like', '%'.$key.'%')->get();
-        //dd($products);
-        if($key != "" && count($products) > 0) 
-        {
+        if($key != "") {
            foreach($products as $product)
         {
            echo "   <a href='categories/product/". $product->id."'>
@@ -54,8 +54,6 @@ class CategoryController extends Controller
                 " ;  
         } 
         }
-        
-
     }
     public function index()
     {

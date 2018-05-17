@@ -42,7 +42,8 @@ class PageController extends Controller
     {
         Cart::remove($id);
         $content = Cart::content();
-        return ($content);
+        //return ($content);
+        return response::json($content);
     }
 
     public function updateItemCart(Request $request,$id)

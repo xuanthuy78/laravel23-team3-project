@@ -17,4 +17,7 @@ class Product extends Model
     public function bill_details(){
         return $this->hasMany('App\BillDetail','product_id','id');
     }
+    public function comments() {
+    	return $this->hasMany('App\Comment','product_id','id');
+    }
 }

@@ -12,7 +12,7 @@
     </ul>
     <div class="tab-content">
         <div id="signin-agile">   
-			<form action="{{url('users/login')}}" method="post">
+			<form action="{{url('user/login')}}" method="post">
 				<input type="hidden" name="_token" value="{{csrf_token()}}">
 				<p class="header">Email</p>
 				<input type="email" name="Email" placeholder="Nhập email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Nhập email';}" required="required">
@@ -21,10 +21,10 @@
 				<input type="password" name="Password" placeholder="Nhập mật khẩu"  required="required">
 				<input type="submit" class="sign-in" value="Sign In">
 			</form> 
-			<br><br><a href="{{url('users/forgetpassword')}}" style="color:#FFA803; font-weight: bold;">* Quên mật khẩu</a>
+			<br><br><a href="{{url('user/forgetpassword')}}" style="color:#FFA803; font-weight: bold;">* Quên mật khẩu</a>
 		</div>
 		<div id="signup-agile">   
-			<form action="{{url('users/signup')}}" method="post">
+			<form action="{{url('user/signup')}}" method="post">
 				<input type="hidden" name="_token" value="{{csrf_token()}}">
 				
 				<p class="header">Họ và tên</p>
@@ -64,10 +64,10 @@
                             <li class="dropdown">
                                 <a href="#" class="account dropdown-toggle" data-toggle="dropdown">My Account</a>
                                 <ul class="dropdown-menu dropdown-menu-right">
-                                    <li><a title="My Account" href="{{url('users/'.Auth::user()->id)}}">Profile</a></li>
-                                    <li><a title="My Account" href="{{url('users/changePassword/'.Auth::user()->id)}}">Change Password</a></li>
-                                    <li><a title="My Cart" href="{{url('users/previewCart')}}">My Cart</a></li>  
-                                    <li><a title="Testimonial" href="{{url('users/logout')}}">Log Out</a></li>
+                                    <li><a title="My Account" href="{{url('user/'.Auth::user()->id)}}">Profile</a></li>
+                                    <li><a title="My Account" href="{{url('user/changePassword/'.Auth::user()->id)}}">Change Password</a></li>
+                                    <li><a title="My Cart" href="{{url('user/previewCart')}}">My Cart</a></li>  
+                                    <li><a title="Testimonial" href="{{url('user/logout')}}">Log Out</a></li>
                                 </ul>
                             </li>
                             @else 
@@ -105,6 +105,13 @@
                                 {!! Session::get('flash_message') !!}
                             </div>
                         @endif
+            <div class="result-message">
+            	@if(isset($_GET['flash_message']))
+            		<div class="alert alert-warning">
+            			Giỏ hàng của bạn đã trống
+            		</div>
+            	@endif
+            </div>
 		<div class="header-body">
 			<div class="container beta-relative">
 				<div class="pull-left">

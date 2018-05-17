@@ -44,7 +44,7 @@ Route::get('contact',
 ]);
 
 /** User Profile**/
-Route::group(['prefix' => 'users'],function(){
+Route::group(['prefix' => 'user'],function(){
 
 	Route::get('checkout',
 	['as'=>'dat-hang',
@@ -101,12 +101,23 @@ Route::group(['prefix' => 'users'],function(){
 	'uses'=>'UserController@changePassword'
 	]);
 
+	Route::post('product/{id}/comment',
+	['as' => 'comment',
+	'uses' => 'UserController@comment'
+
+	]);
+
+	Route::get('deleteBill/{id}',
+	['as' => 'delete-bill',
+	'uses' => 'BillController@deleteBill'
+]);
+
 });
 
 /** ------------**/
 Route::group(['prefix' => 'cart'],function(){
 	
-	Route::get('add/{id}',
+	Route::post('add/{id}',
 	['as' => 'add-item-cart',
 	'uses' => 'PageController@addItemCart'
 	]);
@@ -116,12 +127,12 @@ Route::group(['prefix' => 'cart'],function(){
 	'uses' => 'PageController@deleteItemCart'
 	]);
 
-	Route::get('update/{id}',
+	Route::post('update/{id}',
 	['as' => 'update-item-cart',
 	'uses' => 'PageController@updateItemCart'
 	]);
 
-	Route::get('add/{id}/qty',
+	Route::post('add/{id}/qty',
 	['as' => 'add-item-cart-qty',
 	'uses' => 'PageController@addItemCartQty'
 	]);
@@ -136,7 +147,15 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('deleteBill/{id}',
-	['as' => 'delete-bill',
-	'uses' => 'BillController@deleteBill'
+
+
+Route::get('comment/delete/{id}',
+	['as' => 'delete-comment',
+	'uses' => 'UserController@deleteComment'
 ]);
+
+Route::get('bills/{id}/export',
+	['as' => 'export-bills',
+	'uses' => 'UserController@exportBill'
+]);
+

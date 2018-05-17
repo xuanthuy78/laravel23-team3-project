@@ -1441,7 +1441,7 @@ color:#000
 }
 
 .payment_box {
-background:#f8f8f8;
+background:#facc76;
 margin-left:17px;
 margin-top:20px;
 margin-bottom:30px;
@@ -6871,4 +6871,16 @@ color: #545454;
 	font-size: 14px;
 	color:#FFA803;
 	font-style: italic;
+}
+.result-comment {
+	margin-top:20px;
+}
+.remove-comment {
+	cursor: pointer;
+}
+.remove-comment i{
+	color:black;
+}
+.remove-comment i:hover{
+	color:#ed9c28;
 }

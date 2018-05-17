@@ -20,7 +20,7 @@
 	<div class="container">
 		<div id="content">
 			
-			<form action="{{url('users/checkout')}}" method="post" class="beta-form-checkout" id="formCheckout">
+			<form action="{{url('user/checkout')}}" method="post" class="beta-form-checkout" id="formCheckout">
 				<input type="hidden" name="_token" value="{{csrf_token()}}">
 				<div class="row">
 					<div class="col-sm-6">
@@ -113,9 +113,9 @@
 										<label for="payment_method_cheque">Chuyển khoản </label>
 										<div class="payment_box payment_method_cheque" style="display: none;">
 											Chuyển tiền đến tài khoản sau:
-											<br>- Số tài khoản: 123 456 789
-											<br>- Chủ TK: Nguyễn A
-											<br>- Ngân hàng ACB, Chi nhánh TPHCM
+											<br>- Số tài khoản: 123456789908
+											<br>- Chủ TK: Phan Thanh Hùng
+											<br>- Ngân hàng VietComBank, Chi nhánh Đà Nẵng
 										</div>						
 									</li>
 									

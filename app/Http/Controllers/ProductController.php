@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use DB;
 use App\BillDetail;
+use App\Comment;
+use App\User;
 
 class ProductController extends Controller
 {
@@ -32,6 +34,7 @@ class ProductController extends Controller
                      ->groupBy('product_id', 'Products.name', 'Products.unit_price', 'Products.promotion_price', 'image')
                      ->orderBy('sum', 'desc')
                      ->take(5)->get();
+        $comments = Comment::where('product_id',$id)->OrderBy('id','desc')->get();
         /*Cach 2 Eloquen*/
        /*$nhap =BillDetail::groupBy('product_id')->orderBy('sum','desc')->selectRaw('product_id,sum(quantity) as sum')->get();
        foreach($nhap as $key=>$n)
@@ -41,11 +44,10 @@ class ProductController extends Controller
         echo $a."<br>";
        }    */ 
         //dd($product_top);
-        return view('page.product_detail', compact('product','productRelated','productNew','productTop'));
-
-        
+        return view('page.product_detail', compact('product','productRelated','productNew','productTop','comments'));  
        
     }
+
 
     public function searchProducts()
     {

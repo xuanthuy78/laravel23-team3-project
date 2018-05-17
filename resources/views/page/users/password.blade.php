@@ -6,11 +6,11 @@
 	 <div class="css-treeview">
                 <h4>Profile</h4>
                 <ul class="tree-list-pad">
-                    <li><input type="checkbox" checked="checked" id="item-0" /><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a href="{{url('users/'.Auth::user()->id)}}">Cập nhật thông tin</a></label>
+                    <li><input type="checkbox" checked="checked" id="item-0" /><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a href="{{url('user/'.Auth::user()->id)}}">Cập nhật thông tin</a></label>
                     </li>
-                    <li><input type="checkbox" checked="checked" id="item-0" /><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a href="{{url('users/changePassword/'.Auth::user()->id)}}">Đổi password</a></label>
+                    <li><input type="checkbox" checked="checked" id="item-0" /><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a href="{{url('user/changePassword/'.Auth::user()->id)}}">Đổi password</a></label>
                     </li>
-                    <li><input type="checkbox" id="item-1" checked="checked" /><label for="item-1"><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a href="{{url('users/previewCart')}}">Xem lại đơn hàng</a></label>
+                    <li><input type="checkbox" id="item-1" checked="checked" /><label for="item-1"><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a href="{{url('user/previewCart')}}">Xem lại đơn hàng</a></label>
                     </li>
                    
                 </ul>
@@ -21,7 +21,7 @@
         <h1 class="entry-title2"><span>Đổi mật khẩu</span> </h1>
         <hr>
        
-            <form action="{{url('users/changePassword/update/'.Auth::user()->id)}}" class="form-horizontal" method="post" name="signup" id="signup" enctype="multipart/form-data" > 
+            <form action="{{url('user/changePassword/update/'.Auth::user()->id)}}" class="form-horizontal" method="post" name="signup" id="signup" enctype="multipart/form-data" > 
                   <input type="hidden" name="_method" value="PATCH">
                   <input type="hidden" name="_token" value="{{csrf_token()}}">      
 

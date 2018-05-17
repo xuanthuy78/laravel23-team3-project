@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Sweet Bakery</title>
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<base href="{{asset('')}}">
 	<!-- <link href='http://fonts.googleapis.com/css?family=Dosis:300,400' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'> -->
@@ -65,11 +66,12 @@
 	<script src="source/assets/dest/js/password.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/1.4.5/numeral.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
+	<script src="source/assets/dest/js/moment.js"></script>
 
 
 
 <script>
-	$(document).ready(function($) {
+$(document).ready(function($) {
 
 	$("div.alert").delay(700).slideUp();
 
@@ -103,10 +105,85 @@
 		}	
 	});
 
+	$( ".btncomment" ).click(function() {
+		var proId = $(this).parent().find("#proId").val();
+		var comment = $(this).parent().find("#comment").val();
+		console.log(comment);
+		$.ajax ({
+			headers: {
+		    	'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			},
+			type: 'post',
+			dataType: 'html',
+			url: 'user/product/'+proId+'/comment',
+			data : "id=" + proId + "& comment=" + comment,
+			success:
+				function (data) {
+					var result ='';
+					var obj = jQuery.parseJSON(data);
+					console.log(obj);
+					//alert(obj.name);
+					result += "<div class='media' id='before-comment'>"+
+                    	"<a class='pull-left' href='#' >"+
+                        "<img class='media-object' width='40px' src='source/image/product/avart.png' alt=''>"+
+                    	"</a>"+
+                   		 "<div class='media-body'>"+
+                        	"<h4 class='media-heading'><span style=' color:#ed9c28;'>"+obj.name+"</span>"+
+                            "<small>"+" "+$.datepicker.formatDate( "dd.mm.yy", new Date(obj.created_at))+"</small>"+
+                            "<input type='hidden' value='"+obj.product_id+"' id='proId'>"+
+                            "<input type='hidden' value='"+obj.id+"' id='commentId'>"
+                    if(obj.is_admin == 1) {
+                    	result += "<a class='remove remove-comment' title='Remove comment' style='float:right;'>"+
+                            	"<i class='fa fa-trash-o'></i>"+
+                            "</a>"
+                    }        
+                    result += "</h4>"+
+                        	""+obj.content+""+
+                    	"</div>"+
+                	"</div>"; 
+                    console.log(result);
+                	$('#before-comment').before(result);
+                	$('#before-comment').eq(1).removeAttr('id');
+                	$("#comment").val('');
+				},
+
+
+		});
+
+	});
+
+	$(document).on("click",".remove-comment",function() {	
+		var commentId = $(this).parent().find("#commentId").val();
+		var proId = $(this).parent().find("#proId").val();
+		var checkstr =  confirm('Bạn muốn xóa comment này');
+		if(checkstr == true)
+		{
+			$(this).parent().parent().parent().remove();
+			$.ajax ({
+				type: 'get',
+				dataType: 'html',
+				url: '/comment/delete/'+commentId+'',
+				data: "proId="+proId,
+				success: 
+					function (data) {
+						var obj = jQuery.parseJSON(data);
+						console.log(obj);
+
+				},
+
+			});
+		}
+		else
+			return false;		
+	});
+
 	$('.submit-cart').click(function(){
 		var productId = $(this).parent().find("input[name='ProductId']").val();
 		$.ajax ({
-    		type: 'get',
+			headers: {
+		    	'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			},
+    		type: 'post',
     		dataType: 'html',
    			url: '<?php echo url('/cart/add');?>/'+productId, 
     		success: 
@@ -250,7 +327,10 @@
 		else {
 			$(this).parent().parent().find('.total_sub_amount').text(total_amount);
 			$.ajax({
-    		type: 'get',
+			headers: {
+		    	'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			},
+    		type: 'post',
     		dataType: 'html',
    			url: '<?php echo url('/cart/update');?>/'+proID,
     		data: "newQty=" + newQty + "& rowID=" + rowID + "& proID=" + proID,
@@ -329,6 +409,7 @@
         			var obj = jQuery.parseJSON(data);
         			var strText = "";
         			var sum = 0;
+        			var msg = "";
         			$.each( obj, function( key, value ) {
         				total += (value.qty*value.price);
         				totalQty += parseInt(value.qty);
@@ -373,7 +454,7 @@
              		console.log(sum);
              		if(sum == 0)
              		{
-             			window.location.href ='index';
+             			window.location ='index?flash_message';	
              		}
              	},
              	error: function (request, status, error) {
@@ -387,7 +468,10 @@
 	 	var qty = $(this).parent().find('#valtg').val();
 	 	var proId = $(this).parent().find('#proId').val();
 		$.ajax ({
-        		type: 'get',
+				headers: {
+		    	'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				},
+        		type: 'post',
         		dataType: 'html',
        			url:  '/cart/add/'+proId+'/qty',
        			data: "qty=" + qty + "& id=" + proId ,
@@ -444,8 +528,6 @@
 		});
 	}); 
 
-	
-
 	$('#formCheckout').validate({
 		rules :{
 			name: {
@@ -491,8 +573,6 @@
 		
 	}); 	
 
-	
-
 	$(".scroll").click(function(event){		
 		event.preventDefault();
 		$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
@@ -500,8 +580,6 @@
 		
 })
 </script>
-
-
 <script>
 	$('.value-plus').on('click', function(){
     	var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10)+1;
