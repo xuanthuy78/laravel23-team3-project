@@ -83,7 +83,7 @@
 							</td>
 							
 							<td class="product-remove">
-								<a  class="remove deletePageCartUpdate" title="Remove this item"><i class="fa fa-trash-o"></i></a>
+								<a style="cursor: pointer;" class="remove deletePageCartUpdate" title="Remove this item"><i class="fa fa-trash-o"></i></a>
 							</td>
 						</tr>
 						</div>
@@ -95,7 +95,7 @@
 					<tfoot>
 						<tr>
 							<td colspan="6" class="actions">
-								<a type="submit" href="{{url('users/checkout')}}" class="beta-btn primary" name="proceed">Xác nhận thông tin đặt hàng <i class="fa fa-chevron-right"></i></a>
+								<a type="submit" href="{{url('user/checkout')}}" class="beta-btn primary" name="proceed">Xác nhận thông tin đặt hàng <i class="fa fa-chevron-right"></i></a>
 
 						</tr>
 					</tfoot>

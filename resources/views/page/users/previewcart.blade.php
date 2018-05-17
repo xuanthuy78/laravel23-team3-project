@@ -6,11 +6,11 @@
 	 <div class="css-treeview">
                 <h4>Profile</h4>
                 <ul class="tree-list-pad">
-                    <li><input type="checkbox" checked="checked" id="item-0" /><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a href="{{url('users/'.Auth::user()->id)}}">Cập nhật thông tin</a></label>
+                    <li><input type="checkbox" checked="checked" id="item-0" /><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a href="{{url('user/'.Auth::user()->id)}}">Cập nhật thông tin</a></label>
                     </li>
-                    <li><input type="checkbox" checked="checked" id="item-0" /><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a href="{{url('users/changePassword/'.Auth::user()->id)}}">Đổi password</a></label>
+                    <li><input type="checkbox" checked="checked" id="item-0" /><label for="item-0"><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a href="{{url('user/changePassword/'.Auth::user()->id)}}">Đổi password</a></label>
                     </li>
-                    <li><input type="checkbox" id="item-1" checked="checked" /><label for="item-1"><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a href="{{url('users/previewCart')}}">Xem lại đơn hàng</a></label>
+                    <li><input type="checkbox" id="item-1" checked="checked" /><label for="item-1"><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a href="{{url('user/previewCart')}}">Xem lại đơn hàng</a></label>
                     </li>
                    
                 </ul>
@@ -24,6 +24,7 @@
           <th>Trạng Thái</th>
           <th>Chi Tiết</th>
           <th>Delete</th>
+          <th>Excel</th>
         </tr>
         @foreach ($bills as $bill)
         <tr class="content table-hover">
@@ -32,8 +33,10 @@
           <td>@if(($bill->status) == 0) Đang xử lí @else Giao dịch thành công @endif</td>
           <td><a href="" class="btn btn-primary" role="dialog" data-toggle="modal" data-target="#myModal{{$bill->id}}"><i class="fa fa-star-o" style="color:white;"></i>&nbsp;View</a> </td>
           <td><a class="btn btn-danger" data-toggle="modal" data-target="#delete"><i class="fa fa-trash-o" style="color:white;"></i> &nbsp;Delete</a></td>
+          <td><a href="{{url('bills/'.$bill->id.'/export')}}" class="btn btn-warning">Export </a></td>
         </tr>
         @endforeach
+        @if(!$bills->isEmpty())
         <div class="modal modal-danger fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -41,7 +44,7 @@
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
               <h4 class="modal-title text-center" id="myModalLabel">Delete Confirmation</h4>
             </div>
-            <form action="{{url('deleteBill/' .$bill->id)}}" method="get">
+            <form action="{{url('user/deleteBill/'.$bill->id)}}" method="get">
                 {{method_field('delete')}}
                 {{csrf_field()}}
               <div class="modal-body">
@@ -58,9 +61,10 @@
             </form>
           </div>
         </div>
-    </div>
+        </div>
+        @endif
       </table>
-        
+       <div class="row">{{$bills->links()}}</div>
     </div>
     <div class="clearfix"></div>
 </div>

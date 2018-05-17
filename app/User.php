@@ -31,4 +31,12 @@ class User extends Authenticatable
     public function bills(){
         return $this->hasMany('bill','user_id','id');
     }
+
+    public function comments() {
+        return $this->hasMany('App\Comment','user_id','id');
+    }
+    public function isAdmin()
+    {
+        return $this->is_admin;
+    }
 }

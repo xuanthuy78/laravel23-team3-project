@@ -62,25 +62,47 @@
 
 				<div class="well">
                     <h4>Viết bình luận ...<i class="fa fa-pencil"></i></h4><br>
-                    <form role="form">
+                 
+                        @if(Auth::user())
+                       
                         <div class="form-group">
-                            <textarea class="form-control" rows="3"></textarea>
+                            <textarea class="form-control" rows="3" name="comment" id="comment"></textarea>
+                           	<input type="hidden" value="{{$product->id}}" id="proId">
                         </div>
-                        <button type="submit" class="btn btn-warning"> &nbsp; Gửi &nbsp;  </button>
-                    </form>
+                        <button type="submit" class="btn btn-warning btncomment">  &nbsp; Gửi &nbsp;  </button> 
+                        @else
+                        <div class="form-group">
+                            <textarea class="form-control" rows="3" name="comment" disabled=""></textarea>
+                        </div>
+                        <a type="submit" class="btn btn-warning " id="comment" disabled=""> &nbsp; Gửi &nbsp;  </a>
+                        <span style="color:#ed9c28; font-style: italic; font-size: 12px;">* Bạn cần đăng nhập để có thể bình luận</span>
+                        @endif
+                   
                 </div>
 				<hr>
-                <div class="media">
-                    <a class="pull-left" href="#">
+				<?php $last_comment = true;?>
+				<div id="before-comment"></div>
+				@foreach($comments as $comment)	
+                <div class="media" id="<?php echo $last_comment ? 'before-comment': '' ; $last_comment = false; ?>">
+                    <a class="pull-left" href="#" >
                         <img class="media-object" width="40px" src="source/image/product/avart.png" alt="">
                     </a>
                     <div class="media-body">
-                        <h4 class="media-heading">Hùng
-                            <small>August 25, 2014 at 9:30 PM</small>
+                        <h4 class="media-heading"><span style=" color:#ed9c28;">{{$comment->user->name}}</span>
+                            <small>{{date('d.m.Y', strtotime($comment->created_at))}}</small>
+                            <input type="hidden" value="{{$comment->product_id}}" id="proId">
+                            <input type="hidden" value="{{$comment->id}}" id="commentId">
+                            @if(Auth::user() && Auth::user()->isAdmin())
+                            <a class="remove remove-comment" title="Remove comment" style="float:right;">
+                            	<i class="fa fa-trash-o"></i>
+                            </a>
+                            @endif
                         </h4>
-                        Bánh ngon quá đi bà con cô bác êi
+                        {{$comment->content}}
                     </div>
                 </div>
+                @endforeach
+                
 					<div class="space50">&nbsp;</div>
 					<div class="beta-products-list">
 						<h4>Bánh cùng loại</h4>

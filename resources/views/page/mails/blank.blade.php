@@ -9,13 +9,33 @@
 </head>
 <body>
 	<div class="container">
-<div class="col-sm-12 badge badge-secondary" style="font-size: 17px; color:red">Thông tin đặt hàng của bạn</div>
-<div class="col-sm-6">Tên người nhận:</div> <div class="col-sm-6" style="color:#15c;"> {{$name}}</div>
-<div class="col-sm-6">Địa chỉ:</div> <div class="col-sm-6" style="color:#15c;"">{{$address}}</div>
-<div class="col-sm-6">Số điện thoại:</div> <div class="col-sm-6" style="color:#15c;">{{$phone}}</div>
-<div class="col-sm-6">Hình thức thanh toán:</div> <div class="col-sm-6" style="color:#15c;">{{$payment}}</div>
-<div class="col-sm-6">Thời gian nhận:</div> <div class="col-sm-6" style="color:#15c;">{{$note}}</div>
-<div class="col-sm-6">Tổng tiền đơn hàng:</div><div class="col-sm-6" style="color:#15c;"> {{$total}}</div>
+		<div class="col-sm-12 badge badge-secondary" style="font-size: 17px; color:red">Thông tin đặt hàng của bạn</div>
+		<div class="col-sm-6">Tên người nhận:</div> <div class="col-sm-6" style="color:#15c;"> {{$bill->name}}</div>
+		<div class="col-sm-6">Địa chỉ:</div> <div class="col-sm-6" style="color:#15c;"">{{$bill->address}}</div>
+		<div class="col-sm-6">Số điện thoại:</div> <div class="col-sm-6" style="color:#15c;">{{$bill->phone}}</div>
+		<div class="col-sm-6">Hình thức thanh toán:</div> <div class="col-sm-6" style="color:#15c;">{{$bill->payment}}</div>
+		<div class="col-sm-6">Thời gian nhận:</div> <div class="col-sm-6" style="color:#15c;">{{$bill->note}}</div>
+		<table width="500" border="1">
+			<tr style="text-align: center">
+				<th>Tên bánh</th>
+				<th>Số lượng</th>
+				<th>Đơn giá</th>
+				<th>Thành tiền</th>
+			</tr>		
+		@foreach($billDetails as $details)
+			@if (($details->bill_id) == ($bill->id))
+			<tr style="text-align: center">
+				<td >{{$details->product->name }}</td>
+				<td >{{$details->quantity }}</td>
+				<td >{{$details->unit_price }}</td>
+				<td >{{$details->unit_price*$details->quantity }}</td>
+			</tr>
+			@endif
+		@endforeach
+			<tr>
+			<td colspan="4" style="text-align: center">Tổng tiền: {{$bill->total}}</td>
+			</tr>
+		</table>
 	</div>
 </body>
 </html>

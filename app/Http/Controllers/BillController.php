@@ -32,7 +32,7 @@ class BillController extends Controller
             return redirect('index')->with('flash_message', 'Vui lòng đăng nhập trước khi đặt hàng');
     }
 
-    public function confirmCheckout(Request $request)
+    public function confirmCheckout(CreateCheckoutRequest $request)
             
     {
         $cart=Cart::Content();
@@ -47,7 +47,6 @@ class BillController extends Controller
         $bill->note = $request->note;
         $bill->status = 0;
         $bill->save();
-
         foreach($cart as $item)
         {
             $billDetail = new BillDetail;
@@ -57,14 +56,15 @@ class BillController extends Controller
             $billDetail->unit_price = $item->price;
             $billDetail->save();
         }
+        $billDetails = BillDetail::get();
+        //$nameProducts = BillDetail::with('product')->where('bill_id',$bill->id)->get()->toArray();
         Cart::destroy();
-        $data = ['name' => $request->name, 'address' => $request->address, 'phone' => $request->phone, 'payment' => $request->payment_method, 'note' => $request->note, 'total' => $bill->total];
+        $data = ['bill' => $bill ,'billDetails' => $billDetails];
         Mail::send('page.mails.blank',$data,function($msg) {
             $msg->from('thanhungdn92@gmail.com','Sweet Bakery Store');
             $msg->to('thanhhungmk92@gmail.com','Thanh Hùng')->subject('Thông tin đặt hàng của bạn');
         });
-        return redirect('index')->with('flash_message', 'Đặt hàng thành công!');
-       
+        return redirect('index')->with('flash_message', 'Đặt hàng thành công!');    
     }
 
     public function deleteBill($id){
