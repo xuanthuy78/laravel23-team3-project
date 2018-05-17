@@ -25,7 +25,7 @@
 	<!-- <link rel="stylesheet" href="css/jquery-ui.css"> -->
 	<link rel="stylesheet" title="style" href="source/assets/dest/css/huong-style.css"> 
 </head>
-<body>
+<body onload="now();">
 	@include('header')
 	<div class="rev-slider">
 		@yield('content')
@@ -71,7 +71,7 @@
 
 
 <script>
-$(document).ready(function($) {
+$(document).ready(function now($) {
 
 	$("div.alert").delay(700).slideUp();
 
