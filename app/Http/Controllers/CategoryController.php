@@ -19,8 +19,17 @@ class CategoryController extends Controller
     public function showProducts($id)
     {
         $category=Category::findOrFail($id);
-        $products=$category->products;
+        //$products=$category->products;
+        $products=Product::where('category_id',$category->id)->paginate(8);
         return view('page.product', compact('category', 'products'));
+    }
+
+    public function ajaxPaginateProducts($id)
+    {
+        $category=Category::findOrFail($id);
+        //$products=$category->products;
+        $products=Product::where('category_id',$category->id)->paginate(8);
+        return view('page.paginate-product', compact('category', 'products'));
     }
 
     public function searchCategories()
@@ -44,15 +53,15 @@ class CategoryController extends Controller
         $categoryId = $request->categoryId;
         $products = Product::where('category_id', $categoryId)->where('name', 'like', '%'.$key.'%')->get();
         if($key != "") {
-           foreach($products as $product)
-        {
-           echo "   <a href='categories/product/". $product->id."'>
-                    <div id='panel-search'> 
-                    <img id='pic' width='80px' src='source/image/product/". $product->image."'/>
-                    &nbsp; &nbsp;<span> ".$product->name."</span></div></a>
-                    <div id='line-auto'></div>
-                " ;  
-        } 
+            foreach($products as $product)
+            {
+               echo "   <a href='categories/product/". $product->id."'>
+                        <div id='panel-search'> 
+                        <img id='pic' width='80px' src='source/image/product/". $product->image."'/>
+                        &nbsp; &nbsp;<span> ".$product->name."</span></div></a>
+                        <div id='line-auto'></div>
+                    " ;  
+            } 
         }
     }
     public function index()

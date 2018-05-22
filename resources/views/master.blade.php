@@ -53,20 +53,17 @@
 	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 	<script src="source/assets/dest/vendors/bxslider/jquery.bxslider.min.js"></script>
 	<script src="source/assets/dest/vendors/colorbox/jquery.colorbox-min.js"></script>
-	<!-- <script src="source/assets/dest/vendors/animo/Animo.js"></script> -->
 	<script src="source/assets/dest/vendors/dug/dug.js"></script>
 	<script src="source/assets/dest/js/scripts.min.js"></script>
-	<!-- <script src="source/assets/dest/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
-	<script src="source/assets/dest/rs-plugin/js/jquery.themepunch.revolution.min.js"></script> -->
 	<script src="source/assets/dest/js/waypoints.min.js"></script>
 	<script src="source/assets/dest/js/wow.min.js"></script>
-
-	<!--customjs-->
 	<script src="source/assets/dest/js/custom2.js"></script>
 	<script src="source/assets/dest/js/password.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/1.4.5/numeral.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
-	<script src="source/assets/dest/js/moment.js"></script>
+	<script src="source/assets/dest/js/home.js"></script> <!--scroll home -->
+	<script src="source/assets/dest/js/imagezoom.js"></script> <!--image zoom detail products -->
+
 
 
 
@@ -143,13 +140,10 @@ $(document).ready(function($) {
                 	"</div>"; 
                     console.log(result);
                 	$('#before-comment').before(result);
-                	$('#before-comment').eq(1).removeAttr('id');
+                	// $('#before-comment').eq(1).removeAttr('id');
                 	$("#comment").val('');
 				},
-
-
 		});
-
 	});
 
 	$(document).on("click",".remove-comment",function() {	
@@ -168,7 +162,6 @@ $(document).ready(function($) {
 					function (data) {
 						var obj = jQuery.parseJSON(data);
 						console.log(obj);
-
 				},
 
 			});
@@ -177,7 +170,9 @@ $(document).ready(function($) {
 			return false;		
 	});
 
-	$('.submit-cart').click(function(){
+	$(document).on("click",".submit-cart",function(event) {
+	//$('.submit-cart').click(function(){
+		event.preventDefault();
 		var productId = $(this).parent().find("input[name='ProductId']").val();
 		$.ajax ({
 			headers: {
@@ -301,10 +296,17 @@ $(document).ready(function($) {
 		        	console.log(cart);
 	        		$('.beta-select').html(cart);
              		$('#add-cart-item').html(result);
-             		$('#sum').html(numeral(sum).format('0,0'));
+             		$('#sum').html(numeral(sum).format('0,0')); 
              		if(sum == 0)
              		{
-             			window.location.href ='index';
+             			var urlCurrent = document.URL;
+             			if(urlCurrent.indexOf('index') == -1) 
+             			{
+             				if(urlCurrent.indexOf('categories') == -1)
+             				{
+             					window.location.href ='index?flash_message';
+             				}
+             			} 
              		}		
 	            },
 	            error: function (request, status, error) {
@@ -393,74 +395,79 @@ $(document).ready(function($) {
 	$(".deletePageCartUpdate").click(function() {
 		var rowId = $(this).parent().parent().find('#rowID').val();
 		var tr = $(this).closest('tr');
-        $.ajax ({
-    		type: 'get',
-    		dataType: 'html',
-   			url: '<?php echo url('/cart/delete');?>/'+rowId,
-    		success: 
-    			function (data) {
-    				tr.fadeOut(500, function(){
-       				 $(this).remove();
-    				});
-    				var result = ''; 
-        			var total = 0;
-        			var totalQty = 0;
-        			var cart = '';
-        			var obj = jQuery.parseJSON(data);
-        			var strText = "";
-        			var sum = 0;
-        			var msg = "";
-        			$.each( obj, function( key, value ) {
-        				total += (value.qty*value.price);
-        				totalQty += parseInt(value.qty);
-        				console.log(value); 
-					   	result += "<div class='cart-item'>" +
-		                		"<div class='media'>" + 
-		                		"<a class='pull-left' href='#''><img src='source/image/product/"+value.options.img+"' alt='' ></a>"+			             
-		                		"<div class='media-body'>"+
-		                		"<input type='hidden' value='"+value.rowId+"' id='rowId'>"+
-		                    	"<a><button type='button' class='remove-cart-item deleteCart'>×</button></a>"+
-		                    	"<span class='cart-item-title'>"+ value.name + "</span>"+
-		                		"<span class='cart-item-amount'>"+value.qty+"*<span>"+numeral(value.price).format('0,0')+"</span></span>"+
-	                			"</div>"+
-	                		"</div>"+
-	                		"</div>";
-	                	sum += value.subtotal;
-					});
-					result += "<div class='cart-caption' id='updateCart' >"+
-							"<div class='cart-total text-right'>Tổng tiền: <span class='cart-total-value'>"+numeral(total).format('0,0')+"</span></div>"+
-							"<div class='clearfix'></div>"+
+		var checkstr =  confirm('Bạn muốn xóa sản phẩm này');
+		if(checkstr == true){
+	        $.ajax ({
+	    		type: 'get',
+	    		dataType: 'html',
+	   			url: '<?php echo url('/cart/delete');?>/'+rowId,
+	    		success: 
+	    			function (data) {
+	    				tr.fadeOut(500, function(){
+	       				 $(this).remove();
+	    				});
+	    				var result = ''; 
+	        			var total = 0;
+	        			var totalQty = 0;
+	        			var cart = '';
+	        			var obj = jQuery.parseJSON(data);
+	        			var strText = "";
+	        			var sum = 0;
+	        			var msg = "";
+	        			$.each( obj, function( key, value ) {
+	        				total += (value.qty*value.price);
+	        				totalQty += parseInt(value.qty);
+	        				console.log(value); 
+						   	result += "<div class='cart-item'>" +
+			                		"<div class='media'>" + 
+			                		"<a class='pull-left' href='#''><img src='source/image/product/"+value.options.img+"' alt='' ></a>"+			             
+			                		"<div class='media-body'>"+
+			                		"<input type='hidden' value='"+value.rowId+"' id='rowId'>"+
+			                    	"<a><button type='button' class='remove-cart-item deleteCart'>×</button></a>"+
+			                    	"<span class='cart-item-title'>"+ value.name + "</span>"+
+			                		"<span class='cart-item-amount'>"+value.qty+"*<span>"+numeral(value.price).format('0,0')+"</span></span>"+
+		                			"</div>"+
+		                		"</div>"+
+		                		"</div>";
+		                	sum += value.subtotal;
+						});
+						result += "<div class='cart-caption' id='updateCart' >"+
+								"<div class='cart-total text-right'>Tổng tiền: <span class='cart-total-value'>"+numeral(total).format('0,0')+"</span></div>"+
+								"<div class='clearfix'></div>"+
 
-							"<div class='center'>"+
-								"<div class='space10'>&nbsp;</div>"+
-								"<a href='{{url('cart')}}' class='beta-btn primary text-center'>Đặt hàng <i class='fa fa-chevron-right'></i></a>"+
-							"</div>"+
-						"</div>"
-		            if(totalQty>0 ) {
-		                strText = totalQty;
-		                $('div#block').css({'display':'block'});
-		            }
-		            else {
-		                strText = "Trống";
-		                $('div#block').css({'display':'none'});
-		            }
-		            cart += "<i class='fa fa-shopping-cart'></i> Giỏ hàng "+
-							"( "+ strText +" )" +
-							"<i class='fa fa-chevron-down'></i>"
-	        		console.log(cart);
-	        		$('.beta-select').html(cart);
-             		$('#add-cart-item').html(result);
-             		$('#sum').html(numeral(sum).format('0,0'));
-             		console.log(sum);
-             		if(sum == 0)
-             		{
-             			window.location ='index?flash_message';	
-             		}
-             	},
-             	error: function (request, status, error) {
-			        // alert(request.responseText);
-			    }
-		});
+								"<div class='center'>"+
+									"<div class='space10'>&nbsp;</div>"+
+									"<a href='{{url('cart')}}' class='beta-btn primary text-center'>Đặt hàng <i class='fa fa-chevron-right'></i></a>"+
+								"</div>"+
+							"</div>"
+			            if(totalQty>0 ) {
+			                strText = totalQty;
+			                $('div#block').css({'display':'block'});
+			            }
+			            else {
+			                strText = "Trống";
+			                $('div#block').css({'display':'none'});
+			            }
+			            cart += "<i class='fa fa-shopping-cart'></i> Giỏ hàng "+
+								"( "+ strText +" )" +
+								"<i class='fa fa-chevron-down'></i>"
+		        		console.log(cart);
+		        		$('.beta-select').html(cart);
+	             		$('#add-cart-item').html(result);
+	             		$('#sum').html(numeral(sum).format('0,0'));
+	             		console.log(sum);
+	             		if(sum == 0)
+	             		{
+	             			window.location ='index?flash_message';	
+	             		}
+	             	},
+	             	error: function (request, status, error) {
+				        // alert(request.responseText);
+				    }
+			});
+	    	}
+    	else
+    		return false;
 	});
 
 	$( ".qtyAddCart" ).click(function() {
@@ -528,6 +535,20 @@ $(document).ready(function($) {
 		});
 	}); 
 
+	$(document).on("click",".paginate-product .pagination a",function(e){
+		e.preventDefault();
+		var page = $(this).attr("href").split('page=')[1];
+		//var categoryId = $(this).attr("href").split('categories/')[1][0];
+		var categoryId = $('input:hidden[id=categoryId-paginate]').val();
+		$.ajax({
+			url: 'ajax/categories/'+categoryId+'?page='+page
+		}).done(function(data) {
+			console.log(data);
+			$(".result-paginate-product").html(data);
+			location.hash = page;
+		});
+	});
+
 	$('#formCheckout').validate({
 		rules :{
 			name: {
@@ -571,14 +592,9 @@ $(document).ready(function($) {
 			},
 		},
 		
-	}); 	
-
-	$(".scroll").click(function(event){		
-		event.preventDefault();
-		$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
 	});
 		
-})
+});
 </script>
 <script>
 	$('.value-plus').on('click', function(){
@@ -590,6 +606,5 @@ $(document).ready(function($) {
     	if(newVal>=1) divUpd.text(newVal);	
     });
 </script>
-
 </body>
 </html>

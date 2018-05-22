@@ -103,6 +103,11 @@
 								<div class="clearfix"></div>
 							</div>
 							<div class="row">
+								@if($products->isEmpty())
+								
+									<div style="padding-bottom: 100px;">* Rất tiếc không có kết quả nào phù hợp với từ khóa : <span style="color:#FFA803; font-size:20px; font-style: italic;">{{$productKey}}</span></div>
+								
+								@else
 								@foreach($products as $product)
 								<div class="col-sm-3">
 									<div class="single-item">
@@ -132,7 +137,7 @@
 									</div>
 								</div>
 								@endforeach
-
+								@endif
 							</div>
 							<div class="row"> {{$products->appends($_GET)->links()}}</div>
 						</div> <!-- .beta-products-list -->

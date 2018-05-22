@@ -25,7 +25,7 @@
 
 					<div class="row">
 						<div class="col-sm-4">
-							<img src="source/image/product/{{$product->image}}" alt="">
+							<img src="source/image/product/{{$product->image}}" alt="" data-imagezoom="true">
 						</div>
 						<div class="col-sm-8">
 							<div class="single-top-in">
@@ -51,8 +51,10 @@
 												</div>
 								</div>
 									<button type="submit" class="add-to item_add hvr-skew-backward qtyAddCart ">Add to cart</button>
+									
 								
 				 				</div>
+				 				
 						</div>	
 						</div>
 					</div>
@@ -83,7 +85,7 @@
 				<?php $last_comment = true;?>
 				<div id="before-comment"></div>
 				@foreach($comments as $comment)	
-                <div class="media" id="<?php echo $last_comment ? 'before-comment': '' ; $last_comment = false; ?>">
+                <div class="media">
                     <a class="pull-left" href="#" >
                         <img class="media-object" width="40px" src="source/image/product/avart.png" alt="">
                     </a>
@@ -141,7 +143,7 @@
 				</div>
 				<div class="col-sm-3 aside">
 					<div class="widget">
-						<h3 class="widget-title">Bánh HOT</h3>
+						<h3 class="widget-title">Bánh HOT </h3>
 						<div class="widget-body">
 							<div class="beta-sales beta-lists">
 								@foreach($productTop as $productT)

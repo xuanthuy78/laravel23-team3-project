@@ -27,27 +27,16 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         $categoryId = $product->category_id;
         $productRelated = Product::where('id', '<>', $id)->where('category_id', $categoryId)->paginate(3);
-        $productNew = Product::where('new', 1)->take(5)->get();
-        $productTop = DB::table('Bill_Details')
+        $productNew = Product::where('new', 1)->orderBy('id','desc')->take(5)->get();
+        $productTop = DB::table('Bill_Details')->whereNull('Bill_Details.deleted_at')
                      ->join('Products', 'Bill_Details.product_id', '=', 'Products.id')
                      ->selectRaw('product_id as id, Products.name as name, Products.unit_price as unit_price, Products.promotion_price as promotion_price, Products.image as image, SUM(quantity) as sum')
                      ->groupBy('product_id', 'Products.name', 'Products.unit_price', 'Products.promotion_price', 'image')
                      ->orderBy('sum', 'desc')
                      ->take(5)->get();
         $comments = Comment::where('product_id',$id)->OrderBy('id','desc')->get();
-        /*Cach 2 Eloquen*/
-       /*$nhap =BillDetail::groupBy('product_id')->orderBy('sum','desc')->selectRaw('product_id,sum(quantity) as sum')->get();
-       foreach($nhap as $key=>$n)
-       {
-        $a=$n->product->name." | ".$n->product->unit_price." | ".$n->product->promotion_price;
-
-        echo $a."<br>";
-       }    */ 
-        //dd($product_top);
-        return view('page.product_detail', compact('product','productRelated','productNew','productTop','comments'));  
-       
+        return view('page.product_detail', compact('product','productRelated','productNew','productTop','comments'));
     }
-
 
     public function searchProducts()
     {
@@ -64,7 +53,7 @@ class ProductController extends Controller
             $strMax = $max;
         }
         $products =  new Product;
-        if($productKey <> "") {
+        if($productKey != "") {
             $products = $products->where('name', 'like', "%".$productKey."%")
             ->orWhere('description','like',"%".$productKey."%");
             // ->WhereBetween('unit_price', [$str_min, $str_max])->paginate(8);   

@@ -66,7 +66,7 @@
                                 <ul class="dropdown-menu dropdown-menu-right">
                                     <li><a title="My Account" href="{{url('user/'.Auth::user()->id)}}">Profile</a></li>
                                     <li><a title="My Account" href="{{url('user/changePassword/'.Auth::user()->id)}}">Change Password</a></li>
-                                    <li><a title="My Cart" href="{{url('user/previewCart')}}">My Cart</a></li>  
+                                    <li><a title="My Cart" href="{{url('user/previewCart')}}">My Order</a></li>  
                                     <li><a title="Testimonial" href="{{url('user/logout')}}">Log Out</a></li>
                                 </ul>
                             </li>
@@ -81,7 +81,7 @@
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a class="language dropdown-toggle" data-toggle="dropdown"> English</a>
+                                <a class="language dropdown-toggle" data-toggle="dropdown">Viet Nam</a>
                                 <ul class="dropdown-menu dropdown-menu-right">
                                     <li><a > &nbsp;English</a></li>
                                     <li><a > &nbsp;Viet Nam</a></li>
@@ -96,15 +96,14 @@
 				  		@foreach($errors->all() as $err)
 				  			{{$err}}<br>
 				  		@endforeach
-
 				  	</div>
-				  	@endif
+			@endif
 
-				  	 @if(Session::has('flash_message'))
-                            <div class="alert alert-success">
-                                {!! Session::get('flash_message') !!}
-                            </div>
-                        @endif
+		  	@if(Session::has('flash_message'))
+                    <div class="alert alert-success">
+                        {!! Session::get('flash_message') !!}
+                    </div>
+            @endif
             <div class="result-message">
             	@if(isset($_GET['flash_message']))
             		<div class="alert alert-warning">
@@ -121,7 +120,7 @@
 					<div class="space10">&nbsp;</div>
 					<div class="beta-comp">
 							<div class="header-middle">
-								<form class="form-search" action="{{url('search_categories')}}" method="get">
+								<form class="form-search" action="{{url('categories/search')}}" method="get">
 									<div class="search">
 										<input type="text" name="search_key" id="search" placeholder="Nhập tên bánh cần tìm">
 									</div>

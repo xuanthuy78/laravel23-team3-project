@@ -138,7 +138,7 @@
 					
 					<div class="search-hotel">
 						<h3 class="agileits-sear-head">Tìm với tên</h3>
-							<form id="target" action="{{url('search_products')}}" method="get">
+							<form id="target" action="{{url('products/search')}}" method="get">
 								<input type="hidden" value="min_slide" id="min_slider" name ="min_slider">
 								<input type="hidden" value="max_slide" id="max_slider" name ="max_slider">
 								<input type="search" placeholder="Product name..." name="search_key">
@@ -175,7 +175,9 @@
 			    			<div class="line-text"></div>
 			    			</h3>		
 							<div class="beta-products-details">
-								<p class="pull-left"><i class="fa fa-spinner fa-spin"> </i> &nbsp; Có {{count($newProducts)." "}}  Bánh mới</p>
+								<div class="pull-left"><!-- <i class="fa fa-spinner fa-spin"> </i> --> <img src="source/image/qua.svg" width="80px"></div>
+								&nbsp;
+								<p class="pull-left-new">Có <span style="color:#fe4c50">{{$newProducts->total()." "}}</span>  Bánh mới</p>
 								<div class="clearfix"></div>
 							</div>
 							
@@ -189,7 +191,12 @@
 										<div class="single-item-body">
 											<p class="single-item-title">{{$newProduct->name}}</p>
 											<p class="single-item-price">
-												<span class="flash-sale">{{number_format($newProduct->unit_price)}}</span>
+												@if($newProduct->promotion_price != 0) 
+													<span class="flash-sale">{{number_format($newProduct->promotion_price)}}</span>
+												@else 
+													<span class="flash-sale">{{number_format($newProduct->unit_price)}}</span>
+												@endif
+												
 											</p>
 										</div>
 										<div class="single-item-caption">
@@ -202,7 +209,7 @@
 								</div>
 								@endforeach
 							</div>
-							<div class="row"> {{$newProducts->links()}}</div>
+							<div class="row"> {{$newProducts->appends(['promotionProducts' => $promotionProducts->currentPage()])->links()}}</div>
 						</div> <!-- .beta-products-list -->
 
 
@@ -222,7 +229,9 @@
 			    			<div class="line-text"></div>
 			    			</h3>		
 							<div class="beta-products-details">
-								<!-- <p class="pull-left">438 styles found</p> -->
+								<div class="pull-left"><!-- <i class="fa fa-spinner fa-spin"> </i> --> <img src="source/image/qua.svg" width="80px"></div>
+								&nbsp;
+								<p class="pull-left-new">Có <span style="color:#fe4c50">{{$promotionProducts->total()." "}}</span>  Bánh khuyến mãi</p>
 								<div class="clearfix"></div>
 							</div>
 							<div class="row">
@@ -254,7 +263,8 @@
 								</div>
 								@endforeach
 							</div>
-							<div class="row"> {{$promotionProducts->links()}}</div>
+							<div class="row"> 
+							<div class="row"> {{$promotionProducts->appends(['newProducts' => $newProducts->currentPage()])->links()}}</div>
 							<div class="space40">&nbsp;</div>
 
 							<!-- <div class="row">

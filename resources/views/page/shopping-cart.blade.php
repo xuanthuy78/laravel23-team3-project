@@ -58,7 +58,7 @@
 										<p class="font-large table-title">{{$item->name}}</p>
 										<!-- <p class="table-option">Color: Red</p>
 										<p class="table-option">Size: M</p> -->
-										<a class="table-edit" href="#">Edit</a>
+										<a class="table-edit" >Mã số: {{$item->id}}</a>
 									</div>
 								</div>
 							</td>
@@ -95,6 +95,7 @@
 					<tfoot>
 						<tr>
 							<td colspan="6" class="actions">
+								<a type="submit" href="{{url('index')}}" class="beta-btn primary" name="proceed">Tiếp tục mua hàng <i class="fa fa-chevron-right"></i></a>
 								<a type="submit" href="{{url('user/checkout')}}" class="beta-btn primary" name="proceed">Xác nhận thông tin đặt hàng <i class="fa fa-chevron-right"></i></a>
 
 						</tr>

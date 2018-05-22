@@ -34,7 +34,7 @@
 							<input type="text" id="name" placeholder="Họ tên" value="{{Auth::user()->name}}" name="name" class="form-control">
 						</div>
 						<div class="form-block">
-							<label>Giới tính </label>
+							<label>Giới tính <span class="text-danger">*</span></label>
 							<input id="gender" type="radio" class="input-radio" name="gender" value="1"  style="width: 10%" @if(Auth::user()->gender ==1) {{ "checked" }}
             				@endif><span style="margin-right: 10%">Nam</span>
 							<input id="gender" type="radio" class="input-radio" name="gender" value="0" style="width: 10%" @if(Auth::user()->gender ==0) {{ "checked" }}
@@ -61,9 +61,7 @@
 						<div class="form-block">
 							<label for="notes">Ghi chú <span class="text-danger">*</span></label>
 							<textarea id="notes"  placeholder="Nhập thời gian giao nhận ở đây" name="note" class="form-control"></textarea>
-							@if($errors->has('note'))
-   							<p class="text-danger">{{$errors->first('note')}}</p>
-  							@endif
+							
 						</div>
 						
 					</div>
