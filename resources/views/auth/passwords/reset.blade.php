@@ -98,7 +98,7 @@
     
         <div class="form-group">        
             <div class="col-sm-offset-4 col-sm-10" >
-                <button type="submit" class="btn btn-primary">&nbsp; Gửi xác nhận đổi mật khẩu &nbsp; </button>
+                <button type="submit" class="btn btn-primary">&nbsp; Cập nhật mật khẩu mới &nbsp; </button>
             </div>
         </div>
     </form>

@@ -22,15 +22,13 @@
 				<th>Đơn giá</th>
 				<th>Thành tiền</th>
 			</tr>		
-		@foreach($billDetails as $details)
-			@if (($details->bill_id) == ($bill->id))
+		@foreach($bill->bill_details as $details)
 			<tr style="text-align: center">
 				<td >{{$details->product->name }}</td>
 				<td >{{$details->quantity }}</td>
 				<td >{{$details->unit_price }}</td>
 				<td >{{$details->unit_price*$details->quantity }}</td>
-			</tr>
-			@endif
+			</tr>	
 		@endforeach
 			<tr>
 			<td colspan="4" style="text-align: center">Tổng tiền: {{$bill->total}}</td>

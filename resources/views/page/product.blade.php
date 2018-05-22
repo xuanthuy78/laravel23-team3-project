@@ -83,18 +83,18 @@
 		<!-- The Modal -->
 	</div>						
 </div> 
-	<div class="container">
+	<div class="container ">
 		<div id="content" class="space-top-none">
 			<div class="main-content">
 				<div class="space60">&nbsp;</div>
 				<div class="row">
 					<div class="col-sm-12">
+						<div class="result-paginate-product">
 						<div class="beta-products-list">
 							<h3 class="wthree_text_info">Loại: <span>{{$category->name}}</span>
 			    			<div class="line-text"></div>
 			    			</h3>		
 							<div class="beta-products-details">
-								
 								<div class="clearfix"></div>
 							</div>
 							<div class="row">
@@ -128,7 +128,10 @@
 								</div>
 								@endforeach
 							</div>
+							<input type="hidden" value="{{$category->id}}" id="categoryId-paginate"/>
+							<div class="row paginate-product">{{$products->links()}}</div>
 						</div> <!-- .beta-products-list -->
+						</div>
 					</div> <!-- .beta-products-list -->
 				</div>
 			</div> <!-- end section with sidebar and main content -->

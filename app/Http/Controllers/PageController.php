@@ -24,8 +24,7 @@ class PageController extends Controller
             Cart::add(array('id' => $id, 'name' => $product->name, 'qty' => 1, 'price' => $product->promotion_price, 'options' =>array('img' => $product->image)));
         }
         $content = Cart::Content();
-        return response::json($content);
-       
+        return $content;   
     }
 
     public function listCart()
@@ -42,8 +41,7 @@ class PageController extends Controller
     {
         Cart::remove($id);
         $content = Cart::content();
-        //return ($content);
-        return response::json($content);
+        return $content;
     }
 
     public function updateItemCart(Request $request,$id)
@@ -59,13 +57,11 @@ class PageController extends Controller
         // $content['total_amount'] = $total_amount;
         // $content['rowId'] = $rowId;
         $content = Cart::Content();  
-        return response::json($content);
-        //return view('page.update-shopping-cart', compact('content'));      
+        return $content;      
     }
     public function addItemCartQty(Request $request,$id)
     {
         $product = Product::findOrFail($id);
-        //$qty = $request->val;
         $qty = $request->qty;
         if($product->promotion_price == 0) {
             Cart::add(array('id' => $id, 'name' => $product->name, 'qty' => $qty, 'price' => $product->unit_price, 'options' =>array('img' => $product->image)));
@@ -74,7 +70,7 @@ class PageController extends Controller
             Cart::add(array('id' => $id, 'name' => $product->name, 'qty' => $qty, 'price' => $product->promotion_price, 'options' =>array('img' => $product->image)));
         }
         $content = Cart::Content();
-        return response::json($content);
+        return $content;
     }
 
 }

@@ -61,6 +61,14 @@ class ProductsTableSeeder extends Seeder
             ['name'=>'Bánh Pandan','category_id'=>'2','description'=> 'xuất sứ Pháp','unit_price'=>100000,'promotion_price'=>'0','image'=>'banhpandan.jpg','unit'=>'hộp','new'=>'1'],
             ['name'=>'Bánh mochi Nhật Bản','category_id'=>'2','description'=> 'Màu sắc bắt mắt, bánh dẻo thơm','unit_price'=>180000,'promotion_price'=>'0','image'=>'banhmochi.jpg','unit'=>'hộp','new'=>'0'],
             ['name'=>'Bánh Mango','category_id'=>'3','description'=> 'Hương vị Xoài tươi tự nhiên','unit_price'=>150000,'promotion_price'=>'0','image'=>'banhmango.jpg','unit'=>'cái','new'=>'0'],
+            ['name'=>'Bánh sinh nhật người nhện','category_id'=>'4','description'=> 'Tạo hình tinh nghịch dành cho những cậu bé','unit_price'=>140000,'promotion_price'=>'0','image'=>'banhsinhnhatnguoinhen.jpg','unit'=>'cái','new'=>'0'],
+            ['name'=>'Bánh sinh nhật in hình','category_id'=>'4','description'=> 'Khách hàng có quyền yêu cầu in hình theo ý mình thích','unit_price'=>150000,'promotion_price'=>'0','image'=>'banhsninhinh.jpg','unit'=>'cái','new'=>'0'],
+            ['name'=>'Bánh crepe cầu vòng','category_id'=>'5','description'=> 'Concept Thái Lan','unit_price'=>160000,'promotion_price'=>'0','image'=>'banhcrepecauvong.jpg','unit'=>'cái','new'=>'0'],
+            ['name'=>'Bánh bao Hà Nội','category_id'=>'1','description'=> 'Hương Dứa nhân thịt mặn','unit_price'=>15000,'promotion_price'=>'0','image'=>'banhbaohanoi.jpg','unit'=>'cái','new'=>'0'],
+            ['name'=>'Bánh Cookie','category_id'=>'2','description'=> '','unit_price'=>150000,'promotion_price'=>'0','image'=>'banhcookie.jpg','unit'=>'hộp','new'=>'0'],
+            ['name'=>'Bánh bao KimSa','category_id'=>'2','description'=> '','unit_price'=>120000,'promotion_price'=>'0','image'=>'banhbaokimsa.jpg','unit'=>'hộp','new'=>'1'],
+            ['name'=>'Bánh kem mini','category_id'=>'4','description'=> 'Nhỏ nhắn xinh xắn nhìn là muốn ăn','unit_price'=>100000,'promotion_price'=>'0','image'=>'banhkemdayrat.jpg','unit'=>'hộp','new'=>'1'],
+
 
             ]);
 

@@ -29,7 +29,7 @@ class BillController extends Controller
             $content = Cart::Content();
             return view('page.checkout', compact('content'));
         }
-            return redirect('index')->with('flash_message', 'Vui lòng đăng nhập trước khi đặt hàng');
+            return redirect()->back()->with('flash_message', 'Vui lòng đăng nhập trước khi đặt hàng');
     }
 
     public function confirmCheckout(CreateCheckoutRequest $request)
@@ -61,8 +61,8 @@ class BillController extends Controller
         Cart::destroy();
         $data = ['bill' => $bill ,'billDetails' => $billDetails];
         Mail::send('page.mails.blank',$data,function($msg) {
-            $msg->from('thanhungdn92@gmail.com','Sweet Bakery Store');
-            $msg->to('thanhhungmk92@gmail.com','Thanh Hùng')->subject('Thông tin đặt hàng của bạn');
+            $msg->from('thanhungdn92@gmail.com', 'Sweet Bakery Store');
+            $msg->to(Auth::user()->email, Auth::user()->name)->subject('Thông tin đặt hàng của bạn');
         });
         return redirect('index')->with('flash_message', 'Đặt hàng thành công!');    
     }

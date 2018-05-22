@@ -70,7 +70,7 @@
     
         <div class="form-group">        
             <div class="col-sm-offset-3 col-sm-10" >
-                <button type="submit" class="btn btn-primary">&nbsp; Gửi mail nhập mật khẩu mới &nbsp; </button>
+                <button type="submit" class="btn btn-primary">&nbsp; Xác nhận email để tạo mật khẩu mới &nbsp; </button>
             </div>
         </div>
     </form>

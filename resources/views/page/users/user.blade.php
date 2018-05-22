@@ -35,7 +35,7 @@
     </div>
     <div class="col-md-8">
       <section>      
-        <h1 class="entry-title2"><span>Update User</span> </h1>
+        <h1 class="entry-title2"><span>Thông tin cá nhân</span> </h1>
         <hr>
        
             <form action="{{url('user/update/'.Auth::user()->id)}}" class="form-horizontal" method="post" name="signup" id="signup" enctype="multipart/form-data" > 
@@ -51,21 +51,21 @@
                </div>
             </div>          
               <div class="form-group">
-                <label class="control-label col-sm-3">Full Name <span class="text-danger">*</span></label>
+                <label class="control-label col-sm-3">Họ tên<span class="text-danger">*</span></label>
                 <div class="col-md-8 col-sm-9">
                   <input type="text" class="form-control" name="name" id="mem_name" placeholder="Enter your Name here" value="{{Auth::user()->name}}">
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="control-label col-sm-3">Address <span class="text-danger">*</span></label>
+                <label class="control-label col-sm-3">Địa chỉ<span class="text-danger">*</span></label>
                 <div class="col-md-8 col-sm-9">
-                  <input type="text" class="form-control" name="address" id="mem_name" placeholder="Enter your Name here" value="{{Auth::user()->address}}">
+                  <input type="text" class="form-control" name="address" id="mem_name" placeholder="Vui lòng nhập địa chỉ" value="{{Auth::user()->address}}">
                 </div>
               </div>
               
               <div class="form-group">
-                <label class="control-label col-sm-3">Gender <span class="text-danger">*</span></label>
+                <label class="control-label col-sm-3">Giới tính<span class="text-danger">*</span></label>
                 <div class="col-md-8 col-sm-9">
                   <label>
                   <input name="gender" type="radio" value="1"
@@ -84,17 +84,17 @@
                 </div>
               </div>
               <div class="form-group">
-                <label class="control-label col-sm-3">Contact No. <span class="text-danger">*</span></label>
+                <label class="control-label col-sm-3">Điện thoại<span class="text-danger">*</span></label>
                 <div class="col-md-5 col-sm-8">
                   <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                  <input type="text" class="form-control" name="phone" id="contactnum" placeholder="Enter your Primary contact no." value="{{Auth::user()->phone}}">
+                  <input type="text" class="form-control" name="phone" id="contactnum" placeholder="Vui lòng nhập số điện thoại" value="{{Auth::user()->phone}}">
                   </div>
                 </div>
               </div>
               <div class="form-group">
                 <div class="col-xs-offset-3 col-xs-10">
-                  <input name="Submit" type="submit" value="Update" class="btn btn-warning">
+                  <input name="Submit" type="submit" value="Cập nhật thông tin" class="btn btn-warning">
                 </div>
               </div>  
       </form>
