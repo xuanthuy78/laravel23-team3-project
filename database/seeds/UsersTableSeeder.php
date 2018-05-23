@@ -29,5 +29,14 @@ class UsersTableSeeder extends Seeder
             'phone'=>'11',
             'is_admin'=>1
         ]);
+        DB::table('users')->insert([
+            'name' => 'Tiểu La',
+            'email'=> 'laravel@gmail.com',
+            'password' => bcrypt('12345'),
+            'gender'=>0,
+            'address'=>'92 Quang Trung Đà Nẵng',
+            'phone'=>'023363789990',
+            'is_admin'=>0
+        ]);
     }
 }

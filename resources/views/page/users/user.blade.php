@@ -46,7 +46,7 @@
               <div class="col-md-8 col-sm-9">
                   <div class="input-group">
                   <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                  <input type="email" class="form-control" name="email" id="emailid" placeholder="Enter your Email ID" value="{{Auth::user()->email}}" disabled="">
+                  <input type="email" class="form-control" name="email"  placeholder="Enter your Email ID" value="{{Auth::user()->email}}" disabled="">
                 </div>
                </div>
             </div>          
@@ -103,7 +103,4 @@
 </div>
 <br>
 @endsection
-@section('script')
-  
-@endsection
-  
+
