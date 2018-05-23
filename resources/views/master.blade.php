@@ -184,9 +184,9 @@ $(document).ready(function($) {
     		success: 
         		function (data) {
         			var result = ''; 
-        			var total =0;
-        			var totalQty=0;
-        			var cart ='';
+        			var total = 0;
+        			var totalQty = 0;
+        			var cart = '';
         			var obj = jQuery.parseJSON(data);
         			var strText = "";
         			$.each( obj, function( key, value ) {
@@ -553,7 +553,7 @@ $(document).ready(function($) {
 		rules :{
 			name: {
 				required : true,
-				minlength : 10
+				minlength : 3
 			},
 			address: {
 				required : true,
@@ -573,7 +573,7 @@ $(document).ready(function($) {
 		messages : {
 			name : {
 				required : "* Bạn chưa nhập tên",
-				minlength : "* Tên phải từ 10 ký tự",
+				minlength : "* Tên phải từ 3 ký tự",
 			},
 			address : {
 				required : "* Bạn chưa nhập địa chỉ",

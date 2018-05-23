@@ -18,17 +18,17 @@ class CategoryController extends Controller
      */
     public function showProducts($id)
     {
-        $category=Category::findOrFail($id);
+        $category = Category::findOrFail($id);
         //$products=$category->products;
-        $products=Product::where('category_id',$category->id)->paginate(8);
+        $products = Product::where('category_id',$category->id)->paginate(8);
         return view('page.product', compact('category', 'products'));
     }
 
     public function ajaxPaginateProducts($id)
     {
-        $category=Category::findOrFail($id);
+        $category = Category::findOrFail($id);
         //$products=$category->products;
-        $products=Product::where('category_id',$category->id)->paginate(8);
+        $products = Product::where('category_id',$category->id)->paginate(8);
         return view('page.paginate-product', compact('category', 'products'));
     }
 

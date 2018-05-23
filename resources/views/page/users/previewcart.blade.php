@@ -38,9 +38,9 @@
        <hr>
       <table class="table table-bordered ">
         <tr> 
-          <th>Mã đơn hàng</th>
+          <th>Mã</th>
           <th>Ngày đặt</th>
-          <th>Địa chỉ giao </th>
+          <th>Địa chỉ nhận </th>
           <th>Trạng thái</th>
           <th>Chi tiết</th>
           <th>Delete</th>
@@ -51,9 +51,16 @@
           <td>{{$bill->id}}</td>
           <td>{{ date('d.m.Y H:i:s', strtotime($bill->created_at)) }}</td>
           <td>{{$bill->address}}</td>
-          <td>@if(($bill->status) == 0) Đang xử lí @else Giao dịch thành công @endif</td>
+          <td>@if($bill->deleted_at != "") Đã hủy @elseif($bill->status == 0) Đang xử lí @else Thành công @endif</td>
           <td><a href="" class="btn btn-primary" role="dialog" data-toggle="modal" data-target="#myModal{{$bill->id}}"><i class="fa fa-star-o" style="color:white;"></i>&nbsp;View</a> </td>
-          <td><a class="btn btn-danger" data-toggle="modal" data-target="#delete"><i class="fa fa-trash-o" style="color:white;"></i> &nbsp;Delete</a></td>
+          <td >@if($bill->status == 1) 
+                <i class="fa fa-check" style="color:blue; margin-top: 10px"></i>
+            @elseif ($bill->deleted_at != "")
+               <i class="fa fa-close" style="color:red; margin-top: 10px"></i>
+              @else
+                <a class="btn btn-danger" data-toggle="modal" data-target="#delete"><i class="fa fa-trash-o" style="color:white;"></i> &nbsp;Delete</a>
+              @endif
+          </td>
           <td><a href="{{url('bills/'.$bill->id.'/export')}}" class="btn btn-warning">Export </a></td>
         </tr>
         @endforeach

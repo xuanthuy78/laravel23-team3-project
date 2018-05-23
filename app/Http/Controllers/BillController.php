@@ -56,10 +56,8 @@ class BillController extends Controller
             $billDetail->unit_price = $item->price;
             $billDetail->save();
         }
-        $billDetails = BillDetail::get();
-        //$nameProducts = BillDetail::with('product')->where('bill_id',$bill->id)->get()->toArray();
         Cart::destroy();
-        $data = ['bill' => $bill ,'billDetails' => $billDetails];
+        $data = ['bill' => $bill];
         Mail::send('page.mails.blank',$data,function($msg) {
             $msg->from('thanhungdn92@gmail.com', 'Sweet Bakery Store');
             $msg->to(Auth::user()->email, Auth::user()->name)->subject('Thông tin đặt hàng của bạn');

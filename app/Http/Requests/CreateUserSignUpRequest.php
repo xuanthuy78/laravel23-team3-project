@@ -25,7 +25,7 @@ class CreateUserSignUpRequest extends FormRequest
     {
         return [
             'name' => 'required|min:3',
-            'email' => 'required',
+            'email' => 'required|unique:users',
             'password' => 'required|min:3|max:15',
             'cpassword'=>'required|same:password',
         ];
@@ -36,6 +36,7 @@ class CreateUserSignUpRequest extends FormRequest
             'name.required' => 'Bạn chưa nhập tên',
             'name.min' => 'Tên phải 3 ký tự trở lên',
             'email.required' => 'Bạn chưa nhập email',
+            'email.unique' => 'Email này đã tồn tại trên hệ thống',
             'password.required' => 'Bạn chưa nhập password',
             'password.min' => 'Password phải từ 3 ký tự',
             'password.max' => 'Password tối đa 15 ký tự',
