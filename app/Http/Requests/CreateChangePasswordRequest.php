@@ -25,7 +25,7 @@ class CreateChangePasswordRequest extends FormRequest
     {
         return [
             //
-            'password' => 'required|min:3|max:15',
+            'password' => 'required|min:5|max:15',
             'cpassword' => 'required|same:password',
         ];
     }
