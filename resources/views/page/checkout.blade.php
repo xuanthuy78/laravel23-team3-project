@@ -1,33 +1,40 @@
 @extends('master')
 @section('content')
-	<div class="inner-header">
+	<div class="page-head_agile_info_w3l">
 		<div class="container">
-			<div class="pull-left">
-			</div>
-			<div class="pull-right">
-				<div class="beta-breadcrumb font-large">
-					<a href="index.html">Home</a> / <span>Đặt hàng</span>
+			<h3>Sweet<span> Bakery</span></h3>
+			<!--/w3_short-->
+				 <div class="services-breadcrumb">
+						<div class="agile_inner_breadcrumb">
+
+						   <ul class="w3_short">
+								<li><a href="{{url('index')}}">Trang chủ</a><i>|</i></li>
+								<li>Đặt hàng</li>
+							</ul>
+						 </div>
+
 				</div>
-			</div>
-			<div class="clearfix"></div>
-		</div>
+	   <!--//w3_short-->
 	</div>
+</div>
 	<div class="container">
 		<div id="content">
 			
-			<form action="{{url('checkout')}}" method="post" class="beta-form-checkout">
+			<form action="{{url('user/checkout')}}" method="post" class="beta-form-checkout" id="formCheckout">
 				<input type="hidden" name="_token" value="{{csrf_token()}}">
 				<div class="row">
 					<div class="col-sm-6">
-						<div><h2 color="red">Đặt hàng</h2></div>
+						<div><h3 class="wthree_text_info">Xác nhận<span> đặt hàng</span>
+			    			<div class="line-text"></div>
+			    			</h3>	</div>
 						<div class="space20">&nbsp;</div>
 
 						<div class="form-block">
 							<label for="name">Họ tên <span class="text-danger">*</span></label>
-							<input type="text" id="name" placeholder="Họ tên" value="{{Auth::user()->name}}" required name="name">
+							<input type="text" id="name" placeholder="Họ tên" value="{{Auth::user()->name}}" name="name" class="form-control">
 						</div>
 						<div class="form-block">
-							<label>Giới tính </label>
+							<label>Giới tính <span class="text-danger">*</span></label>
 							<input id="gender" type="radio" class="input-radio" name="gender" value="1"  style="width: 10%" @if(Auth::user()->gender ==1) {{ "checked" }}
             				@endif><span style="margin-right: 10%">Nam</span>
 							<input id="gender" type="radio" class="input-radio" name="gender" value="0" style="width: 10%" @if(Auth::user()->gender ==0) {{ "checked" }}
@@ -42,21 +49,19 @@
 
 						<div class="form-block">
 							<label for="adress">Địa chỉ <span class="text-danger">*</span></label>
-							<input type="text" id="adress" placeholder="" value="{{Auth::user()->address}}" required name="address">
+							<input type="text" id="adress" placeholder="" value="{{Auth::user()->address}}"  name="address" class="form-control">
 						</div>
 						
 
 						<div class="form-block">
 							<label for="phone">Điện thoại <span class="text-danger">*</span></label>
-							<input type="text" id="phone" value="{{Auth::user()->phone}}" required name="phone">
+							<input type="text" id="phone" value="{{Auth::user()->phone}}"  name="phone" class="form-control">
 						</div>
 						
 						<div class="form-block">
 							<label for="notes">Ghi chú <span class="text-danger">*</span></label>
-							<textarea id="notes" required="Vui lòng nhập thời gian giao nhận" placeholder="Nhập thời gian giao nhận ở đây" name="note"></textarea>
-							@if($errors->has('note'))
-   							<p class="text-danger">{{$errors->first('note')}}</p>
-  							@endif
+							<textarea id="notes"  placeholder="Nhập thời gian giao nhận ở đây" name="note" class="form-control"></textarea>
+							
 						</div>
 						
 					</div>
@@ -106,9 +111,9 @@
 										<label for="payment_method_cheque">Chuyển khoản </label>
 										<div class="payment_box payment_method_cheque" style="display: none;">
 											Chuyển tiền đến tài khoản sau:
-											<br>- Số tài khoản: 123 456 789
-											<br>- Chủ TK: Nguyễn A
-											<br>- Ngân hàng ACB, Chi nhánh TPHCM
+											<br>- Số tài khoản: 123456789908
+											<br>- Chủ TK: Phan Thanh Hùng
+											<br>- Ngân hàng VietComBank, Chi nhánh Đà Nẵng
 										</div>						
 									</li>
 									

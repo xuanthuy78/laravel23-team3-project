@@ -1,30 +1,88 @@
 @extends('master')
 @section('content')
-<div class="fullwidthbanner-container">
-					<div class="fullwidthbanner">
-						<div class="bannercontainer" >
-					    <div class="banner" >
-								<ul>
-									<!-- THE FIRST SLIDE -->
-									@foreach($slides as $slide)
-									<li data-transition="boxfade" data-slotamount="20" class="active-revslide" style="width: 100%; height: 100%; overflow: hidden; z-index: 18; visibility: hidden; opacity: 0;">
-						            <div class="slotholder" style="width:100%;height:100%;" data-duration="undefined" data-zoomstart="undefined" data-zoomend="undefined" data-rotationstart="undefined" data-rotationend="undefined" data-ease="undefined" data-bgpositionend="undefined" data-bgposition="undefined" data-kenburns="undefined" data-easeme="undefined" data-bgfit="undefined" data-bgfitend="undefined" data-owidth="undefined" data-oheight="undefined">
-													<div class="tp-bgimg defaultimg" data-lazyload="undefined" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat" data-lazydone="undefined" src="source/image/slide/{{$slide->image}}" data-src="source/image/slide/{{$slide->image}}"  style="background-color: rgba(0, 0, 0, 0); background-repeat: no-repeat; background-image: url('source/image/slide/{{$slide->image}}'); background-size: cover; background-position: center center; width: 100%; height: 100%; opacity: 1; visibility: inherit;">
-													</div>
-												</div>
-
-						        </li>
-						        @endforeach
-								
-								</ul>
-							</div>
+<div >
+					
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+		<!-- Indicators -->
+		<ol class="carousel-indicators">
+			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+			<li data-target="#myCarousel" data-slide-to="1" class=""></li>
+			<li data-target="#myCarousel" data-slide-to="2" class=""></li>
+			<li data-target="#myCarousel" data-slide-to="3" class=""></li>
+		</ol>
+		<div class="carousel-inner" role="listbox">
+			<div class="item active">
+				<div class="container">
+					<div class="carousel-caption">
+						<div class="col-md-6 slider_left" style="color:white;">
+							<h2 style="color:white;" >CUPCAKE, <span>for any occassion</span></h2>
+							<p>SweetBakery với danh sách rất nhiều các loại bánh khác nhau , bánh có sẵn hoặc sẽ được làm ngay trong ngày và giao tận nơi theo yêu cầu.</p>
+							<a href="#about" class="hvr-bounce-to-right read scroll"><span class="fa fa-birthday-cake" aria-hidden="true"></span>Read More</a>
 						</div>
-
-						<div class="tp-bannertimer"></div>
+						<div class="col-md-6 slider_right">
+							<img src="source/image/slide_new/cake.png" alt="cake1" />
+						</div>
+						<div class="clearfix"></div>
 					</div>
 				</div>
-				<!--slider-->
-	</div>
+			</div>
+			<div class="item item2">
+				<div class="container">
+					<div class="carousel-caption">
+						<div class="col-md-6 slider_left">
+							<h3 style="color:white;">CUPCAKE, <span>for any occassion</span></h3>
+							<p>SweetBakery với danh sách rất nhiều các loại bánh khác nhau , bánh có sẵn hoặc sẽ được làm ngay trong ngày và giao tận nơi theo yêu cầu.</p>
+							<a href="#about" class="hvr-bounce-to-right read scroll"><span class="fa fa-birthday-cake" aria-hidden="true"></span>Read More</a>
+						</div>
+						<div class="col-md-6 slider_right">
+							<img src="source/image/slide_new/cake1.png" alt="cake1" />
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+			<div class="item item3">
+				<div class="container">
+					<div class="carousel-caption">
+						<div class="col-md-6 slider_left">
+							<h3 style="color:white;">CUPCAKE, <span>for any occassion.</span></h3>
+							<p>SweetBakery với danh sách rất nhiều các loại bánh khác nhau , bánh có sẵn hoặc sẽ được làm ngay trong ngày và giao tận nơi theo yêu cầu.</p>
+							<a href="#about" class="hvr-bounce-to-right read scroll"><span class="fa fa-birthday-cake" aria-hidden="true"></span>Read More</a>
+						</div>
+						<div class="col-md-6 slider_right">
+							<img src="source/image/slide_new/cake2.png" alt="cake1" />
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+			<div class="item item4">
+				<div class="container">
+					<div class="carousel-caption">
+						<div class="col-md-6 slider_left">
+							<h3 style="color:white;">CUPCAKE, <span>for any occassion.</span></h3>
+							<p>SweetBakery với danh sách rất nhiều các loại bánh khác nhau , bánh có sẵn hoặc sẽ được làm ngay trong ngày và giao tận nơi theo yêu cầu.</p>
+							<a href="#about" class="hvr-bounce-to-right read scroll"><span class="fa fa-birthday-cake" aria-hidden="true"></span>Read More</a>
+						</div>
+						<div class="col-md-6 slider_right">
+							<img src="source/image/slide_new/cake3.png" alt="cake1" />
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					</div>
+			</div>
+		</div>
+		<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+			<span class="fa fa-chevron-left" aria-hidden="true"></span>
+			<span class="sr-only">Previous</span>
+		</a>
+		<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+			<span class="fa fa-chevron-right" aria-hidden="true"></span>
+			<span class="sr-only">Next</span>
+		</a>
+		<!-- The Modal -->
+	</div>						
+</div> 
 	<div class="container">
 		<div id="content" class="space-top-none">
 			<div class="main-content">
@@ -39,6 +97,9 @@
 								
 								<div class="clearfix"></div>
 							</div>
+							@if($products->isEmpty())
+								<div style="padding-bottom: 100px;">* Rất tiếc không có kết quả nào phù hợp với từ khóa : <span style="color:#FFA803; font-size:20px; font-style: italic;">{{$productKey}}</span></div>
+							@else
 							<div class="row">
 								@foreach($products as $product)
 								<div class="col-sm-3">
@@ -47,7 +108,7 @@
 										<div class="ribbon-wrapper"><div class="ribbon sale">Sale</div></div>
 										@endif
 										<div class="single-item-header">
-											<a href="product.html"><img src="source/image/product/{{$product->image}}" alt=""></a>
+											<a href="{{url('categories/product/'.$product->id)}}"><img src="source/image/product/{{$product->image}}" alt=""></a>
 										</div>
 										<div class="single-item-body">
 											<p class="single-item-title">{{$product->name}}</p>
@@ -61,7 +122,8 @@
 											</p>
 										</div>
 										<div class="single-item-caption">
-											<a class="add-to-cart pull-left" href="{{url('additemcart/'.$product->id)}}"><i class="fa fa-shopping-cart"></i></a>
+											<input type="hidden" value="{{$product->id}}" name="ProductId">
+											<a class="add-to-cart pull-left submit-cart"><i class="fa fa-shopping-cart"></i></a>
 											<a class="beta-btn primary" href="{{url('categories/product/'.$product->id)}}">Details <i class="fa fa-chevron-right"></i></a>
 											<div class="clearfix"></div>
 										</div>
@@ -69,6 +131,8 @@
 								</div>
 								@endforeach
 							</div>
+							<div class="row"> {{$products->appends($_GET)->links()}}</div>
+							@endif
 						</div> <!-- .beta-products-list -->
 					</div> <!-- .beta-products-list -->
 				</div>

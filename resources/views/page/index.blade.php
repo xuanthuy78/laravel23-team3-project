@@ -1,25 +1,87 @@
 @extends('master')
 @section('content')
-<div class="fullwidthbanner-container">
-					<div class="fullwidthbanner">
-						<div class="bannercontainer">
-					    <div class="banner">
-								<ul>
-									<!-- THE FIRST SLIDE -->
-									@foreach($slides as $slide)
-									<li data-transition="boxfade" data-slotamount="20" class="active-revslide" style="width: 100%; height: 100%; overflow: hidden; z-index: 18; visibility: hidden; opacity: 0;">
-						            <div class="slotholder" style="width:100%;height:100%;" data-duration="undefined" data-zoomstart="undefined" data-zoomend="undefined" data-rotationstart="undefined" data-rotationend="undefined" data-ease="undefined" data-bgpositionend="undefined" data-bgposition="undefined" data-kenburns="undefined" data-easeme="undefined" data-bgfit="undefined" data-bgfitend="undefined" data-owidth="undefined" data-oheight="undefined">
-													<div class="tp-bgimg defaultimg" data-lazyload="undefined" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat" data-lazydone="undefined" src="source/image/slide/{{$slide->image}}" data-src="source/image/slide/{{$slide->image}}"  style="background-color: rgba(0, 0, 0, 0); background-repeat: no-repeat; background-image: url('source/image/slide/{{$slide->image}}'); background-size: cover; background-position: center center; width: 100%; height: 100%; opacity: 1; visibility: inherit;">
-													</div>
-												</div>
-						        </li>
-						        @endforeach
-								</ul>
-							</div>
+<div>
+					
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+		<!-- Indicators -->
+		<ol class="carousel-indicators">
+			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+			<li data-target="#myCarousel" data-slide-to="1" class=""></li>
+			<li data-target="#myCarousel" data-slide-to="2" class=""></li>
+			<li data-target="#myCarousel" data-slide-to="3" class=""></li>
+		</ol>
+		<div class="carousel-inner" role="listbox">
+			<div class="item active">
+				<div class="container">
+					<div class="carousel-caption">
+						<div class="col-md-6 slider_left" style="color:white;">
+							<h2 style="color:white;" >CUPCAKE, <span>for any occassion</span></h2>
+							<p>SweetBakery với danh sách rất nhiều các loại bánh khác nhau , bánh có sẵn hoặc sẽ được làm ngay trong ngày và giao tận nơi theo yêu cầu.</p>
+							<a href="#about" class="hvr-bounce-to-right read scroll"><span class="fa fa-birthday-cake" aria-hidden="true"></span>Read More</a>
 						</div>
-						<div class="tp-bannertimer"></div>
+						<div class="col-md-6 slider_right">
+							<img src="source/image/slide_new/cake.png" alt="cake1" />
+						</div>
+						<div class="clearfix"></div>
 					</div>
 				</div>
+			</div>
+			<div class="item item2">
+				<div class="container">
+					<div class="carousel-caption">
+						<div class="col-md-6 slider_left">
+							<h3 style="color:white;">CUPCAKE, <span>for any occassion</span></h3>
+							<p>SweetBakery với danh sách rất nhiều các loại bánh khác nhau , bánh có sẵn hoặc sẽ được làm ngay trong ngày và giao tận nơi theo yêu cầu.</p>
+							<a href="#about" class="hvr-bounce-to-right read scroll"><span class="fa fa-birthday-cake" aria-hidden="true"></span>Read More</a>
+						</div>
+						<div class="col-md-6 slider_right">
+							<img src="source/image/slide_new/cake1.png" alt="cake1" />
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+			<div class="item item3">
+				<div class="container">
+					<div class="carousel-caption">
+						<div class="col-md-6 slider_left">
+							<h3 style="color:white;">CUPCAKE, <span>for any occassion.</span></h3>
+							<p>SweetBakery với danh sách rất nhiều các loại bánh khác nhau , bánh có sẵn hoặc sẽ được làm ngay trong ngày và giao tận nơi theo yêu cầu.</p>
+							<a href="#about" class="hvr-bounce-to-right read scroll"><span class="fa fa-birthday-cake" aria-hidden="true"></span>Read More</a>
+						</div>
+						<div class="col-md-6 slider_right">
+							<img src="source/image/slide_new/cake2.png" alt="cake1" />
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+			<div class="item item4">
+				<div class="container">
+					<div class="carousel-caption">
+						<div class="col-md-6 slider_left">
+							<h3 style="color:white;">CUPCAKE, <span>for any occassion.</span></h3>
+							<p>SweetBakery với danh sách rất nhiều các loại bánh khác nhau , bánh có sẵn hoặc sẽ được làm ngay trong ngày và giao tận nơi theo yêu cầu.</p>
+							<a href="#about" class="hvr-bounce-to-right read scroll"><span class="fa fa-birthday-cake" aria-hidden="true"></span>Read More</a>
+						</div>
+						<div class="col-md-6 slider_right">
+							<img src="source/image/slide_new/cake3.png" alt="cake1" />
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					</div>
+			</div>
+		</div>
+		<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+			<span class="fa fa-chevron-left" aria-hidden="true"></span>
+			<span class="sr-only">Previous</span>
+		</a>
+		<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+			<span class="fa fa-chevron-right" aria-hidden="true"></span>
+			<span class="sr-only">Next</span>
+		</a>
+		<!-- The Modal -->
+	</div>						
 </div> 
 <div class="inner-header ">
 		<div class="container ">
@@ -37,26 +99,26 @@
 	<div class="container editcontainer">
 				<div class="col-sm-3">
 			<div class="left-sidebar">
-				<h2 class="text-center"><span>C</span>ategories
+				<h2 class="text-center"><span>Loại</span> Bánh
 					<div class="line-text"></div>
 				</h2>
 					<div class="panel-group category-products" id="accordian">
-						@foreach($categories as $categorie)
+						@foreach($categories as $category)
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<h4 class="panel-title">
-									<a data-toggle="collapse" data-parent="#accordian" href="#{{$categorie->id}}">
+									<a data-toggle="collapse" data-parent="#accordian" href="#{{$category->id}}">
 										<span class="span-heart"><i class="fa fa-caret-square-o-down"></i></span>
-											<p class="category-label-sportswear">{{$categorie->name}}</p>
+											<p class="category-label-sportswear">{{$category->name}}</p>
 									</a>
 								</h4>
 								<div class="line"></div>
 							</div>
 								
-								<div id="{{$categorie->id}}" class="panel-collapse collapse">
+								<div id="{{$category->id}}" class="panel-collapse collapse">
 									<div class="panel-body">
 										<ul>
-											@foreach($categorie->products as $products)
+											@foreach($category->products as $products)
 											<li><a href="{{url('categories/product/'.$products->id)}}">{{$products->name}}</a></li>
 											@endforeach
 										</ul>
@@ -69,18 +131,18 @@
 			<!--</div>-->
 			<!--/category-products-->
 			<div class="left-sidebar">
-				<h2 class="text-center"><span>S</span>earch
+				<h2 class="text-center"><span>Tìm</span> Kiếm
 					<div class="line-text"></div>
 				</h2>
 				<div class="category-products2 side-bar">
 					
 					<div class="search-hotel">
-						<h3 class="agileits-sear-head">  Search Here..</h3>
-							<form id="target" action="{{url('search_products')}}" method="get">
+						<h3 class="agileits-sear-head">Tìm với tên</h3>
+							<form id="target" action="{{url('products/search')}}" method="get">
 								<input type="hidden" value="min_slide" id="min_slider" name ="min_slider">
 								<input type="hidden" value="max_slide" id="max_slider" name ="max_slider">
 								<input type="search" placeholder="Product name..." name="search_key">
-								<input type="submit" value="Tìm" class="bstn btn-info" id="submit">
+								<input type="submit" value=" " class="bstn btn-info" id="submit">
 								<br> <br>
 								<h3 class="agileits-sear-head">  Giá từ:</h3>
 									<span id="app_min_price" ></span>
@@ -89,21 +151,18 @@
 									<div id="slider_price"></div>
 							</form>
 					</div>
-					
-					
-		
 					<div class="clearfix"></div>
-
 				</div>
-				 <div class="banner-left"><a href="#"><img src="source/image/product/banh-bong-lan-cuon-cam-6-80462.jpg" alt=""></a>
-                            <div class="banner-content">
+				 	<div class="banner-left"><a href="#"><img src="source/image/product/banh-bong-lan-cuon-cam-6-80462.jpg" alt=""></a>
+                        <div class="banner-content">
                                 <h1>sale up to</h1>
                                 <h2>20% off</h2>
                                 <p>selected products</p>
                                 <a href="#">buy now</a>
-                            </div>
                         </div>
-			<div class="clearfix"></div>
+                    </div>
+					<div class="clearfix"></div>
+					 
 			</div>
 </div>
 						</div>
@@ -112,37 +171,45 @@
 					<div class="col-sm-9">
 						<div class="beta-products-list">
 							<!-- <h4>New Products</h4> -->
-							<h3 class="wthree_text_info">New <span>Product</span>
+							<h3 class="wthree_text_info">Bánh<span> mới</span>
 			    			<div class="line-text"></div>
 			    			</h3>		
 							<div class="beta-products-details">
-								<p class="pull-left"><i class="fa fa-spinner fa-spin"> </i>Có {{count($newproducts)." "}}  Bánh mới</p>
+								<div class="pull-left"><!-- <i class="fa fa-spinner fa-spin"> </i> --> <img src="source/image/qua.svg" width="80px"></div>
+								&nbsp;
+								<p class="pull-left-new">Có <span style="color:#fe4c50">{{$newProducts->total()." "}}</span>  Bánh mới</p>
 								<div class="clearfix"></div>
 							</div>
-
+							
 							<div class="row">
-								@foreach($newproducts as $newproduct)
+								@foreach($newProducts as $newProduct)
 								<div class="col-sm-4">
 									<div class="single-item">
 										<div class="single-item-header">
-											<a href="product.html"><img src="source\image\product\{{$newproduct->image}}" alt=""></a>
+											<a href="{{url('categories/product/'.$newProduct->id)}}"><img src=" source\image\product\{{$newProduct->image}}" alt=""></a>
 										</div>
 										<div class="single-item-body">
-											<p class="single-item-title">{{$newproduct->name}}</p>
+											<p class="single-item-title">{{$newProduct->name}}</p>
 											<p class="single-item-price">
-												<span>{{number_format($newproduct->unit_price)}}</span>
+												@if($newProduct->promotion_price != 0) 
+													<span class="flash-sale">{{number_format($newProduct->promotion_price)}}</span>
+												@else 
+													<span class="flash-sale">{{number_format($newProduct->unit_price)}}</span>
+												@endif
+												
 											</p>
 										</div>
 										<div class="single-item-caption">
-											<a class="add-to-cart pull-left" href="{{url('additemcart/'.$newproduct->id)}}"><i class="fa fa-shopping-cart"></i></a>
-											<a class="beta-btn primary" href="{{url('categories/product/'.$newproduct->id)}}">Details <i class="fa fa-chevron-right"></i></a>
+											 <input type="hidden" value="{{$newProduct->id}}" name="ProductId">
+											<a  class="add-to-cart pull-left submit-cart"><i class="fa fa-shopping-cart"></i></a>
+											<a class="beta-btn primary" href="{{url('categories/product/'.$newProduct->id)}}">Details <i class="fa fa-chevron-right"></i></a>
 											<div class="clearfix"></div>
 										</div>
 									</div>
 								</div>
 								@endforeach
 							</div>
-							<div class="row"> {{$newproducts->links()}}</div>
+							<div class="row"> {{$newProducts->appends(['promotionProducts' => $promotionProducts->currentPage()])->links()}}</div>
 						</div> <!-- .beta-products-list -->
 
 
@@ -158,42 +225,46 @@
 	   					</div>	
 
 						<div class="beta-products-list">
-							<h3 class="wthree_text_info">Promotion<span> Product</span>
+							<h3 class="wthree_text_info">Bánh<span> Khuyến Mãi</span>
 			    			<div class="line-text"></div>
 			    			</h3>		
 							<div class="beta-products-details">
-								<!-- <p class="pull-left">438 styles found</p> -->
+								<div class="pull-left"><!-- <i class="fa fa-spinner fa-spin"> </i> --> <img src="source/image/qua.svg" width="80px"></div>
+								&nbsp;
+								<p class="pull-left-new">Có <span style="color:#fe4c50">{{$promotionProducts->total()." "}}</span>  Bánh khuyến mãi</p>
 								<div class="clearfix"></div>
 							</div>
 							<div class="row">
-								@foreach($promotionproducts as $promotionproduct)
+								@foreach($promotionProducts as $promotionProduct)
 								<div class="col-sm-4">
 									<div class="single-item">
 										<div class="ribbon-wrapper"><div class="ribbon sale">Sale</div></div>
 										<div class="single-item-header">
-											<a href="product.html"><img src="source\image\product\{{$promotionproduct->image}}" alt=""></a>
+											<a href="{{url('categories/product/'.$promotionProduct->id)}}"><img src="source\image\product\{{$promotionProduct->image}}" alt=""></a>
 										</div>
 										<div class="single-item-body">
-											<p class="single-item-title">{{$promotionproduct->name}}</p>
+											<p class="single-item-title">{{$promotionProduct->name}}</p>
 											<p class="single-item-price">
-												@if($promotionproduct->promotion_price != 0)
-												<span class="flash-del">{{number_format($promotionproduct->unit_price)}}</span>
-												<span class="flash-sale">{{number_format($promotionproduct->promotion_price)}}</span>
+												@if($promotionProduct->promotion_price != 0)
+												<span class="flash-del">{{number_format($promotionProduct->unit_price)}}</span>
+												<span class="flash-sale">{{number_format($promotionProduct->promotion_price)}}</span>
 												@else
-												<span class="flash-sale">{{number_format($promotionproduct->unit_price)}}</span>
+												<span class="flash-sale">{{number_format($promotionProduct->unit_price)}}</span>
 												@endif
 											</p>
 										</div>
 										<div class="single-item-caption">
-											<a class="add-to-cart pull-left" href="{{url('additemcart/'.$promotionproduct->id)}}"><i class="fa fa-shopping-cart"></i></a>
-											<a class="beta-btn primary" href="{{url('categories/product/'.$promotionproduct->id)}}">Details <i class="fa fa-chevron-right"></i></a>
+											<input type="hidden" value="{{$promotionProduct->id}}" name="ProductId">
+											<a class="add-to-cart pull-left submit-cart" ><i class="fa fa-shopping-cart"></i></a>
+											<a class="beta-btn primary" href="{{url('categories/product/'.$promotionProduct->id)}}">Details <i class="fa fa-chevron-right"></i></a>
 											<div class="clearfix"></div>
 										</div>
 									</div>
 								</div>
 								@endforeach
 							</div>
-							<div class="row"> {{$promotionproducts->links()}}</div>
+							<div class="row"> 
+							<div class="row"> {{$promotionProducts->appends(['newProducts' => $newProducts->currentPage()])->links()}}</div>
 							<div class="space40">&nbsp;</div>
 
 							<!-- <div class="row">
@@ -261,4 +332,5 @@
 		<!-- #content -->
 	</div> <!-- .container -->
 	<div class="space40">&nbsp;</div>
+	
 @endsection()

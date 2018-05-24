@@ -1,7 +1,7 @@
-@extends('layouts.app')
+@extends('master')
 
 @section('content')
-<div class="container">
+<!-- <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -61,5 +61,51 @@
             </div>
         </div>
     </div>
+</div> -->
+<br><br>
+
+<div class="container">
+  <div class="panel-group">
+    <div class="panel panel-info">
+      <div class="panel-heading">Vui lòng tạo mật khẩu mới</div><br>
+
+    <form class="form-horizontal" action="{{ route('password.request') }}" method="POST">
+        @csrf
+        <input type="hidden" name="token" value="{{ $token }}">
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="email">Email:</label>
+                <div class="col-sm-6">
+                <input type="email" class="form-control" id="email" placeholder="Nhập email của bạn" name="email" value="{{ $email ?? old('email') }}"  required="">
+                                @if ($errors->has('email'))
+                                    <span class="text-danger" style="font-size: 12px;">
+                                        * {{ $errors->first('email') }}
+                                    </span>
+                                @endif
+                </div>
+         </div>
+         <div class="form-group">
+            <label class="control-label col-sm-4" for="email">Mật khẩu mới:</label>
+                <div class="col-sm-6">
+                <input type="password" class="form-control" id="password" placeholder="Nhập mật khẩu mới" name="password" required="">
+                </div>
+         </div>
+         <div class="form-group">
+            <label class="control-label col-sm-4" for="email">Nhập lại mật khẩu mới:</label>
+                <div class="col-sm-6">
+                <input type="password" class="form-control" id="password-confirm" placeholder="Nhập lại mật khẩu mới" name="password_confirmation"  required="">
+                </div>
+         </div>
+    
+        <div class="form-group">        
+            <div class="col-sm-offset-4 col-sm-10" >
+                <button type="submit" class="btn btn-primary">&nbsp; Cập nhật mật khẩu mới &nbsp; </button>
+            </div>
+        </div>
+    </form>
+    </div>
+
+    
+  </div>
 </div>
+<br><br>
 @endsection

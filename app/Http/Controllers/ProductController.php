@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use DB;
 use App\BillDetail;
+use App\Comment;
+use App\User;
 
 class ProductController extends Controller
 {
@@ -20,54 +22,45 @@ class ProductController extends Controller
         return view('page.product');
     }
 
-    public function getProduct_Detail($id)
+    public function getProductDetail($id)
     {
         $product = Product::findOrFail($id);
-        $category_id = $product->category_id;
-        $product_copy = Product::where('id','<>',$id)->where('category_id',$category_id)->paginate(3);
-        $product_new = Product::where('new',1)->take(4)->get();
-        $product_top = DB::table('Bill_Details')
-                     ->join('Products','Bill_Details.product_id','=','Products.id')
-                     ->selectRaw('product_id as id ,Products.name as name,Products.unit_price as unit_price,Products.promotion_price as promotion_price,Products.image as image,SUM(quantity) as sum')
-                     ->groupBy('product_id','Products.name','Products.unit_price','Products.promotion_price','image')
-                     ->orderBy('sum','desc')
-                     ->get();
-        /*Cach 2 Eloquen*/
-       /*$nhap =BillDetail::groupBy('product_id')->orderBy('sum','desc')->selectRaw('product_id,sum(quantity) as sum')->get();
-       foreach($nhap as $key=>$n)
-       {
-        $a=$n->product->name." | ".$n->product->unit_price." | ".$n->product->promotion_price;
-
-        echo $a."<br>";
-       }    */ 
-        //dd($product_top);
-        return view('page.product_detail', compact('product','product_copy','product_new','product_top'));
-       
+        $categoryId = $product->category_id;
+        $productRelated = Product::where('id', '<>', $id)->where('category_id', $categoryId)->paginate(3);
+        $productNew = Product::where('new', 1)->orderBy('id','desc')->take(5)->get();
+        $productTop = DB::table('Bill_Details')->whereNull('Bill_Details.deleted_at')
+                     ->join('Products', 'Bill_Details.product_id', '=', 'Products.id')
+                     ->selectRaw('product_id as id, Products.name as name, Products.unit_price as unit_price, Products.promotion_price as promotion_price, Products.image as image, SUM(quantity) as sum')
+                     ->groupBy('product_id', 'Products.name', 'Products.unit_price', 'Products.promotion_price', 'image')
+                     ->orderBy('sum', 'desc')
+                     ->take(5)->get();
+        $comments = Comment::where('product_id',$id)->OrderBy('id','desc')->get();
+        return view('page.product_detail', compact('product','productRelated','productNew','productTop','comments'));
     }
 
     public function searchProducts()
     {
         $data = Input::all();
-        $product_key = $data['search_key'];
+        $productKey = $data['search_key'];
         $min = $data["min_slider"];
         $max = $data["max_slider"];
         if($min <> '0' && $max <> '500000') {
-            $str_min = str_limit($min, -3, "");
-            $str_max = str_limit($max, -3, "");   
+            $strMin = str_limit($min, -3, "");
+            $strMax = str_limit($max, -3, "");   
         }
         else {
-            $str_min = $min;
-            $str_max = $max;
+            $strMin = $min;
+            $strMax = $max;
         }
-        if($product_key <> "") {
-            $products = Product::where('name','like',"%".$product_key."%")
-            ->orWhere('description','like',"%".$product_key."%")
-            ->WhereBetween('unit_price',[$str_min,$str_max])->paginate(8);   
-        }
-        else {
-            $products = Product::WhereBetween('unit_price',[$str_min,$str_max])->paginate(8);
-        }
-        return view('page.products.search_product',compact('product_key','products'));
+        $products =  new Product;
+        if($productKey != "") {
+            $products = $products->where('name', 'like', "%".$productKey."%")
+            ->orWhere('description','like',"%".$productKey."%");
+            // ->WhereBetween('unit_price', [$str_min, $str_max])->paginate(8);   
+        }    
+        $products = $products->WhereBetween('unit_price', [$strMin, $strMax]);
+        $products = $products->paginate(8); 
+        return view('page.products.search_product', compact('productKey', 'products','strMin','strMax'));
     }
 
     public function index()

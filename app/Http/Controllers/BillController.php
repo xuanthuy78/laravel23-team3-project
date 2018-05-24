@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use Auth;
 use App\BillDetail;
 use Cart;
+use Mail;
 use App\Http\Requests\CreateCheckoutRequest;
+use DB;
 
 class BillController extends Controller
 {
@@ -20,14 +22,16 @@ class BillController extends Controller
     {
         return view('page.shopping-cart');
     }
+    
     public function checkout()
     {
         if(Auth::user()) {
             $content = Cart::Content();
-            return view('page.checkout',compact('content'));
+            return view('page.checkout', compact('content'));
         }
-            return redirect('index')->with('flash_message','Vui lòng đăng nhập trước khi đặt hàng');
+            return redirect()->back()->with('flash_message', 'Vui lòng đăng nhập trước khi đặt hàng');
     }
+
     public function confirmCheckout(CreateCheckoutRequest $request)
             
     {
@@ -43,19 +47,29 @@ class BillController extends Controller
         $bill->note = $request->note;
         $bill->status = 0;
         $bill->save();
-
         foreach($cart as $item)
         {
-            $bill_detail = new BillDetail;
-            $bill_detail->bill_id = $bill->id;
-            $bill_detail->product_id = $item->id;
-            $bill_detail->quantity = $item->qty;
-            $bill_detail->unit_price = $item->price;
-            $bill_detail->save();
+            $billDetail = new BillDetail;
+            $billDetail->bill_id = $bill->id;
+            $billDetail->product_id = $item->id;
+            $billDetail->quantity = $item->qty;
+            $billDetail->unit_price = $item->price;
+            $billDetail->save();
         }
         Cart::destroy();
-        return redirect('index')->with('flash_message','Đặt hàng thành công!');
-       
+        $data = ['bill' => $bill];
+        Mail::send('page.mails.blank',$data,function($msg) {
+            $msg->from('thanhungdn92@gmail.com', 'Sweet Bakery Store');
+            $msg->to(Auth::user()->email, Auth::user()->name)->subject('Thông tin đặt hàng của bạn');
+        });
+        return redirect('index')->with('flash_message', 'Đặt hàng thành công!');    
+    }
+
+    public function deleteBill($id){
+        $bill = Bill::findOrFail($id);
+        $bill_detail = BillDetail::where('bill_id','=',$id)->delete();
+        $bill->delete();
+        return redirect()->back();
     }
     public function index()
     {

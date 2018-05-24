@@ -11,6 +11,7 @@
 |
 */
 
+
 //Routes use for admin_side
 Route::group(['prefix' => 'admin'], function () {
 //    Auth::routes();
@@ -103,91 +104,165 @@ Route::get('previewcart',
 	['as'=>'don-dat-hang',
 	'uses'=>'UserController@previewCart'
 ]);
+
+Route::get('/', function () {
+    return redirect('index');
+});
+
 Route::get('index',
-	['as'=>'trang-chu',
-	'uses'=>'HomeController@index'
+	['as' => 'page-index',
+	'uses' => 'HomeController@index'
 ]);
-Route::get('menu-content',
-	['as'=>'menu-content',
-	'uses'=>'HomeController@menuContent'
-]);
-Route::get('search_categories',
-	['as'=>'tim-kiem-the-loai',
-	'uses'=>'CategoryController@searchCategories'
-]);
-Route::get('search_products',
-	['as'=>'tim-kiem-san-pham',
-	'uses'=>'ProductController@searchProducts'
-]);
-Route::get('products',
-	['as'=>'san-pham',
-	'uses'=>'ProductController@getProduct'
-]);
-Route::get('categories/{id}',
-	['as'=>'san-pham-the-loai',
-	'uses'=>'CategoryController@showProducts'
-]);
-Route::get('categories/product/{id}',
-	['as'=>'chi-tiet-san-pham',
-	'uses'=>'ProductController@getProduct_Detail'
+
+Route::group(['prefix' => 'categories'],function() {
+
+	Route::get('search',
+	['as' => 'search-categories',
+	'uses' => 'CategoryController@searchCategories'
+	]);
+
+	Route::get('products/autoget',
+	['as' => 'auto-name-search',
+	'uses' => 'CategoryController@autoGetSearch'
+	]);
+
+	Route::get('{id}',
+	['as' => 'categories-products',
+	'uses' => 'CategoryController@showProducts'
+	]);
+
+	Route::get('product/{id}',
+	['as' => 'product-detail',
+	'uses' => 'ProductController@getProductDetail'
+	]);
+
+});
+
+Route::get('products/search',
+	['as' => 'search-products',
+	'uses' => 'ProductController@searchProducts'
 ]);
 
 Route::get('contact',
-	['as'=>'lien-he',
-	'uses'=>'PageController@contact'
+	['as' => 'page-contact',
+	'uses' => 'PageController@contact'
 ]);
-
+Route::get('ajax/categories/{id}',
+	['as' => 'ajax-categories-products',
+	'uses' => 'CategoryController@ajaxPaginateProducts'
+]);
 
 /** User Profile**/
+Route::group(['prefix' => 'user'],function(){
 
-Route::patch('users/update/{id}',
-	['as'=>'sua-profile',
-	'uses'=>'UserController@user_update'
-]);
-Route::post('users/login',
-	['as'=>'dang-nhap',
-	'uses'=>'UserController@login'
-]);
-Route::get('users/logout',
-	['as'=>'dang-xuat',
-	'uses'=>'UserController@logout'
-]);
-Route::get('users/{id}',
-	['as'=>'profile',
-	'uses'=>'UserController@user_show'
-]);
-Route::post('users/signup',
-	['as' => 'dang-ky',
+	Route::get('checkout',
+	['as' => 'page-checkout',
+	'uses' => 'BillController@checkout'
+	]);
+	
+	Route::post('checkout',
+	['as' => 'confirm-checkout',
+	'uses' => 'BillController@confirmCheckout'
+	]);
+
+	Route::get('previewCart',
+	['as' => 'page-preview-cart',
+	'uses' => 'UserController@previewCart'
+	]);
+
+	Route::post('login',
+	['as' => 'page-login',
+	'uses' => 'UserController@login'
+	]);
+
+	Route::get('forgetpassword',
+	['as' => 'page-forget-password',
+	'uses' => 'UserController@forgetPassword'
+	]);
+
+	Route::get('logout',
+	['as' => 'page-logout',
+	'uses' => 'UserController@logout'
+	]);
+
+	Route::post('signup',
+	['as' => 'page-signup',
 	'uses' => 'UserController@signup'
+	]);
+
+	Route::get('{id}',
+	['as' => 'profile',
+	'uses' => 'UserController@userProfile'
+	]);
+
+	Route::patch('update/{id}',
+	['as' => 'update-profile',
+	'uses' => 'UserController@userUpdate'
+	]);
+
+	Route::get('changePassword/{id}',
+	['as' => 'profile',
+	'uses' => 'UserController@changePasswordShow'
+	]);
+
+	Route::patch('changePassword/update/{id}',
+	['as' => 'update-password',
+	'uses' => 'UserController@changePassword'
+	]);
+
+	Route::post('product/{id}/comment',
+	['as' => 'comment',
+	'uses' => 'UserController@comment'
+
+	]);
+
+	Route::get('deleteBill/{id}',
+	['as' => 'delete-bill',
+	'uses' => 'BillController@deleteBill'
 ]);
+
+});
+
 /** ------------**/
-Route::get('additemcart/{id}',
+Route::group(['prefix' => 'cart'],function(){
+	
+	Route::post('add/{id}',
 	['as' => 'add-item-cart',
 	'uses' => 'PageController@addItemCart'
-]);
-Route::get('cart',
-	['as' => 'shopping-cart',
-	'uses' => 'PageController@listCart'
-]);
-Route::get('deleteitemcart/{id}',
+	]);
+
+	Route::get('delete/{id}',
 	['as' => 'delete-item-cart',
 	'uses' => 'PageController@deleteItemCart'
-]);
-Route::get('cart/update/{id}',
+	]);
+
+	Route::post('update/{id}',
 	['as' => 'update-item-cart',
 	'uses' => 'PageController@updateItemCart'
-]);
-Route::get('checkout',
-	['as'=>'dat-hang',
-	'uses'=>'BillController@checkout'
-]);
-Route::post('checkout',
-	['as' => 'xn-dathang',
-	'uses' => 'BillController@confirmCheckout'
-]);
-Route::get('additemcartqty/{id}',
+	]);
+
+	Route::post('add/{id}/qty',
 	['as' => 'add-item-cart-qty',
 	'uses' => 'PageController@addItemCartQty'
-]);
+	]);
+
+	Route::get('',
+	['as' => 'shopping-cart',
+	'uses' => 'PageController@listCart'
+	]);
+});
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('comment/delete/{id}',
+	['as' => 'delete-comment',
+	'uses' => 'UserController@deleteComment'
+]);
+
+Route::get('bills/{id}/export',
+	['as' => 'export-bills',
+	'uses' => 'UserController@exportBill'
+]);
+
+
+

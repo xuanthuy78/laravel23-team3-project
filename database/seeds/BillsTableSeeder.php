@@ -20,10 +20,9 @@ class BillsTableSeeder extends Seeder
                 'address' => $faker->address,
                 'date_order' => $faker->date($format = 'Y-m-d', $max = 'now'),
                 'total' => $faker->numberBetween($min = 10 , $max= 100),
-                'payment' => $faker-> randomElement(['Processing', 'Done', 'Cancel']),
+                'payment' => $faker-> randomElement(['COD', 'Card']),
                 'note' => $faker->sentence,
                 'status' => $faker->boolean,
-
             ]);
         }
     }

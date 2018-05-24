@@ -104,7 +104,7 @@ class ProductController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Product Updated'
+            'message' => 'Contact Updated'
         ]);
     }
 
@@ -120,7 +120,7 @@ class ProductController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Product Deleted'
+            'message' => 'Contact Deleted'
         ]);
     }
 
