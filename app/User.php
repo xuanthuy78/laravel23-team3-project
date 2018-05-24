@@ -8,9 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
     use SoftDeletes;
-
+    use Notifiable;
     protected $guard = 'user';
     /**
      * The attributes that are mass assignable.
@@ -20,6 +19,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name', 'email', 'password', 'gender', 'phone', 'address', 'role', 'status'
     ];
+    protected $date = ['deleted_at'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -30,7 +30,6 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    protected $date = ['deleted_at'];
 
     public function bills(){
         return $this->hasMany('bill','user_id','id');
