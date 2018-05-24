@@ -22,7 +22,7 @@ class CreateProductsTable extends Migration
             $table->float('unit_price');
             $table->float('promotion_price');
             $table->string('image');
-            $table->string('unit');
+            $table->string('unit')->default('cái')->nullable();
             $table->boolean('new')->default(true)->nullable();
             $table->timestamps();
         });
