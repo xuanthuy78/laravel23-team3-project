@@ -43,7 +43,7 @@ class ProductController extends Controller
         $input['image'] = null;
 
         if($request->hasFile('image')) {
-            $input['image'] = '/source/image/product'.str_slug($input['name'], '-').'.'.$request->image->getClientOriginalExtension();
+            $input['image'] = str_slug($input['name'], '-').'.'.$request->image->getClientOriginalExtension();
             $request->image->move(public_path('/source/image/product'), $input['image']);
         }
 
@@ -93,10 +93,10 @@ class ProductController extends Controller
         $input['image'] = $product->image;
 
         if ($request->hasFile('image')){
-            if (!$product->image == NULL){
-                unlink(public_path($product->image));
-            }
-            $input['image'] = '/source/image/product/'.str_slug($input['name'], '-').'.'.$request->image->getClientOriginalExtension();
+            // if (!$product->image == NULL){
+            //     unlink(public_path($product->image));
+            // }
+            $input['image'] = str_slug($input['name'], '-').'.'.$request->image->getClientOriginalExtension();
             $request->image->move(public_path('/source/image/product/'), $input['image']);
         }
 
@@ -107,7 +107,6 @@ class ProductController extends Controller
             'message' => 'Contact Updated'
         ]);
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -135,7 +134,7 @@ class ProductController extends Controller
                 if ($product->image == NULL) {
                     return 'No Image';
                 }
-                return '<img class="rounded-square" width="30" height="30" src="http://localhost:8000/source/image/product/'.$product->image.'" alt="">';
+                return '<img class="rounded-square" width="30" height="30" src="/source/image/product/'.$product->image.'" alt="">';
             })
             ->addColumn('action', function($product) {
                 return '<a onclick="editForm('. $product->id .')" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i>Edit</a>'.
