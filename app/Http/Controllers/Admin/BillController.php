@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Bill;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Yajra\DataTables\DataTables;
 
-
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Input;
-use App\User;
-
-class AdminController extends Controller
+class BillController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,7 +16,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.dashboard');
+        return view('admin.page.bill');
     }
 
     /**
@@ -62,7 +59,8 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        //
+        $bill = Bill::findOrFail($id);
+        return $bill;
     }
 
     /**
@@ -74,7 +72,13 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+        $bill = Bill::findOrFail($id);
+        $bill->update($input);
+        return response()->json([
+            'success' => true,
+            'message' => 'Bill Updated'
+        ]);
     }
 
     /**
@@ -86,5 +90,14 @@ class AdminController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function apiBill() {
+        $bill = Bill::all();
+        return DataTables::of($bill)
+            ->addColumn('action', function($bill){
+                return '<a onclick="editForm('. $bill->id .')" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i>Edit</a>'.
+                    '<a onclick="deleteData('. $bill->id .')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i>Delete</a>';
+            })->make(true);
     }
 }

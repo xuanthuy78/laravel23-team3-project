@@ -21,40 +21,6 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="email" class="col-md-3 control-label">Email</label>
-                        <div class="col-md-6">
-                            <input type="email" id="email" name="email" class="form-control" required>
-                            <span class="help-block with-errors"></span>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="password" class="col-md-3 control-label">Password</label>
-                        <div class="col-md-6">
-                            <input type="password" id="password" name="password" class="form-control"  required>
-                            <span class="help-block with-errors"></span>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="gender" class="col-md-3 control-label">Gender</label>
-                        <div class="col-md-6">
-                            <select id="gender" name="gender">
-                                <option>Male</option>
-                                <option>Female</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="address" class="col-md-3 control-label">Address</label>
-                        <div class="col-md-6">
-                            <input type="text" id="address" name="address" class="form-control"  required>
-                            <span class="help-block with-errors"></span>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
                         <label for="phone" class="col-md-3 control-label">Phone</label>
                         <div class="col-md-6">
                             <input type="text" id="phone" name="phone" class="form-control"  required>
@@ -63,21 +29,36 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="role" class="col-md-3 control-label">Role</label>
+                        <label for="date_order" class="col-md-3 control-label">Date order</label>
                         <div class="col-md-6">
-                            <select id="role" name="role">
-                                <option>User</option>
-                                <option>Mod</option>
-                            </select>
+                            <input type="text" id="date_order" name="date_order" class="form-control"  required>
+                            <span class="help-block with-errors"></span>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="status" class="col-md-3 control-label">Status</label>
+                        <label for="total" class="col-md-3 control-label">Total</label>
                         <div class="col-md-6">
-                            <select id="status" name="status">
-                                <option>Active</option>
-                                <option>Deactive</option>
+                            <input type="text" id="total" name="total" class="form-control"  required>
+                            <span class="help-block with-errors"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="note" class="col-md-3 control-label">Note</label>
+                        <div class="col-md-6">
+                            <input type="text" id="note" name="note" class="form-control"  required>
+                            <span class="help-block with-errors"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="role" class="col-md-3 control-label">Payment</label>
+                        <div class="col-md-6">
+                            <select id="payment" name="payment">
+                                <option>Processing</option>
+                                <option>Done</option>
+                                <option>Cancel</option>
                             </select>
                         </div>
                     </div>

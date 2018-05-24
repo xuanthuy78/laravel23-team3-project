@@ -15,30 +15,26 @@
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
             <li>
-                <a href="{{url('admin/user')}}" id="user">
+                <a href="{{route('admin.user.index')}}" id="user">
                     <i class="fa fa-user"></i> <span>User</span>
                     <span class="pull-right-container"></span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="{{route('admin.category.index')}}">
                     <i class="fa fa-box"></i> <span>Category</span>
                     <span class="pull-right-container"></span>
-
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="{{route('admin.bill.index')}}">
                     <i class="fa fa-file"></i> <span>Bill</span>
                     <span class="pull-right-container"></span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="{{route('admin.product.index')}}">
                     <i class="fa fa-file"></i> <span>Product</span>
-                <a href="#">
-                    <i class="fa fa-user"></i> <span>Customer</span>
-                    <span class="pull-right-container"></span>
                 </a>
             </li>
             <li>

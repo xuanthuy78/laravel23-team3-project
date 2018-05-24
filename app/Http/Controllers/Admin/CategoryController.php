@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Yajra\DataTables\DataTables;
 
-
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Input;
-use App\User;
-
-class AdminController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,7 +16,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.dashboard');
+        return view('admin.page.category');
     }
 
     /**
@@ -29,7 +26,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -40,7 +37,13 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+
+        Category::create($input);
+        return response()->json([
+            'success' => true,
+            'message' => 'Category Created',
+        ]);
     }
 
     /**
@@ -62,7 +65,9 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        return $category;
+
     }
 
     /**
@@ -74,7 +79,15 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+        $category = Category::findOrFail($id);
+        dd($input);
+        $category->update($input);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Category Updated'
+        ]);
     }
 
     /**
@@ -85,6 +98,19 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Category::destroy($id);
+        return response()->json([
+            'success' => true,
+            'message' => 'Category Deleted'
+        ]);
+    }
+
+    public function apiCategory() {
+        $category = Category::all();
+        return DataTables::of($category)
+            ->addColumn('action', function($category){
+                return '<a onclick="editForm('. $category->id .')" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i>Edit</a>'.
+                    '<a onclick="deleteData('. $category->id .')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i>Delete</a>';
+            })->make(true);
     }
 }

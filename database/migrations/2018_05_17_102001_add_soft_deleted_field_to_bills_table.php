@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddSoftDeletedToUsersTable extends Migration
+class AddSoftDeletedFieldToBillsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,9 @@ class AddSoftDeletedToUsersTable extends Migration
      */
     public function up()
     {
-        ư
+        Schema::table('bills', function ($table) {
+            $table->softDeletes();
+        });
     }
 
     /**

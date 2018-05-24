@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
         }
 
         if (Schema::hasTable('categories')) {
-            $categories = Category::all()->pluck('name','id');
+            $categories = Category::all();
             View::share('categories', $categories);
         }
 

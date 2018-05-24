@@ -12,7 +12,6 @@
 */
 
 //Routes use for admin_side
-
 Route::group(['prefix' => 'admin'], function () {
 //    Auth::routes();
 
@@ -20,27 +19,83 @@ Route::group(['prefix' => 'admin'], function () {
 
     // Routes use for user management
     Route::group(['prefix' => 'user'], function() {
+
+        // Api get user
         Route::get('api/user', 'Admin\UserController@apiUser')->name('api.user');
+
+        // Show list user
         Route::get('/', 'Admin\UserController@index')->name('admin.user.index');
+
+        // Create user
         Route::post('/create', 'Admin\UserController@store')->name('admin.user.create');
+
+        // Update user
         Route::get('/update/{id}', 'Admin\UserController@edit')->name('admin.user.edit');
         Route::patch('/update/{id}', 'Admin\UserController@update')->name('admin.user.update');
+
+        // Delete user
         Route::delete('/delete/{id}', 'Admin\UserController@destroy')->name('admin.user.destroy');
-    });
-
-    // Routes use for bill management
-    Route::group(['prefix' => 'bill'], function() {
-
-    });
-
-    // Routes use for category management
-    Route::group(['prefix' => 'category'], function() {
     });
 
     // Routes use for product management
     Route::group(['prefix' => 'product'], function() {
+        // Api get product
+        Route::get('api/product', 'Admin\ProductController@apiProduct')->name('api.product');
+
+        // Show list product
+        Route::get('/', 'Admin\ProductController@index')->name('admin.product.index');
+
+        // Create product
+        Route::post('/create', 'Admin\ProductController@store')->name('admin.product.create');
+
+        // Update product
+        Route::get('/update/{id}', 'Admin\ProductController@edit')->name('admin.product.edit');
+        Route::patch('/update/{id}', 'Admin\ProductController@update')->name('admin.product.update');
+
+        // Delete user
+        Route::delete('/delete/{id}', 'Admin\ProductController@destroy')->name('admin.product.destroy');
 
     });
+
+    // Routes use for bill management
+    Route::group(['prefix' => 'bill'], function() {
+        // Api get bill
+        Route::get('api/bill', 'Admin\BillController@apiBill')->name('api.bill');
+
+        // Show list bill
+        Route::get('/', 'Admin\BillController@index')->name('admin.bill.index');
+
+        // Create bill
+        Route::post('/create', 'Admin\BillController@store')->name('admin.bill.create');
+
+        // Update bill
+        Route::get('/update/{id}', 'Admin\BillController@edit')->name('admin.bill.edit');
+        Route::patch('/update/{id}', 'Admin\BillController@update')->name('admin.bill.update');
+
+        // Delete bill
+        Route::delete('/delete/{id}', 'Admin\CategoryController@destroy')->name('admin.bill.destroy');
+    });
+
+    // Routes use for category management
+    Route::group(['prefix' => 'category'], function() {
+        // Api get category
+        Route::get('api/category', 'Admin\CategoryController@apiCategory')->name('api.category');
+
+        // Show list product
+        Route::get('/', 'Admin\CategoryController@index')->name('admin.category.index');
+
+        // Create product
+        Route::post('/create', 'Admin\CategoryController@store')->name('admin.category.create');
+
+        // Update product
+        Route::get('/update/{id}', 'Admin\CategoryController@edit')->name('admin.category.edit');
+        Route::patch('/update/{id}', 'Admin\CategoryController@update')->name('admin.category.update');
+
+        // Delete user
+        Route::delete('/delete/{id}', 'Admin\CategoryController@destroy')->name('admin.category.destroy');
+    });
+
+
 });
 
 

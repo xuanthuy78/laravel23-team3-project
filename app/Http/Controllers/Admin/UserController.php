@@ -39,7 +39,6 @@ class UserController extends Controller
     {
         $input = $request->all();
         User::create($input);
-        dd($input);
         return response()->json([
             'success' => true,
             'message' => 'User Created',
@@ -84,7 +83,7 @@ class UserController extends Controller
         $user->update($input);
         return response()->json([
             'success' => true,
-            'message' => 'Contact Updated'
+            'message' => 'User Updated'
         ]);
     }
 
@@ -96,11 +95,10 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::findOrFail($id);
         User::destroy($id);
         return response()->json([
             'success' => true,
-            'message' => 'Contact Deleted'
+            'message' => 'User Deleted'
         ]);
     }
 

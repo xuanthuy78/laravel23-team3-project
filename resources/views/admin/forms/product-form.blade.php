@@ -21,64 +21,46 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="email" class="col-md-3 control-label">Email</label>
+                        <label for="category_id" class="col-md-3 control-label">Category</label>
                         <div class="col-md-6">
-                            <input type="email" id="email" name="email" class="form-control" required>
-                            <span class="help-block with-errors"></span>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="password" class="col-md-3 control-label">Password</label>
-                        <div class="col-md-6">
-                            <input type="password" id="password" name="password" class="form-control"  required>
-                            <span class="help-block with-errors"></span>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="gender" class="col-md-3 control-label">Gender</label>
-                        <div class="col-md-6">
-                            <select id="gender" name="gender">
-                                <option>Male</option>
-                                <option>Female</option>
+                            <select id="category_id" name="category_id">
+                                @foreach($categories as $category)
+                                    <option value="{{$category->id}}">{{$category->name}}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="address" class="col-md-3 control-label">Address</label>
+                        <label for="description" class="col-md-3 control-label">Description</label>
                         <div class="col-md-6">
-                            <input type="text" id="address" name="address" class="form-control"  required>
+                            <textarea rows="4" cols="50" type="text" id="description" name="description" class="form-control"  required>
+                            </textarea>
                             <span class="help-block with-errors"></span>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="phone" class="col-md-3 control-label">Phone</label>
+                        <label for="unit_price" class="col-md-3 control-label">Price</label>
                         <div class="col-md-6">
-                            <input type="text" id="phone" name="phone" class="form-control"  required>
+                            <input type="unit_price" id="unit_price" name="unit_price" class="form-control"  required>
                             <span class="help-block with-errors"></span>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="role" class="col-md-3 control-label">Role</label>
+                        <label for="promotion_price" class="col-md-3 control-label">Price promo</label>
                         <div class="col-md-6">
-                            <select id="role" name="role">
-                                <option>User</option>
-                                <option>Mod</option>
-                            </select>
+                            <input type="promotion_price" id="promotion_price" name="promotion_price" class="form-control"  required>
+                            <span class="help-block with-errors"></span>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="status" class="col-md-3 control-label">Status</label>
+                        <label for="image" class="col-md-3 control-label">Image</label>
                         <div class="col-md-6">
-                            <select id="status" name="status">
-                                <option>Active</option>
-                                <option>Deactive</option>
-                            </select>
+                            <input type="file" id="image" name="image" class="form-control">
+                            <span class="help-block with-errors"></span>
                         </div>
                     </div>
 

@@ -27,6 +27,19 @@
                         </tr>
                     </thead>
                     <tbody></tbody>
+                    <tfoot>
+                        <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Gender</th>
+                            <th>Address</th>
+                            <th>Phone</th>
+                            <th>Role</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>
@@ -39,6 +52,7 @@
     var table = $('#contact-table').DataTable({
         processing: true,
         serverSide: true,
+        searchable: false,
         ajax: "{{ route('api.user') }}",
         columns: [
             {data: 'id', name: 'id'},
@@ -50,8 +64,36 @@
             {data: 'role', name: 'role'},
             {data: 'status', name: 'status'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
-        ]
+        ],
+        initComplete: function () {
+            console.log(this.api());
+            this.api().columns().every(function (index) {
+                var column = this;
+                var select = $('<select id="'+ index +'"><option value=""></option></select>')
+                    .appendTo($(column.footer()).empty())
+                    .on('change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+
+                        column
+                            .search(val ? '^' + val + '$' : '', true, false)
+                            .draw();
+                    });
+
+                column.data().unique().sort().each(function (d, j) {
+                    select.append('<option value="' + d + '">' + d + '</option>')
+                });
+            });
+
+            var columnHideIndex = [0,1,2,4,5,8];
+            $.each(columnHideIndex, function (value) {
+                $('select#'+ value).css('display', 'none');
+            })
+        },
     });
+
+
 
     function addForm() {
         save_method = "add";
