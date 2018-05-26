@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -64,6 +65,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+
         $user = User::findOrFail($id);
         return $user;
     }
@@ -78,8 +80,9 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $input = $request->all();
+        $input['password'] = Hash::make($input['password']);
         $user = User::findOrFail($id);
-        $user->password = bcrypt($user->password);
+        //$user->password = Hash::make($request->password);
         $user->update($input);
         return response()->json([
             'success' => true,

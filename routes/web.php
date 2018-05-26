@@ -13,10 +13,13 @@
 
 
 //Routes use for admin_side
-Route::group(['prefix' => 'admin'], function () {
+
+Route::group(['prefix' => 'admin','middleware'=>'isAdmin'], function () {
 //    Auth::routes();
 
     Route::get('/', 'Admin\AdminController@index')->name('admin.dashboard');
+
+    Route::get('/logout','Admin\AdminController@logout');
 
     // Routes use for user management
     Route::group(['prefix' => 'user'], function() {
@@ -75,6 +78,26 @@ Route::group(['prefix' => 'admin'], function () {
 
         // Delete bill
         Route::delete('/delete/{id}', 'Admin\CategoryController@destroy')->name('admin.bill.destroy');
+
+        // Route::get('/back', 'Admin\BillController@back');
+
+        Route::get('/details/{id}', 'Admin\BillController@detailsOrder');
+
+        Route::get('/date', 'Admin\BillController@dateOrder');
+
+ 
+        Route::get('/process/{id}', 'Admin\BillController@processOrder');
+
+        Route::get('/export/excel', 'Admin\BillController@excelOrder');
+
+        Route::get('/report', 'Admin\BillController@reportOrder')->name('admin.bill.report');
+
+        Route::get('/export/pdf/{id}', 'Admin\BillController@pdfOrder');
+
+        Route::get('/report/search','Admin\BillController@searchBillReport');
+
+        Route::get('/report/search/ajax/name','Admin\BillController@searchBillReportByName');
+
     });
 
     // Routes use for category management
@@ -98,6 +121,7 @@ Route::group(['prefix' => 'admin'], function () {
 
 
 });
+
 
 
 Route::get('previewcart',
@@ -263,6 +287,7 @@ Route::get('bills/{id}/export',
 	['as' => 'export-bills',
 	'uses' => 'UserController@exportBill'
 ]);
+//Auth::routes();
 
 
 

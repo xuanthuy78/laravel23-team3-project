@@ -46,7 +46,7 @@ class UserController extends Controller
         if (Auth::user()) {
             $id = Auth::user()->id;
             $bills = Bill::withTrashed()->where('user_id',$id)->paginate(10);
-            $billdetails = BillDetail::get();
+            $billdetails = BillDetail::withTrashed()->get();
             return view('page.users.previewcart',compact('bills','billdetails'));
         }
         return redirect('index');

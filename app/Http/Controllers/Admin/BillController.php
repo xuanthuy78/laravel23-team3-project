@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Bill;
+use App\BillDetail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Yajra\DataTables\DataTables;
+use Excel;
+use PDF;
+
 
 class BillController extends Controller
 {
@@ -18,6 +22,126 @@ class BillController extends Controller
     {
         return view('admin.page.bill');
     }
+
+    public function detailsOrder($id)
+    {
+        $bill = Bill::withTrashed()->find($id);
+        $billDetails = BillDetail::withTrashed()->where('bill_id', $bill->id)->get();
+        return view('admin.page.billdetail', compact('billDetails'));
+    }
+
+    public function dateOrder(Request $request)
+    {
+        $fromDate = $request->fromdate;
+        $toDate = $request->todate;
+        $bills = new Bill;
+        if($fromDate != "" && $toDate != "") {
+            $bills = Bill::whereBetween('date_order',[$fromDate, $toDate]);
+        }
+        elseif ($fromDate != "" && $toDate == "") {
+            $bills = Bill::where('date_order', $fromDate);
+        }
+        else {
+            $bills = Bill::where('date_order', $toDate);
+        }
+        $bills = $bills->paginate(10);
+        return view('admin.page.bill_date', compact('bills','fromDate','toDate'));
+    }
+
+    public function excelOrder(Request $request)
+    {
+        $fromDate = $request->fromDate;
+        $toDate = $request->toDate;
+        $bills = new Bill;
+        if($fromDate != "" && $toDate != "") {
+            $bills = Bill::whereBetween('date_order', [$fromDate, $toDate]);
+        }
+        elseif ($fromDate != "" && $toDate == "") {
+            $bills = Bill::where('date_order', $fromDate);
+        }
+        else {
+            $bills = Bill::where('date_order', $toDate);
+        }
+        $bills = $bills->get()->toArray();
+        return Excel::create('data', function($excel) use ($bills) {
+            $excel->sheet('sheet', function($sheet) use ($bills) {
+                $sheet->fromArray($bills);
+            });
+        })->export('xls');
+    }
+
+    public function reportOrder()
+    {
+        $bills = Bill::withTrashed()->where('date_order', date('Y-m-d'))->paginate(10);
+        $billsDelivered = Bill::where('date_order', date('Y-m-d'))->where('status',1)->count();
+        $billsUndelivered = Bill::where('date_order', date('Y-m-d'))->where('status',0)->count();
+        $billsCancelled = Bill::onlyTrashed()->where('date_order', date('Y-m-d'))->count();
+        return view('admin.page.bill_report', compact('bills','billsDelivered','billsUndelivered','billsCancelled'));
+    }
+
+    public function processOrder($id)
+    {
+        $bill = Bill::find($id);
+        $bill->status = 1;
+        $bill->save();
+        return Redirect()->back();
+    }
+
+    public function pdfOrder($id)
+    {
+        $bill = Bill::find($id);
+        $pdf = PDF::loadView('admin.page.bill_pdf', ['bill' => $bill]);
+        return $pdf->download('bill.pdf');
+    }
+
+   public function searchBillReport(Request $request)
+   {
+        $date = $request->date;
+        $status = $request->status;
+
+        if($date == "")
+        {
+            if($status == "") {
+                // $bills = Bill::withTrashed()->where('date_order',date('Y-m-d'))->paginate(20);
+                // return view('admin.page.bill_report',compact('bills','date')); 
+                return redirect('admin/bill/report');
+            }
+            else {
+                if($status == "delete") {
+                    $bills = Bill::onlyTrashed()->where('date_order', date('Y-m-d'))->paginate(10);
+                    return view('admin.page.bill_report', compact('bills','date'));
+                }
+                else {
+                    $bills = Bill::where('status', $status)->where('date_order', date('Y-m-d'))->paginate(10);
+                    return view('admin.page.bill_report', compact('bills', 'date'));
+                }
+            }
+        }
+        else {
+            if($status == "") {
+                $bills = Bill::withTrashed()->where('date_order', $date)->paginate(10);
+                return view('admin.page.bill_report', compact('bills', 'date'));
+            }
+            else {
+                if($status == "delete") {
+                    $bills = Bill::onlyTrashed()->where('date_order', $date)->paginate(10);
+                    return view('admin.page.bill_report',compact('bills', 'date'));
+                }
+                else {
+                    $bills = Bill::where('date_order',$date)->where('status', $status)->paginate(10);
+                    return view('admin.page.bill_report',compact('bills','date'));
+                }
+            }
+
+        }        
+   }
+   
+   public function searchBillReportByName(Request $request)
+   {
+    $name = $request->name;
+    $bills = Bill::withTrashed()->where('name','like','%'.$name.'%')->where('date_order',date('Y-m-d'))->paginate(20);
+    return view('admin.page.table_bill_report',compact('bills'));
+   }
 
     /**
      * Show the form for creating a new resource.
@@ -97,7 +221,8 @@ class BillController extends Controller
         return DataTables::of($bill)
             ->addColumn('action', function($bill){
                 return '<a onclick="editForm('. $bill->id .')" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i>Edit</a>'.
-                    '<a onclick="deleteData('. $bill->id .')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i>Delete</a>';
+                    '<a onclick="deleteData('. $bill->id .')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i>Delete</a>'.
+                    '<a href="bill/details/'.$bill->id.'" class="btn btn-danger btn-xs">Details</a>';
             })->make(true);
     }
 }

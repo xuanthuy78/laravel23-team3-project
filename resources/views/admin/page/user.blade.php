@@ -61,7 +61,7 @@
             {data: 'gender', name: 'gender'},
             {data: 'address', name: 'address'},
             {data: 'phone', name: 'phone'},
-            {data: 'role', name: 'role'},
+            {data: 'is_admin', name: 'is_admin'},
             {data: 'status', name: 'status'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ],
@@ -121,9 +121,10 @@
                 $('#address').val(data.address);
                 $('#phone').val(data.phone);
                 $('#status').val(data.status);
-                $('#role').val(data.role);
+                $('#role').val(data.is_admin);
                 $('#gender').val(data.gender);
             },
+
             error : function() {
                 alert("Nothing Data");
             }
