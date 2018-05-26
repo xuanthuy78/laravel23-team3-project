@@ -5,8 +5,8 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4>Product list
-                        <a onclick="addForm()" class="btn btn-primary pull-right">Add Product</a>
+                    <h4>Categories list
+                        <a onclick="addForm()" class="btn btn-primary pull-right">Add Category</a>
                     </h4>
                 </div>
             </div>

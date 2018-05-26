@@ -4,8 +4,11 @@
         <div class="col-md-12">
 
             <div class="panel-body">
+
                 <table id="contact-table" class="table table-striped">
+
                     <thead>
+
                     <tr>
                         <th width="30">No</th>
                         <th>Name</th>
@@ -20,11 +23,21 @@
                     </thead>
                     <tbody></tbody>
                     <tfoot>
+
                     </tfoot>
                 </table>
+                <form action="{{url('admin/bill/date')}}" method="get">
+                    <input type="hidden" name="_token" value="{{csrf_token()}}">
+                        <label>From Date:</label><input type="Date" name="fromdate">
+                        <label>To Date:</label><input type="Date" name="todate">
+                        <input type="submit" class="btn btn-danger" value="View"> 
+                </form>
+                
             </div>
         </div>
+
     </div>
+
     @include('admin.forms.bill-form')
 @endsection
 
@@ -40,7 +53,7 @@
                 {data: 'phone', name: 'phone'},
                 {data: 'address', name: 'address'},
                 {data: 'date_order', name: 'date_order'},
-                {data: 'total', name: 'total'},
+                {data: 'total', name: 'total',},
                 {data: 'payment', name: 'payment'},
                 {data: 'note', name: 'note'},
                 {data: 'action', name: 'action', orderable: false, searchable: false},

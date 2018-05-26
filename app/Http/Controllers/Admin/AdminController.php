@@ -9,6 +9,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use App\User;
+use App\Category;
+use App\Product;
+use App\Bill;
+use App\Comment;
+use Auth;
 
 class AdminController extends Controller
 {
@@ -19,7 +24,19 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.dashboard');
+        $users = User::all()->count();
+        $categories = Category::all()->count();
+        $products = Product::all()->count();
+        $bills = Bill::all()->count();
+        $billsDate = Bill::withTrashed()->where('date_order',date('Y-m-d'))->count();
+        $comments = Comment::all()->count();
+        return view('admin.dashboard',compact('users','categories','products','bills','billsDate','comments'));
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('index');
     }
 
     /**

@@ -65,9 +65,9 @@
                     <div class="form-group">
                         <label for="role" class="col-md-3 control-label">Role</label>
                         <div class="col-md-6">
-                            <select id="role" name="role">
-                                <option>User</option>
-                                <option>Mod</option>
+                            <select id="role" name="is_admin">
+                                <option value="0">User</option>
+                                <option value="1">Mod</option>
                             </select>
                         </div>
                     </div>
@@ -76,8 +76,8 @@
                         <label for="status" class="col-md-3 control-label">Status</label>
                         <div class="col-md-6">
                             <select id="status" name="status">
-                                <option>Active</option>
-                                <option>Deactive</option>
+                                <option value="Active">Active</option>
+                                <option value="Deactive">Deactive</option>
                             </select>
                         </div>
                     </div>

@@ -13,7 +13,7 @@
         </div>
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
-            <li class="header">MAIN NAVIGATION</li>
+            <a href="{{url('admin')}}"><li class="header">HOME DASHBOARD</li></a>
             <li>
                 <a href="{{route('admin.user.index')}}" id="user">
                     <i class="fa fa-user"></i> <span>User</span>
@@ -38,7 +38,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="{{route('admin.bill.report')}}">
                     <i class="fa fa-car"></i> <span>Shipping report</span>
                     <span class="pull-right-container"></span>
                 </a>
