@@ -38,9 +38,9 @@ class CategoryController extends Controller
         $categoryId = $data['nameCategory'];
         $productKey = $data['search_key'];
         $products = new Product;
-        $products = Product::where('category_id', $categoryId);
+        $products = $products->where('category_id', $categoryId);
         if($productKey != "") {
-        $products = $products->where('name', 'like', '%'.$productKey.'%');
+            $products = $products->where('name', 'like', '%'.$productKey.'%');
         }
         $products = $products->paginate(8);
         $category = Category::findOrFail($categoryId);

@@ -23,7 +23,7 @@
                         @if($bills->isEmpty())
                             <span style="color:red; font-style: italic;">/ Not Data</span>
                         @else
-                            <span style="color:#3c8dbc; font-style: italic;">: {{$fromDate}} -> {{$toDate}} / Have: {{$bills->count()}} Bills</span>
+                            <span style="color:#3c8dbc; font-style: italic;">: {{$fromDate}} -> {{$toDate}} / Have: {{$bills->count()}} Bills / Total money: {{number_format($bills->sum('total'))}}</span>
                     	@foreach($bills as $bill)
                     	<tr>
                     		<td><a href="{{url('admin/bill/details/'.$bill->id)}}" title="Details bill">{{$bill->id}}</a></td>

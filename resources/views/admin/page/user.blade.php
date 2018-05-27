@@ -117,7 +117,7 @@
                 $('#id').val(data.id);
                 $('#name').val(data.name);
                 $('#email').val(data.email);
-                $('#password').val(data.password);
+                $('#password').val('');
                 $('#address').val(data.address);
                 $('#phone').val(data.phone);
                 $('#status').val(data.status);

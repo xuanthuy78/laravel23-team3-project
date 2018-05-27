@@ -25,6 +25,7 @@
     {{-- SweetAlert2 --}}
     <script src="{{ asset('assets/sweetalert2/sweetalert2.min.js') }}"></script>
     <link href="{{ asset('assets/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
 </head>
 <!-- ADD THE CLASS layout-boxed TO GET A BOXED LAYOUT -->
 <body class="hold-transition skin-blue sidebar-mini">
@@ -72,5 +73,10 @@
 <script src="{{ asset('assets/dataTables/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('assets/dataTables/js/dataTables.bootstrap.min.js') }}"></script>
 @yield('script')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
+@if(isset($calendar_details))
+{!! $calendar_details->script() !!}
+@endif
 </body>
 </html>

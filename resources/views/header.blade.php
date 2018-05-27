@@ -15,7 +15,7 @@
 			<form action="{{url('user/login')}}" method="post">
 				<input type="hidden" name="_token" value="{{csrf_token()}}">
 				<p class="header">Email</p>
-				<input type="email" name="Email" placeholder="Nhập email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Nhập email';}" required="required">
+				<input type="email" name="Email" placeholder="Nhập email" required="required">
 				
 				<p class="header">Mật khẩu</p>
 				<input type="password" name="Password" placeholder="Nhập mật khẩu"  required="required">
@@ -28,10 +28,10 @@
 				<input type="hidden" name="_token" value="{{csrf_token()}}">
 				
 				<p class="header">Họ và tên</p>
-				<input type="text" name="name" placeholder="Nhập tên" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Nhập tên';}" required="required">
+				<input type="text" name="name" placeholder="Nhập tên" required="required">
 				
 				<p class="header">Email </p>
-				<input type="email" name="email" placeholder="Nhập Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Nhập Email';}" required="required">
+				<input type="email" name="email" placeholder="Nhập Email"  required="required">
 				
 				<p class="header">Mật khẩu</p>
 				<input type="password" name="password" placeholder="Nhập mật khẩu"  required="required">
@@ -126,9 +126,18 @@
 									</div>
 									<div class="section_room">
 										<select onchange="change_country(this.value)" class="frm-field required" name="nameCategory" id="categoryId">
-											@foreach($categories as $category)
-											<option value="{{$category->id}}">{{$category->name}}</option>     
-											@endforeach
+											@if(isset($category))
+												<option value="{{$category->id}}">{{$category->name}}</option>
+												@foreach($categories as $categoryD)
+													@if($categoryD->id != $category->id)
+													<option value="{{$categoryD->id}}">{{$categoryD->name}}</option> 
+													@endif 
+												@endforeach
+											@else
+												@foreach($categories as $category)
+												<option value="{{$category->id}}">{{$category->name}}</option>     
+												@endforeach
+											@endif
 										</select>
 									</div>
 									<div class="sear-sub">
