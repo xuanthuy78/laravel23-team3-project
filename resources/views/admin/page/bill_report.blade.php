@@ -50,12 +50,14 @@
     $(document).ready(function($) {
         $("#name-order").keyup(function() {
             var key = $(this).val();
+            var date =$(this).parent().parent().find("input[name='date']").val();
+            console.log(date);
             console.log(key);
                 $.ajax({
                 type: 'get',
                 dataType: 'html', 
                 url: '<?php echo url('admin/bill/report/search/ajax/name');?>',
-                data: "name=" + key,
+                data: "name=" + key + "& date=" +date,
                 success: function (data) {
                     $(".result-table-report-bill").html(data);
                 },

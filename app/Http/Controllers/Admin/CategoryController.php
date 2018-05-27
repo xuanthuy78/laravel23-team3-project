@@ -81,14 +81,13 @@ class CategoryController extends Controller
     {
         $input = $request->all();
         $category = Category::findOrFail($id);
-        dd($input);
         $category->update($input);
-
         return response()->json([
             'success' => true,
             'message' => 'Category Updated'
         ]);
     }
+
 
     /**
      * Remove the specified resource from storage.

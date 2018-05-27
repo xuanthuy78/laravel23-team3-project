@@ -119,6 +119,10 @@ Route::group(['prefix' => 'admin','middleware'=>'isAdmin'], function () {
         Route::delete('/delete/{id}', 'Admin\CategoryController@destroy')->name('admin.category.destroy');
     });
 
+    Route::get('/calendar','Admin\EventController@calendar');
+
+    Route::post('/calendar/add','Admin\EventController@addEvent');
+
 
 });
 

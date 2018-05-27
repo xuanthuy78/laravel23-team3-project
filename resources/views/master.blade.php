@@ -119,7 +119,6 @@ $(document).ready(function now($) {
 					var result ='';
 					var obj = jQuery.parseJSON(data);
 					console.log(obj);
-					//alert(obj.name);
 					result += "<div class='media' id='before-comment'>"+
                     	"<a class='pull-left' href='#' >"+
                         "<img class='media-object' width='40px' src='source/image/product/avart.png' alt=''>"+

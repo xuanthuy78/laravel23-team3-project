@@ -31,7 +31,7 @@
                     <div class="form-group">
                         <label for="password" class="col-md-3 control-label">Password</label>
                         <div class="col-md-6">
-                            <input type="password" id="password" name="password" class="form-control"  required>
+                            <input type="password" id="password" name="password" class="form-control" >
                             <span class="help-block with-errors"></span>
                         </div>
                     </div>

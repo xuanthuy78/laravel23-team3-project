@@ -25,11 +25,14 @@ class BillController extends Controller
     
     public function checkout()
     {
-        if(Auth::user()) {
+        if(Auth::user() && Cart::count() > 0 ) {
             $content = Cart::Content();
             return view('page.checkout', compact('content'));
         }
-            return redirect()->back()->with('flash_message', 'Vui lòng đăng nhập trước khi đặt hàng');
+        if(Auth::user() && Cart::count() == 0 ) {
+            return redirect()->back()->with('flash_message', 'Giỏ hàng còn trống');
+        }
+        return redirect()->back()->with('flash_message', 'Vui lòng đăng nhập trước khi đặt hàng');
     }
 
     public function confirmCheckout(CreateCheckoutRequest $request)

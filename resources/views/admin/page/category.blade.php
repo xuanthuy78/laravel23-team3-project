@@ -109,6 +109,7 @@
             });
         }
 
+
         $(function(){
             $('#modal-form form').validator().on('submit', function (e) {
                 if (!e.isDefaultPrevented()){
@@ -120,15 +121,13 @@
                     var id = $('#id').val();
                     if (save_method == 'add') {
                         url = "{{ url('admin/category/create') }}";
-                        type = "POST";
+                        
                     }
-                    else {
+                    else 
                         url = "{{ url('admin/category/update') }}" + "/" + id;
-                        type = "PATCH";
-                    }
                     $.ajax({
                         url : url,
-                        type : type,
+                        type : "POST",
                         data: new FormData($("#modal-form form")[0]),
                         contentType: false,
                         processData: false,

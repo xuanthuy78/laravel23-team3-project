@@ -28,18 +28,24 @@
             </li>
             <li>
                 <a href="{{route('admin.bill.index')}}">
-                    <i class="fa fa-file"></i> <span>Bill</span>
+                    <i class="fa fa-table"></i> <span>Bill</span>
                     <span class="pull-right-container"></span>
                 </a>
             </li>
             <li>
                 <a href="{{route('admin.product.index')}}">
-                    <i class="fa fa-file"></i> <span>Product</span>
+                    <i class="fa fa-heartbeat"></i> <span>Product</span>
                 </a>
             </li>
             <li>
                 <a href="{{route('admin.bill.report')}}">
                     <i class="fa fa-car"></i> <span>Shipping report</span>
+                    <span class="pull-right-container"></span>
+                </a>
+            </li>
+             <li>
+                <a href="{{url('admin/calendar')}}">
+                    <i class="fa fa-birthday-cake"></i> <span>Calendar</span>
                     <span class="pull-right-container"></span>
                 </a>
             </li>

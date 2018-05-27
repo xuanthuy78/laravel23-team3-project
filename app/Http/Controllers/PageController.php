@@ -34,7 +34,7 @@ class PageController extends Controller
             $total = Cart::subtotal();
             return view('page.shopping-cart', compact('content', 'total'));
         }
-            return redirect('index')->with('flash_message', 'Giỏ hàng còn trống');  
+        return redirect('index')->with('flash_message', 'Giỏ hàng còn trống');  
     }
         
     public function deleteItemCart($id)
