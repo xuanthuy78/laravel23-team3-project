@@ -56,9 +56,9 @@
                         <label for="role" class="col-md-3 control-label">Payment</label>
                         <div class="col-md-6">
                             <select id="payment" name="payment">
-                                <option>Processing</option>
-                                <option>Done</option>
-                                <option>Cancel</option>
+                                <!-- <option>Processing</option> -->
+                                <option value="COD">COD</option>
+                                <option value="ATM">ATM</option>
                             </select>
                         </div>
                     </div>

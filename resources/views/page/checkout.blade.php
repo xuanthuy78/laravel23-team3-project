@@ -48,7 +48,7 @@
 						</div>
 
 						<div class="form-block">
-							<label for="adress">Địa chỉ <span class="text-danger">*</span></label>
+							<label for="adress">Địa chỉ nhận hàng <span class="text-danger">*</span></label>
 							<input type="text" id="adress" placeholder="" value="{{Auth::user()->address}}"  name="address" class="form-control">
 						</div>
 						

@@ -70,7 +70,7 @@
 <script>
 $(document).ready(function now($) {
 
-	$("div.alert").delay(700).slideUp();
+	$("div.alert").delay(900).slideUp();
 
 	$(window).scroll(function(){
 		if($(this).scrollTop()>150){
@@ -83,6 +83,7 @@ $(document).ready(function now($) {
 	$("#search").keyup(function(){
 		var key = $(this).val();
 		var categoryId = $(this).parent().parent().find("#categoryId").val();
+		
 		if ($(this).val() == "") {
 			$('div#back_result').css({'display':'none'});
 		}
@@ -575,7 +576,7 @@ $(document).ready(function now($) {
 				minlength : "* Tên phải từ 3 ký tự",
 			},
 			address : {
-				required : "* Bạn chưa nhập địa chỉ",
+				required : "* Bạn chưa nhập địa chỉ nhận hàng",
 				minlength : "* Địa chỉ phải từ 15 ký tự trở lên",
 			},
 			phone : {

@@ -96,6 +96,8 @@
             });
         }
 
+        
+
         function deleteData(id){
             var csrf_token = $('meta[name="csrf-token"]').attr('content');
             swal({
@@ -108,7 +110,7 @@
                 confirmButtonText: 'Yes, delete it!'
             }).then(function () {
                 $.ajax({
-                    url : "{{ url('admin/category/delete') }}" + '/' + id ,
+                    url : "{{ url('admin/bill/delete') }}" + '/' + id ,
                     type : "POST",
                     data : {'_method' : 'DELETE', '_token' : csrf_token},
                     success : function(data) {
@@ -140,7 +142,8 @@
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         }
                     });
-                    url = "{{ url('admin/category/update') }}" + "/" + id;
+                    var id = $('#id').val();
+                    url = "{{ url('admin/bill/update') }}" + "/" + id;
                     $.ajax({
                         url : url,
                         type : 'POST',

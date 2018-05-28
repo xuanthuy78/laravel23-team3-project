@@ -90,7 +90,7 @@
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="beta-products-list">
-							<h3 class="wthree_text_info">Loại: <span>{{$category->name}}</span>
+							<h3 class="wthree_text_info">Loại: <span>{{$categorySearch->name}}</span>
 			    			<div class="line-text"></div>
 			    			</h3>		
 							<div class="beta-products-details">

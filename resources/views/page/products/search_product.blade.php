@@ -108,6 +108,7 @@
 									<div style="padding-bottom: 100px;">* Rất tiếc không có kết quả nào phù hợp với từ khóa : <span style="color:#FFA803; font-size:20px; font-style: italic;">{{$productKey}}</span></div>
 								
 								@else
+								<div style="padding-bottom: 20px;">* Có: <span style="color:#FFA803; font-size:20px; font-style: italic;">{{$products->total()}} </span> sản phẩm phù hợp với yêu cầu của bạn</div>
 								@foreach($products as $product)
 								<div class="col-sm-3">
 									<div class="single-item">
