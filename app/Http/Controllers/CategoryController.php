@@ -43,8 +43,8 @@ class CategoryController extends Controller
             $products = $products->where('name', 'like', '%'.$productKey.'%');
         }
         $products = $products->paginate(8);
-        $category = Category::findOrFail($categoryId);
-        return view('page.categories.search_category', compact('products', 'category','productKey'));
+        $categorySearch = Category::findOrFail($categoryId);
+        return view('page.categories.search_category', compact('products', 'categorySearch','productKey'));
     }
     
     public function autoGetSearch(Request $request)

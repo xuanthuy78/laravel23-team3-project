@@ -23,7 +23,7 @@
                     		<td>{{$bill->name}}</td>
                     		<td>{{$bill->phone}}</td>
                     		<td>{{$bill->address}}</td>
-                    		<td>{{date('d.m.Y', strtotime($bill->date_order))}}</td>
+                    		<td>{{date('d.m.Y H:i:s', strtotime($bill->created_at))}}</td>
                             <td>{{$bill->total}}</td>
                             <td>{{$bill->payment}}</td>  
                             <td>{{$bill->note}}</td>

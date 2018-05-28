@@ -77,7 +77,7 @@ Route::group(['prefix' => 'admin','middleware'=>'isAdmin'], function () {
         Route::patch('/update/{id}', 'Admin\BillController@update')->name('admin.bill.update');
 
         // Delete bill
-        Route::delete('/delete/{id}', 'Admin\CategoryController@destroy')->name('admin.bill.destroy');
+        Route::delete('/delete/{id}', 'Admin\BillController@destroy')->name('admin.bill.destroy');
 
         // Route::get('/back', 'Admin\BillController@back');
 
@@ -85,7 +85,6 @@ Route::group(['prefix' => 'admin','middleware'=>'isAdmin'], function () {
 
         Route::get('/date', 'Admin\BillController@dateOrder');
 
- 
         Route::get('/process/{id}', 'Admin\BillController@processOrder');
 
         Route::get('/export/excel', 'Admin\BillController@excelOrder');
@@ -291,7 +290,8 @@ Route::get('bills/{id}/export',
 	['as' => 'export-bills',
 	'uses' => 'UserController@exportBill'
 ]);
-//Auth::routes();
+
+Auth::routes();
 
 
 

@@ -61,6 +61,7 @@
                         <ul class="topbar-nav clearfix">
                         	
                             @if(Auth::user())
+                            	@if(Auth::user()->isAdmin())<li class="dropdown" style="cursor: pointer;"><a href="{{url('admin')}}"><i class="fa fa-gear fa-spin" style="color:black"></i>Page Admin</a></li>@endif
                             <li class="dropdown">
                                 <a href="#" class="account dropdown-toggle" data-toggle="dropdown">My Account</a>
                                 <ul class="dropdown-menu dropdown-menu-right">
@@ -126,11 +127,11 @@
 									</div>
 									<div class="section_room">
 										<select onchange="change_country(this.value)" class="frm-field required" name="nameCategory" id="categoryId">
-											@if(isset($category))
-												<option value="{{$category->id}}">{{$category->name}}</option>
-												@foreach($categories as $categoryD)
-													@if($categoryD->id != $category->id)
-													<option value="{{$categoryD->id}}">{{$categoryD->name}}</option> 
+											@if(isset($categorySearch))
+												<option value="{{$categorySearch->id}}">{{$categorySearch->name}}</option>
+												@foreach($categories as $category)
+													@if($category->id != $categorySearch->id)
+													<option value="{{$category->id}}">{{$category->name}}</option> 
 													@endif 
 												@endforeach
 											@else

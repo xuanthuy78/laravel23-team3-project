@@ -25,8 +25,8 @@ class BillController extends Controller
 
     public function detailsOrder($id)
     {
-        $bill = Bill::withTrashed()->find($id);
-        $billDetails = BillDetail::withTrashed()->where('bill_id', $bill->id)->get();
+        //$bill = Bill::withTrashed()->find($id);
+        $billDetails = BillDetail::withTrashed()->where('bill_id', $id)->get();
         return view('admin.page.billdetail', compact('billDetails'));
     }
 
@@ -136,7 +136,7 @@ class BillController extends Controller
     $name = $request->name;
     $date = $request->date;
     $bills = Bill::withTrashed()->where('name','like','%'.$name.'%');
-    if($date !="") {
+    if($date != "") {
         $bills = $bills->where('date_order',$date);
     }
     else {
@@ -218,7 +218,12 @@ class BillController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+         Bill::destroy($id);
+        return response()->json([
+            'success' => true,
+            'message' => 'Bill Deleted'
+        ]);
     }
 
     public function apiBill() {

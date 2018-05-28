@@ -98,7 +98,11 @@ class UserController extends Controller
     
     public function forgetPassword()
     {
-        return view('auth.passwords.email');
+        if(!Auth::user()) {
+           return view('auth.passwords.email'); 
+        }
+        return redirect('index');
+        
     }
 
     public function comment(Request $request,$id)
