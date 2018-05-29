@@ -23,6 +23,10 @@ class Bill_detailsTableSeeder extends Seeder
             ['bill_id'=>3,'product_id'=>10,'quantity'=> 2,'unit_price' => 150000],
             ['bill_id'=>4,'product_id'=>42,'quantity'=> 2,'unit_price' => 120000],
             ['bill_id'=>4,'product_id'=>50,'quantity'=> 1,'unit_price' => 150000],
+            ['bill_id'=>5,'product_id'=>26,'quantity'=> 1,'unit_price' => 180000],
+            ['bill_id'=>6,'product_id'=>43,'quantity'=> 2,'unit_price' => 200000],
+            ['bill_id'=>7,'product_id'=>30,'quantity'=> 1,'unit_price' => 130000],
+
         ]);
     }
 }

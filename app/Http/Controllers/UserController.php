@@ -46,7 +46,7 @@ class UserController extends Controller
         if (Auth::user()) {
             $id = Auth::user()->id;
             $bills = Bill::withTrashed()->where('user_id',$id)->paginate(10);
-            $billdetails = BillDetail::withTrashed()->get();
+            $billdetails = BillDetail::all();
             return view('page.users.previewcart',compact('bills','billdetails'));
         }
         return redirect('index');
@@ -129,7 +129,7 @@ class UserController extends Controller
 
     public function exportBill($id)
     {
-        $bill = Bill::findOrFail($id);
+        $bill = Bill::withTrashed()->findOrFail($id);
         $billDetails = $bill->bill_details;
         $billData  = "";
         $billData .= '<p>Mã bill:'.$bill->id.'| Ngày đặt: '.$bill->created_at.'
