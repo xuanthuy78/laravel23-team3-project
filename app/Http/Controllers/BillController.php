@@ -70,7 +70,7 @@ class BillController extends Controller
 
     public function deleteBill($id){
         $bill = Bill::findOrFail($id);
-        $bill_detail = BillDetail::where('bill_id','=',$id)->delete();
+        //$bill_detail = BillDetail::where('bill_id','=',$id)->delete();
         $bill->delete();
         return redirect()->back();
     }

@@ -26,7 +26,7 @@ class BillController extends Controller
     public function detailsOrder($id)
     {
         //$bill = Bill::withTrashed()->find($id);
-        $billDetails = BillDetail::withTrashed()->where('bill_id', $id)->get();
+        $billDetails = BillDetail::where('bill_id', $id)->get();
         return view('admin.page.billdetail', compact('billDetails'));
     }
 
@@ -87,7 +87,7 @@ class BillController extends Controller
 
     public function pdfOrder($id)
     {
-        $bill = Bill::find($id);
+        $bill = Bill::withTrashed()->find($id);
         $pdf = PDF::loadView('admin.page.bill_pdf', ['bill' => $bill]);
         return $pdf->download('bill.pdf');
     }
@@ -104,23 +104,20 @@ class BillController extends Controller
             else {
                 if($status == "delete") {
                     $bills = Bill::onlyTrashed()->paginate(10);
-                    // return view('admin.page.bill_report', compact('bills','date'));
                 }
                 else {
-                    $bills = Bill::where('status', $status)->paginate(10);
-                    // return view('admin.page.bill_report', compact('bills', 'date'));
+                    $bills = Bill::where('status', $status)->paginate(10);   
                 }
             }
         }
         else {
             if($status == "") {
-                $bills = Bill::withTrashed()->where('date_order', $date)->paginate(10);
-                // return view('admin.page.bill_report', compact('bills', 'date'));
+                $bills = Bill::withTrashed()->where('date_order', $date)->paginate(10);     
             }
             else {
                 if($status == "delete") {
                     $bills = Bill::onlyTrashed()->where('date_order', $date)->paginate(10);
-                    // return view('admin.page.bill_report',compact('bills', 'date'));
+                    
                 }
                 else {
                     $bills = Bill::where('date_order',$date)->where('status', $status)->paginate(10);    
